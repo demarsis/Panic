@@ -1,9 +1,10 @@
 #include "floor.h"
 
-Floor::Floor(Size size, QString name, FloorImagePtr floorImage)
+Floor::Floor(Size size, QString name, FloorImagePtr floorImage, std::vector<HumanPtr> humanList)
     : size(size),
       name(name),
-      floorImage(floorImage)
+      floorImage(floorImage),
+      humanList(humanList)
 {
     if ((this->size.x > 0) && (this->size.y  > 0))
     {

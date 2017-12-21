@@ -27,12 +27,16 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     map/cell.cpp \
     map/floor.cpp \
-    map/floorimage.cpp
+    map/floorimage.cpp \
+    human/human.cpp \
+    map/map.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
     common/types.h \
     map/floor.h \
-    map/floorimage.h
+    map/floorimage.h \
+    human/human.h \
+    map/map.h
 
 FORMS    += mainwindow.ui

@@ -1,6 +1,6 @@
 #include "floorimage.h"
 
-FloorImage::FloorImage()
+FloorImage::FloorImage(const QString &filename)
+    : image(filename)
 {
-
 }

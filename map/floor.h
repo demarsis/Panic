@@ -7,16 +7,18 @@
 #include <QString>
 #include "cell.h"
 #include "floorimage.h"
+#include "human/human.h"
 
 class Floor
 {
     Size size;
     QString name;
     FloorImagePtr floorImage;
+    std::vector<HumanPtr> humanList;
     std::vector<std::vector<CellPtr>> cellMatrix;
 
 public:
-    Floor(Size size, QString name, FloorImagePtr floorImage);
+    Floor(Size size, QString name, FloorImagePtr floorImage, std::vector<HumanPtr> humanList);
 
     CellPtr getCell(const Position &pos);
     bool setCell(const Position &pos, CellPtr cell);
