@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui opengl
+CONFIG   += c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -29,7 +30,8 @@ SOURCES += main.cpp\
     map/floor.cpp \
     map/floorimage.cpp \
     human/human.cpp \
-    map/map.cpp
+    map/map.cpp \
+    graph/simulatorwidget.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -37,6 +39,7 @@ HEADERS  += mainwindow.h \
     map/floor.h \
     map/floorimage.h \
     human/human.h \
-    map/map.h
+    map/map.h \
+    graph/simulatorwidget.h
 
 FORMS    += mainwindow.ui

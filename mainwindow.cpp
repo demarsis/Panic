@@ -12,3 +12,10 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    QImage img("test.jpg");
+    ui->openGLWidget->setFloorImage(img);
+    ui->openGLWidget->update();
+}
