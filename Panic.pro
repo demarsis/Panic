@@ -32,7 +32,9 @@ SOURCES += main.cpp\
     human/human.cpp \
     map/map.cpp \
     graph/simulatorwidget.cpp \
-    human/health.cpp
+    human/health.cpp \
+    mapgen/mapgenerator.cpp \
+    mapgen/mapgeneratorcafe.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -42,6 +44,8 @@ HEADERS  += mainwindow.h \
     human/human.h \
     map/map.h \
     graph/simulatorwidget.h \
-    human/health.h
+    human/health.h \
+    mapgen/mapgenerator.h \
+    mapgen/mapgeneratorcafe.h
 
 FORMS    += mainwindow.ui
