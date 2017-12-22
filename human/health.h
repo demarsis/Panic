@@ -1,6 +1,8 @@
 #ifndef HEALTH_H
 #define HEALTH_H
 
+#include "common/types.h"
+
 enum HealthStatus
 {
     Ok,
@@ -11,13 +13,15 @@ enum HealthStatus
 
 class Health
 {
-    float health;
+    float health; // 0..100
 
 public:
     Health();
 
     HealthStatus getStatus() const;
     bool isDead() const;
+
+    void applyMinDamage();
 };
 
 #endif // HEALTH_H
