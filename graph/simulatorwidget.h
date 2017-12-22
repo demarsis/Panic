@@ -8,17 +8,20 @@
 #include <gl/GL.h>
 #include <QImage>
 #include "common/types.h"
+#include "human/human.h"
 
 class SimulatorWidget : public QOpenGLWidget
 {
     GLuint floorTextureID;
     Size floorTextureSize;
+    std::vector<HumanPtr> humanList;
 
 public:
     SimulatorWidget(QWidget *parent = 0);
     ~SimulatorWidget();
 
     void setFloorImage(const QImage &image);
+    void setHumanList(const std::vector<HumanPtr> &humanList);
 
 protected:
     void initializeGL();

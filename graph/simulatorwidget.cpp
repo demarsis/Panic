@@ -37,6 +37,11 @@ void SimulatorWidget::setFloorImage(const QImage &image)
     resize(size().width(), size().height());
 }
 
+void SimulatorWidget::setHumanList(const std::vector<HumanPtr> &humanList)
+{
+    this->humanList = humanList;
+}
+
 void SimulatorWidget::initializeGL()
 {
     glClearColor(0, 0, 0, 1);
