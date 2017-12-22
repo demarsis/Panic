@@ -11,6 +11,27 @@ SimulatorWidget::~SimulatorWidget()
 {
 }
 
+void SimulatorWidget::DrawCircle(float cx, float cy, float r)
+{
+    int num_segments = 13;
+
+    glBegin(GL_LINE_LOOP);
+    for (int i = 0; i < num_segments; i++)
+    {
+        float theta = 2.0f * 3.1415f * float(i) / num_segments;
+        float x = r * cosf(theta);
+        float y = r * sinf(theta);
+        glVertex3f(x + cx, y + cy, 0);
+    }
+    glEnd();
+}
+
+PositionF SimulatorWidget::transferCoordToGl(const PositionF &real_coord) const
+{
+    return PositionF(real_coord.x - floorTextureSize.x / 2,
+                     floorTextureSize.y - (floorTextureSize.y / 2 + real_coord.y));
+}
+
 void SimulatorWidget::setFloorImage(const QImage &image)
 {
     floorTextureSize.x = image.size().width();
@@ -42,9 +63,65 @@ void SimulatorWidget::setHumanList(const std::vector<HumanPtr> &humanList)
     this->humanList = humanList;
 }
 
+void SimulatorWidget::drawFloor()
+{
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, floorTextureID);
+
+    glColor3f(1, 1, 1);
+    glBegin(GL_QUADS);
+        float floorWidth  = floorTextureSize.x;
+        float floorHeight = floorTextureSize.y;
+
+        glTexCoord2f(0, 0); glVertex3f(-floorWidth / 2, -floorHeight / 2, 0);
+        glTexCoord2f(1, 0); glVertex3f(+floorWidth / 2, -floorHeight / 2, 0);
+        glTexCoord2f(1, 1); glVertex3f(+floorWidth / 2, +floorHeight / 2, 0);
+        glTexCoord2f(0, 1); glVertex3f(-floorWidth / 2, +floorHeight / 2, 0);
+    glEnd();
+
+    glDisable(GL_TEXTURE_2D);
+}
+
+void SimulatorWidget::drawHuman(HumanPtr human)
+{
+    if (!human) return;
+    float diameter = human->getDiameter() / 10.0f;
+
+    switch (human->getHealth().getStatus())
+    {
+    case HealthStatus::Ok:
+        glColor3f(0, 1, 0);
+        break;
+    case HealthStatus::MinorDamage:
+        glColor3f(1, 1, 0);
+        break;
+    case HealthStatus::MajorDamage:
+        glColor3f(1, 0.5f, 0);
+        break;
+    case HealthStatus::Dead:
+        glColor3f(1, 0, 0);
+        break;
+    }
+
+    PositionF pos = transferCoordToGl(human->getPosition());
+
+    DrawCircle(pos.x, pos.y, diameter);
+
+    if (human->getHealth().isDead())
+    {
+        glBegin(GL_LINES);
+            glVertex3f(pos.x - diameter / 2.5f, pos.y - diameter / 2.5f, 0);
+            glVertex3f(pos.x + diameter / 2.5f, pos.y + diameter / 2.5f, 0);
+            glVertex3f(pos.x - diameter / 2.5f, pos.y + diameter / 2.5f, 0);
+            glVertex3f(pos.x + diameter / 2.5f, pos.y - diameter / 2.5f, 0);
+        glEnd();
+    }
+}
+
 void SimulatorWidget::initializeGL()
 {
     glClearColor(0, 0, 0, 1);
+    glEnable(GL_LINE_SMOOTH);
 }
 
 void SimulatorWidget::resizeGL(int w, int h)
@@ -80,20 +157,9 @@ void SimulatorWidget::resizeGL(int w, int h)
 void SimulatorWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
+    drawFloor();
 
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, floorTextureID);
-
-    glBegin(GL_QUADS);
-        float floorWidth  = floorTextureSize.x;
-        float floorHeight = floorTextureSize.y;
-
-        glTexCoord2f(0, 0); glVertex3f(-floorWidth / 2, -floorHeight / 2, 0);
-        glTexCoord2f(1, 0); glVertex3f(+floorWidth / 2, -floorHeight / 2, 0);
-        glTexCoord2f(1, 1); glVertex3f(+floorWidth / 2, +floorHeight / 2, 0);
-        glTexCoord2f(0, 1); glVertex3f(-floorWidth / 2, +floorHeight / 2, 0);
-    glEnd();
-
-    glDisable(GL_TEXTURE_2D);
+    HumanPtr human = std::make_shared<Human>(PositionF(10, 50), 40);
+    drawHuman(human);
 }
 

@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     map/floorimage.cpp \
     human/human.cpp \
     map/map.cpp \
-    graph/simulatorwidget.cpp
+    graph/simulatorwidget.cpp \
+    human/health.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -40,6 +41,7 @@ HEADERS  += mainwindow.h \
     map/floorimage.h \
     human/human.h \
     map/map.h \
-    graph/simulatorwidget.h
+    graph/simulatorwidget.h \
+    human/health.h
 
 FORMS    += mainwindow.ui

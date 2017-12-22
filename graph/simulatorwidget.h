@@ -9,6 +9,7 @@
 #include <QImage>
 #include "common/types.h"
 #include "human/human.h"
+#include <math.h>
 
 class SimulatorWidget : public QOpenGLWidget
 {
@@ -22,6 +23,14 @@ public:
 
     void setFloorImage(const QImage &image);
     void setHumanList(const std::vector<HumanPtr> &humanList);
+
+private:
+    void drawFloor();
+    void drawHuman(HumanPtr human);
+
+    void DrawCircle(float cx, float cy, float r);
+
+    PositionF transferCoordToGl(const PositionF &real_coord) const;
 
 protected:
     void initializeGL();

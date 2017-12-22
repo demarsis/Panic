@@ -1,9 +1,9 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-typedef double CellPenalty;
-typedef double CellCost;
-typedef double Diameter;
+typedef float CellPenalty;
+typedef float CellCost;
+typedef float Diameter;
 
 #define PENALTY_WALL              (double(10000))
 #define PENALTY_EMERGENCY         (double(100))
@@ -20,7 +20,7 @@ struct Position
 struct PositionF
 {
     double x, y;
-    PositionF(double x, double y) : x(x), y(y) {}
+    PositionF(float x, float y) : x(x), y(y) {}
 };
 
 struct Size
