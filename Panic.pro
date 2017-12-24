@@ -49,3 +49,7 @@ HEADERS  += mainwindow.h \
     mapgen/mapgeneratorcafe.h
 
 FORMS    += mainwindow.ui
+
+target.path = $$OUT_PWD
+target.files = $$PWD/install/maps/
+INSTALLS += target
