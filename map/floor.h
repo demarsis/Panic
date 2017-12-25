@@ -16,6 +16,8 @@ class Floor
     QString name;
     FloorImagePtr floorImage;
     std::vector<HumanPtr> humanList;
+    MapPositions finishPositions;
+
     std::vector<std::vector<CellPtr>> cellMatrix;
 
 public:
@@ -30,6 +32,8 @@ public:
 
     FloorImagePtr getFloorImage();
     std::vector<HumanPtr> &getHumanList();
+
+    const MapPositions &getFinishMapPositions() const;
 
     const Size &getSize() const;
 

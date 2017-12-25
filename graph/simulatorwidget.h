@@ -17,6 +17,7 @@ class SimulatorWidget : public QOpenGLWidget
     GLuint floorTextureID;
     Size floorSize;
     std::vector<HumanPtr> humanList;
+    std::vector<Position> finishPositions;
 
 public:
     SimulatorWidget(QWidget *parent = 0);
@@ -28,14 +29,17 @@ private:
     void setFloorSize(const Size &size);
     void setFloorImage(const QImage &image);
     void setHumanList(const std::vector<HumanPtr> &humanList);
+    void setFinishPositionList(const MapPositions &mapFinishPosition);
 
 private:
     void drawFloor();
+    void drawFinishPosition(const Position &p);
     void drawHuman(HumanPtr human);
 
     void DrawCircle(float cx, float cy, float r);
 
     PositionF transferCoordToGl(const PositionF &real_coord) const;
+    PositionF transferCoordToGl(const Position &cell_coord) const;
 
 protected:
     void initializeGL();

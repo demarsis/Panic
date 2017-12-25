@@ -8,7 +8,8 @@ Floor::Floor(Size size,
     : size(size),
       name(name),
       floorImage(floorImage),
-      humanList(humanList)
+      humanList(humanList),
+      finishPositions(finishPositions)
 {
     if ((this->size.x > 0) && (this->size.y  > 0))
     {
@@ -75,6 +76,11 @@ FloorImagePtr Floor::getFloorImage()
 std::vector<HumanPtr> &Floor::getHumanList()
 {
     return humanList;
+}
+
+const MapPositions &Floor::getFinishMapPositions() const
+{
+    return finishPositions;
 }
 
 const Size &Floor::getSize() const

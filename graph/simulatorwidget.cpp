@@ -18,6 +18,7 @@ void SimulatorWidget::setFloor(FloorPtr floor)
     setFloorSize(floor->getSize());
     setFloorImage(floor->getFloorImage()->getImage());
     setHumanList(floor->getHumanList());
+    setFinishPositionList(floor->getFinishMapPositions());
 }
 
 void SimulatorWidget::setFloorSize(const Size &size)
@@ -45,6 +46,11 @@ PositionF SimulatorWidget::transferCoordToGl(const PositionF &real_coord) const
 {
     return PositionF(real_coord.x - floorSize.x / 2,
                      floorSize.y - (floorSize.y / 2 + real_coord.y));
+}
+
+PositionF SimulatorWidget::transferCoordToGl(const Position &cell_coord) const
+{
+    return transferCoordToGl(PositionF(cell_coord.x, cell_coord.y));
 }
 
 void SimulatorWidget::setFloorImage(const QImage &image)
@@ -75,6 +81,11 @@ void SimulatorWidget::setHumanList(const std::vector<HumanPtr> &humanList)
     this->humanList = humanList;
 }
 
+void SimulatorWidget::setFinishPositionList(const MapPositions &mapFinishPosition)
+{
+    this->finishPositions = mapFinishPosition.getPositionList();
+}
+
 void SimulatorWidget::drawFloor()
 {
     glEnable(GL_TEXTURE_2D);
@@ -92,6 +103,15 @@ void SimulatorWidget::drawFloor()
     glEnd();
 
     glDisable(GL_TEXTURE_2D);
+}
+
+void SimulatorWidget::drawFinishPosition(const Position &p)
+{
+    PositionF pos = transferCoordToGl(p);
+    glColor3f(0, 0, 1);
+    glLineWidth(2);
+    DrawCircle(pos.x, pos.y, 4);
+    glLineWidth(1);
 }
 
 void SimulatorWidget::drawHuman(HumanPtr human)
@@ -172,6 +192,11 @@ void SimulatorWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     drawFloor();
+
+    for (const Position &p : finishPositions)
+    {
+        drawFinishPosition(p);
+    }
 
     for (HumanPtr h : humanList)
     {
