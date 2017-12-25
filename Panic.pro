@@ -37,7 +37,8 @@ SOURCES += main.cpp\
     mapgen/mapgeneratorcafe.cpp \
     mapgen/humanlistgenerator.cpp \
     mapgen/imagepositions.cpp \
-    map/barrier.cpp
+    map/barrier.cpp \
+    map/exit.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -52,7 +53,8 @@ HEADERS  += mainwindow.h \
     mapgen/mapgeneratorcafe.h \
     mapgen/humanlistgenerator.h \
     mapgen/imagepositions.h \
-    map/barrier.h
+    map/barrier.h \
+    map/exit.h
 
 FORMS    += mainwindow.ui
 

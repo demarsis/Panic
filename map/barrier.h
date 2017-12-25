@@ -3,9 +3,9 @@
 
 enum BarrierType
 {
-    No,
-    Critical,
-    Wall
+    BarrierTypeNo,
+    BarrierTypeCritical,
+    BarrierTypeWall
 };
 
 class Barrier

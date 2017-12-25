@@ -1,9 +1,10 @@
 #include "cell.h"
 
-Cell::Cell(const Barrier &barrier)
+Cell::Cell(const Barrier &barrier, const Exit &exit)
     : penalty(0),
       cost(0),
-      barrier(barrier)
+      barrier(barrier),
+      exit(exit)
 {
 }
 
@@ -35,4 +36,9 @@ void Cell::resetCost()
 const Barrier &Cell::getBarrier() const
 {
     return barrier;
+}
+
+const Exit &Cell::getExit() const
+{
+    return exit;
 }
