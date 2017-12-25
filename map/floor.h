@@ -18,7 +18,11 @@ class Floor
     std::vector<std::vector<CellPtr>> cellMatrix;
 
 public:
-    Floor(Size size, QString name, FloorImagePtr floorImage, std::vector<HumanPtr> humanList);
+    Floor(Size size,
+          QString name,
+          FloorImagePtr floorImage,
+          const std::vector<HumanPtr> &humanList,
+          const std::vector<Position> &finishPositions);
 
     CellPtr getCell(const Position &pos);
     bool setCell(const Position &pos, CellPtr cell);

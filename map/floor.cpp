@@ -1,6 +1,10 @@
 #include "floor.h"
 
-Floor::Floor(Size size, QString name, FloorImagePtr floorImage, std::vector<HumanPtr> humanList)
+Floor::Floor(Size size,
+             QString name,
+             FloorImagePtr floorImage,
+             const std::vector<HumanPtr> &humanList,
+             const std::vector<Position> &finishPositions)
     : size(size),
       name(name),
       floorImage(floorImage),
