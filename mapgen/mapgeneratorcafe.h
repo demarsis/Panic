@@ -2,6 +2,7 @@
 #define MAPGENERATORCAFE_H
 
 #include "mapgenerator.h"
+#include "humanlistgenerator.h"
 
 class MapGeneratorCafe : public MapGenerator
 {

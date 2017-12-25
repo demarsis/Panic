@@ -14,6 +14,7 @@
 class SimulatorWidget : public QOpenGLWidget
 {
     GLuint floorTextureID;
+    Size floorSize;
     Size floorTextureSize;
     std::vector<HumanPtr> humanList;
 
@@ -21,6 +22,7 @@ public:
     SimulatorWidget(QWidget *parent = 0);
     ~SimulatorWidget();
 
+    void setFloorSize(const Size &size);
     void setFloorImage(const QImage &image);
     void setHumanList(const std::vector<HumanPtr> &humanList);
 

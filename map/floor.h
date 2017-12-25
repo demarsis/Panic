@@ -24,6 +24,7 @@ public:
     bool setCell(const Position &pos, CellPtr cell);
 
     FloorImagePtr getFloorImage();
+    std::vector<HumanPtr> &getHumanList();
 
     const Size &getSize() const;
 

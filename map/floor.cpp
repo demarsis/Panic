@@ -48,6 +48,11 @@ FloorImagePtr Floor::getFloorImage()
     return floorImage;
 }
 
+std::vector<HumanPtr> &Floor::getHumanList()
+{
+    return humanList;
+}
+
 const Size &Floor::getSize() const
 {
     return size;

@@ -3,12 +3,18 @@
 SimulatorWidget::SimulatorWidget(QWidget *parent)
     : QOpenGLWidget(parent),
       floorTextureID(0),
+      floorSize(0, 0),
       floorTextureSize(0, 0)
 {
 }
 
 SimulatorWidget::~SimulatorWidget()
 {
+}
+
+void SimulatorWidget::setFloorSize(const Size &size)
+{
+    this->floorSize = size;
 }
 
 void SimulatorWidget::DrawCircle(float cx, float cy, float r)
@@ -159,7 +165,9 @@ void SimulatorWidget::paintGL()
     glClear(GL_COLOR_BUFFER_BIT);
     drawFloor();
 
-    HumanPtr human = std::make_shared<Human>(PositionF(10, 50), 40);
-    drawHuman(human);
+    for (HumanPtr h : humanList)
+    {
+        drawHuman(h);
+    }
 }
 
