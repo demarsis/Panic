@@ -41,7 +41,8 @@ SOURCES += main.cpp\
     map/exit.cpp \
     map/mappositions.cpp \
     mapgen/imagebarriers.cpp \
-    map/mapbarriers.cpp
+    map/mapbarriers.cpp \
+    common/consolelogger.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -61,7 +62,8 @@ HEADERS  += mainwindow.h \
     map/mappositions.h \
     mapgen/imagebarriers.h \
     map/mapbarriers.h \
-    common/defines.h
+    common/defines.h \
+    common/consolelogger.h
 
 FORMS    += mainwindow.ui
 

@@ -5,6 +5,8 @@
 #include <vector>
 #include <QImage>
 #include "map/mappositions.h"
+#include <QApplication>
+#include "common/consolelogger.h"
 
 class ImagePositions
 {

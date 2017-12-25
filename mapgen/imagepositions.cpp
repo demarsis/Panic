@@ -7,12 +7,13 @@ ImagePositions::ImagePositions(const QImage &img)
         for (int j = 0; j < img.height(); j++)
         {
             QRgb pixel = img.pixel(i, j);
-            if (qAlpha(pixel) != 0)
+            if (qAlpha(pixel) > 50)
             {
                 pos.push_back(Position(i, j));
             }
         }
     }
+    ConsoleLogger::info(QString::number(pos.size()));
 }
 
 MapPositions ImagePositions::getMapsPositions() const
