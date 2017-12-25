@@ -108,7 +108,9 @@ void SimulatorWidget::drawHuman(HumanPtr human)
 
     PositionF pos = transferCoordToGl(human->getPosition());
 
+    glLineWidth(2);
     DrawCircle(pos.x, pos.y, diameter);
+    glLineWidth(1);
 
     if (human->getHealth().isDead())
     {

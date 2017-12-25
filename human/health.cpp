@@ -1,12 +1,12 @@
 #include "health.h"
 
 Health::Health()
+    : health(100)
 {
 }
 
 HealthStatus Health::getStatus() const
 {
-    //return HealthStatus::Dead;
     if (health > 80) return HealthStatus::Ok;
     if (health > 50) return HealthStatus::MinorDamage;
     if (health >= 1) return HealthStatus::MajorDamage;
