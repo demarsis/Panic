@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     mapgen/mapgenerator.cpp \
     mapgen/mapgeneratorcafe.cpp \
     mapgen/humanlistgenerator.cpp \
-    mapgen/imagepositions.cpp
+    mapgen/imagepositions.cpp \
+    map/barrier.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -50,7 +51,8 @@ HEADERS  += mainwindow.h \
     mapgen/mapgenerator.h \
     mapgen/mapgeneratorcafe.h \
     mapgen/humanlistgenerator.h \
-    mapgen/imagepositions.h
+    mapgen/imagepositions.h \
+    map/barrier.h
 
 FORMS    += mainwindow.ui
 

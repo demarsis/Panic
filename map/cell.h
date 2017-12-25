@@ -3,15 +3,16 @@
 
 #include <memory>
 #include "common/types.h"
+#include "barrier.h"
 
 class Cell
 {
     CellPenalty penalty;
     CellCost cost;
-    bool exit;
+    Barrier barrier;
 
 public:
-    Cell(bool exit);
+    Cell(const Barrier &barrier);
 
     CellPenalty getPenalty() const;
     void setPenalty(CellPenalty penalty);
@@ -20,7 +21,7 @@ public:
     void setCost(CellCost cost);
     void resetCost();
 
-    bool isExit() const;
+    const Barrier &getBarrier() const;
 };
 
 typedef std::shared_ptr<Cell> CellPtr;
