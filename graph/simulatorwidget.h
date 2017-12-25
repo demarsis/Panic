@@ -8,6 +8,7 @@
 #include <gl/GL.h>
 #include <QImage>
 #include "common/types.h"
+#include "common/defines.h"
 #include "human/human.h"
 #include <math.h>
 #include "map/floor.h"
@@ -28,6 +29,7 @@ public:
 private:
     void drawFloor();
     void drawFinishPosition(const Position &p);
+    void drawBarrier(const Position &p, BarrierType barrierType);
     void drawHuman(HumanPtr human);
 
     void DrawCircle(float cx, float cy, float r);

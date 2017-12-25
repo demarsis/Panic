@@ -60,7 +60,8 @@ HEADERS  += mainwindow.h \
     map/exit.h \
     map/mappositions.h \
     mapgen/imagebarriers.h \
-    map/mapbarriers.h
+    map/mapbarriers.h \
+    common/defines.h
 
 FORMS    += mainwindow.ui
 

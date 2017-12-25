@@ -98,6 +98,28 @@ void SimulatorWidget::drawFinishPosition(const Position &p)
     glLineWidth(1);
 }
 
+void SimulatorWidget::drawBarrier(const Position &p, BarrierType barrierType)
+{
+    PositionF pos = transferCoordToGl(p);
+
+    switch (barrierType)
+    {
+    case BarrierTypeNo:
+        break;
+    case BarrierTypeCritical:
+        glColor3f(1, 0, 0);
+        break;
+    case BarrierTypeWall:
+        glColor3f(0, 0, 0);
+        break;
+    }
+
+    if (barrierType != BarrierTypeNo)
+    {
+        DrawCircle(pos.x, pos.y, 1);
+    }
+}
+
 void SimulatorWidget::drawHuman(HumanPtr human)
 {
     if (!human) return;
@@ -185,9 +207,17 @@ void SimulatorWidget::paintGL()
 
     drawFloor();
 
-    for (const Position &p : floor->getFinishMapPositions().getPositionList())
+    if (DRAW_ADDITION_PLAN_OBJECTS)
     {
-        drawFinishPosition(p);
+        for (const Position &p : floor->getFinishMapPositions().getPositionList())
+        {
+            drawFinishPosition(p);
+        }
+
+        for (const auto &barrier : floor->getMapBarriers().getBarrierList())
+        {
+            drawBarrier(barrier.first, barrier.second);
+        }
     }
 
     for (HumanPtr h : floor->getHumanList())
