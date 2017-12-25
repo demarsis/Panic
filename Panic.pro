@@ -42,7 +42,8 @@ SOURCES += main.cpp\
     map/mappositions.cpp \
     mapgen/imagebarriers.cpp \
     map/mapbarriers.cpp \
-    common/consolelogger.cpp
+    common/consolelogger.cpp \
+    mapgen/floordescriptor.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -63,7 +64,8 @@ HEADERS  += mainwindow.h \
     mapgen/imagebarriers.h \
     map/mapbarriers.h \
     common/defines.h \
-    common/consolelogger.h
+    common/consolelogger.h \
+    mapgen/floordescriptor.h
 
 FORMS    += mainwindow.ui
 
