@@ -35,8 +35,8 @@ SOURCES += main.cpp\
     human/health.cpp \
     mapgen/mapgenerator.cpp \
     mapgen/mapgeneratorcafe.cpp \
-    mapgen/startpositions.cpp \
-    mapgen/humanlistgenerator.cpp
+    mapgen/humanlistgenerator.cpp \
+    mapgen/imagepositions.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -49,8 +49,8 @@ HEADERS  += mainwindow.h \
     human/health.h \
     mapgen/mapgenerator.h \
     mapgen/mapgeneratorcafe.h \
-    mapgen/startpositions.h \
-    mapgen/humanlistgenerator.h
+    mapgen/humanlistgenerator.h \
+    mapgen/imagepositions.h
 
 FORMS    += mainwindow.ui
 

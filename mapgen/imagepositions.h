@@ -5,12 +5,12 @@
 #include <vector>
 #include <QImage>
 
-class StartPositions
+class ImagePositions
 {
     std::vector<PositionF> pos;
 
 public:
-    StartPositions(const QImage &img);
+    ImagePositions(const QImage &img);
 
     const std::vector<PositionF> &getStartPositionList() const;
 };

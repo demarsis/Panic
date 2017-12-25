@@ -9,7 +9,7 @@ MapPtr MapGeneratorCafe::generate() const
     //# ground floor
     //########################
 
-    StartPositions startPos(QImage("maps\\cafe\\floor1\\starts.png"));
+    ImagePositions startPos(QImage("maps\\cafe\\floor1\\starts.png"));
     HumanListGenerator humanListGenerator(startPos);
 
     floors.push_back(std::make_shared<Floor>(Size(200, 200),

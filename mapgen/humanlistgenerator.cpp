@@ -1,6 +1,6 @@
 #include "humanlistgenerator.h"
 
-HumanListGenerator::HumanListGenerator(const StartPositions &pos)
+HumanListGenerator::HumanListGenerator(const ImagePositions &pos)
 {
     for (const PositionF &p : pos.getStartPositionList())
     {

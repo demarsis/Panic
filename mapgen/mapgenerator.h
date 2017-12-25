@@ -5,7 +5,7 @@
 #include "human/human.h"
 #include <memory>
 #include "map/floor.h"
-#include "startpositions.h"
+#include "imagepositions.h"
 
 class MapGenerator
 {

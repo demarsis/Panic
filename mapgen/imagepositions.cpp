@@ -1,6 +1,6 @@
-#include "startpositions.h"
+#include "imagepositions.h"
 
-StartPositions::StartPositions(const QImage &img)
+ImagePositions::ImagePositions(const QImage &img)
 {
     for (int i = 0; i < img.width(); i++)
     {
@@ -18,7 +18,7 @@ StartPositions::StartPositions(const QImage &img)
     }
 }
 
-const std::vector<PositionF> &StartPositions::getStartPositionList() const
+const std::vector<PositionF> &ImagePositions::getStartPositionList() const
 {
     return pos;
 }
