@@ -40,7 +40,7 @@ const QString &FloorDescriptor::getBarriersPosImageFile() const
     return barriersPosImageFile;
 }
 
-const QString &FloorDescriptor::getFloorImageImageFile() const
+const QString &FloorDescriptor::getFloorImageFile() const
 {
     return floorImageFile;
 }

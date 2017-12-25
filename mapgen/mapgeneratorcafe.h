@@ -2,11 +2,8 @@
 #define MAPGENERATORCAFE_H
 
 #include "mapgenerator.h"
-#include "humanlistgenerator.h"
-#include "imagepositions.h"
-#include "imagebarriers.h"
-#include "map/mappositions.h"
-#include "map/mapbarriers.h"
+#include "floorgenerator.h"
+#include "floordescriptor.h"
 
 class MapGeneratorCafe : public MapGenerator
 {

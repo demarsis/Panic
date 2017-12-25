@@ -26,7 +26,7 @@ public:
     const QString &getStartPosImageFile() const;
     const QString &getEndPosImageFile() const;
     const QString &getBarriersPosImageFile() const;
-    const QString &getFloorImageImageFile() const;
+    const QString &getFloorImageFile() const;
 };
 
 #endif // FLOORDESCRIPTOR_H

@@ -4,24 +4,15 @@
 MapPtr MapGeneratorCafe::generate() const
 {
     Floors floors;
+    FloorDescriptor groundFloorDescriptor(
+                Size(200, 200),
+                "Ground Floor",
+                "maps\\cafe\\floor1\\starts.png",
+                "maps\\cafe\\floor1\\finishes.png",
+                "maps\\cafe\\floor1\\barriers.png",
+                "maps\\cafe\\floor1\\image.png"
+                );
 
-    //########################
-    //# ground floor
-    //########################
-
-    ImagePositions startPos(QImage("maps\\cafe\\floor1\\starts.png"));
-    ImagePositions endPos(QImage("maps\\cafe\\floor1\\finishes.png"));
-    ImageBarriers barriersPos(QImage("maps\\cafe\\floor1\\barriers.png"));
-    HumanListGenerator humanListGenerator(startPos);
-
-    floors.push_back(std::make_shared<Floor>(Size(200, 200),
-                                             "Ground Floor",
-                                             std::make_shared<FloorImage>("maps\\cafe\\floor1\\image.png"),
-                                             humanListGenerator.getHumanList(),
-                                             endPos.getMapsPositions(),
-                                             barriersPos.getMapBarriers()
-                                             ));
-
-
+    floors.push_back(FloorGenerator::generate(groundFloorDescriptor));
     return std::make_shared<Map>("Cafe", floors);
 }
