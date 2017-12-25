@@ -7,12 +7,12 @@
 
 class ImagePositions
 {
-    std::vector<PositionF> pos;
+    std::vector<Position> pos;
 
 public:
     ImagePositions(const QImage &img);
 
-    const std::vector<PositionF> &getStartPositionList() const;
+    const std::vector<Position> &getPositionList() const;
 };
 
 #endif // STARTPOSITIONS_H

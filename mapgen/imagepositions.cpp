@@ -9,16 +9,16 @@ ImagePositions::ImagePositions(const QImage &img)
             QRgb pixel = img.pixel(i, j);
             if (qAlpha(pixel) != 0)
             {
-                pos.push_back(PositionF(
-                                  (float)(i * CELL_MM_REAL_SIZE),
-                                  (float)(j * CELL_MM_REAL_SIZE)
+                pos.push_back(Position(
+                                  (float)(i),
+                                  (float)(j)
                                   ));
             }
         }
     }
 }
 
-const std::vector<PositionF> &ImagePositions::getStartPositionList() const
+const std::vector<Position> &ImagePositions::getPositionList() const
 {
     return pos;
 }
