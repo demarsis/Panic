@@ -13,8 +13,8 @@ SimulatorWidget::~SimulatorWidget()
 
 void SimulatorWidget::setFloorSize(const Size &size)
 {
-    this->floorSize.x = size.x * CELL_MM_REAL_SIZE;
-    this->floorSize.y = size.y * CELL_MM_REAL_SIZE;
+    this->floorSize.x = size.x;
+    this->floorSize.y = size.y;
 }
 
 void SimulatorWidget::DrawCircle(float cx, float cy, float r)

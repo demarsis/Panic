@@ -9,8 +9,6 @@ typedef float Diameter;
 #define PENALTY_EMERGENCY         (double(100))
 #define PENALTY_HUMAN             (double(1))
 
-#define CELL_MM_REAL_SIZE         (long(10))
-
 struct Position
 {
     int x, y;
