@@ -14,6 +14,7 @@
 #include "map/floor.h"
 #include "map/mappositions.h"
 #include "map/mapbarriers.h"
+#include "common/consolelogger.h"
 
 class SimulatorWidget : public QOpenGLWidget
 {

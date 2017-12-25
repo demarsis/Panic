@@ -5,6 +5,7 @@
 #include <vector>
 #include "human/human.h"
 #include <memory>
+#include "common/consolelogger.h"
 
 class HumanListGenerator
 {

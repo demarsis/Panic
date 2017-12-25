@@ -21,7 +21,7 @@ void SimulatorWidget::setFloor(FloorPtr floor)
 
 void SimulatorWidget::DrawCircle(float cx, float cy, float r)
 {
-    int num_segments = 13;
+    int num_segments = 9;
 
     glBegin(GL_LINE_LOOP);
     for (int i = 0; i < num_segments; i++)

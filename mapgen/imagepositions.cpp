@@ -13,7 +13,6 @@ ImagePositions::ImagePositions(const QImage &img)
             }
         }
     }
-    ConsoleLogger::info(QString::number(pos.size()));
 }
 
 MapPositions ImagePositions::getMapsPositions() const
