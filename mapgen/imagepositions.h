@@ -4,6 +4,7 @@
 #include "common/types.h"
 #include <vector>
 #include <QImage>
+#include "map/mappositions.h"
 
 class ImagePositions
 {
@@ -12,7 +13,7 @@ class ImagePositions
 public:
     ImagePositions(const QImage &img);
 
-    const std::vector<Position> &getPositionList() const;
+    MapPositions getMapsPositions() const;
 };
 
 #endif // STARTPOSITIONS_H

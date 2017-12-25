@@ -4,7 +4,7 @@ Floor::Floor(Size size,
              QString name,
              FloorImagePtr floorImage,
              const std::vector<HumanPtr> &humanList,
-             const std::vector<Position> &finishPositions)
+             const MapPositions &finishPositions)
     : size(size),
       name(name),
       floorImage(floorImage),
@@ -16,6 +16,26 @@ Floor::Floor(Size size,
         for (int i = 0; i < this->size.x; i++)
         {
             cellMatrix[i].resize(this->size.y);
+        }
+
+        // fill the matrix with real Cells
+        for (int i = 0; i < this->size.x; i++)
+        {
+            for (int j = 0; j < this->size.y; j++)
+            {
+                // has barrier
+                BarrierType barrierType = BarrierTypeNo;
+
+                // has exit
+                ExitType exitType = ExitTypeNo;
+                if (finishPositions.hasFinishPosition(i, j)) exitType = ExitTypeExit;
+
+                // create cell
+                cellMatrix[i][j] = std::make_shared<Cell>(
+                            Barrier(barrierType),
+                            Exit(exitType)
+                            );
+            }
         }
     }
     else

@@ -18,8 +18,8 @@ ImagePositions::ImagePositions(const QImage &img)
     }
 }
 
-const std::vector<Position> &ImagePositions::getPositionList() const
+MapPositions ImagePositions::getMapsPositions() const
 {
-    return pos;
+    return MapPositions(pos);
 }
 

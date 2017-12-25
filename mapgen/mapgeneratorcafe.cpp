@@ -17,7 +17,7 @@ MapPtr MapGeneratorCafe::generate() const
                                              "Ground Floor",
                                              std::make_shared<FloorImage>("maps\\cafe\\floor1\\image.png"),
                                              humanListGenerator.getHumanList(),
-                                             endPos.getPositionList()
+                                             endPos.getMapsPositions()
                                              ));
 
 

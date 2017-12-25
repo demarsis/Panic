@@ -2,7 +2,7 @@
 
 HumanListGenerator::HumanListGenerator(const ImagePositions &pos)
 {
-    for (const Position &p : pos.getPositionList())
+    for (const Position &p : pos.getMapsPositions().getPositionList())
     {
         HumanPtr human = std::make_shared<Human>(
                     PositionF(p.x, p.y),

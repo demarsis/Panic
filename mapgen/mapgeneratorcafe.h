@@ -3,6 +3,7 @@
 
 #include "mapgenerator.h"
 #include "humanlistgenerator.h"
+#include "map/mappositions.h"
 
 class MapGeneratorCafe : public MapGenerator
 {

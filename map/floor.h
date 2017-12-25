@@ -8,6 +8,7 @@
 #include "cell.h"
 #include "floorimage.h"
 #include "human/human.h"
+#include "mappositions.h"
 
 class Floor
 {
@@ -22,7 +23,7 @@ public:
           QString name,
           FloorImagePtr floorImage,
           const std::vector<HumanPtr> &humanList,
-          const std::vector<Position> &finishPositions);
+          const MapPositions &finishPositions);
 
     CellPtr getCell(const Position &pos);
     bool setCell(const Position &pos, CellPtr cell);
