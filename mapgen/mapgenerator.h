@@ -3,6 +3,8 @@
 
 #include "map/map.h"
 #include "human/human.h"
+#include <memory>
+#include "map/floor.h"
 
 class MapGenerator
 {

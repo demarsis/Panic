@@ -23,6 +23,8 @@ public:
     CellPtr getCell(const Position &pos);
     bool setCell(const Position &pos, CellPtr cell);
 
+    FloorImagePtr getFloorImage();
+
     const Size &getSize() const;
 
 private:

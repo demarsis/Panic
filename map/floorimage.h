@@ -11,6 +11,8 @@ class FloorImage
 
 public:
     FloorImage(const QString &filename);
+
+    const QImage &getImage() const;
 };
 
 typedef std::shared_ptr<FloorImage> FloorImagePtr;

@@ -15,7 +15,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QImage img("test.jpg");
-    ui->openGLWidget->setFloorImage(img);
+    MapPtr cafe = MapGeneratorCafe().generate();
+    FloorPtr groundFloor= cafe->getFloors()[0];
+    ui->openGLWidget->setFloorImage(groundFloor->getFloorImage()->getImage());
     ui->openGLWidget->update();
 }

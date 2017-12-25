@@ -43,6 +43,11 @@ bool Floor::setCell(const Position &pos, CellPtr cell)
     return false;
 }
 
+FloorImagePtr Floor::getFloorImage()
+{
+    return floorImage;
+}
+
 const Size &Floor::getSize() const
 {
     return size;
