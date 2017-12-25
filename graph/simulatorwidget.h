@@ -11,25 +11,19 @@
 #include "human/human.h"
 #include <math.h>
 #include "map/floor.h"
+#include "map/mappositions.h"
+#include "map/mapbarriers.h"
 
 class SimulatorWidget : public QOpenGLWidget
 {
     GLuint floorTextureID;
-    Size floorSize;
-    std::vector<HumanPtr> humanList;
-    std::vector<Position> finishPositions;
+    FloorPtr floor;
 
 public:
     SimulatorWidget(QWidget *parent = 0);
     ~SimulatorWidget();
 
     void setFloor(FloorPtr floor);
-
-private:
-    void setFloorSize(const Size &size);
-    void setFloorImage(const QImage &image);
-    void setHumanList(const std::vector<HumanPtr> &humanList);
-    void setFinishPositionList(const MapPositions &mapFinishPosition);
 
 private:
     void drawFloor();
@@ -40,6 +34,8 @@ private:
 
     PositionF transferCoordToGl(const PositionF &real_coord) const;
     PositionF transferCoordToGl(const Position &cell_coord) const;
+
+    void setFloorImage(const QImage &image);
 
 protected:
     void initializeGL();

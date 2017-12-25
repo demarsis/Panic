@@ -9,6 +9,7 @@
 #include "floorimage.h"
 #include "human/human.h"
 #include "mappositions.h"
+#include "mapbarriers.h"
 
 class Floor
 {
@@ -17,6 +18,7 @@ class Floor
     FloorImagePtr floorImage;
     std::vector<HumanPtr> humanList;
     MapPositions finishPositions;
+    MapBarriers mapBarriers;
 
     std::vector<std::vector<CellPtr>> cellMatrix;
 
@@ -25,15 +27,18 @@ public:
           QString name,
           FloorImagePtr floorImage,
           const std::vector<HumanPtr> &humanList,
-          const MapPositions &finishPositions);
+          const MapPositions &finishPositions,
+          const MapBarriers &mapBarriers);
 
     CellPtr getCell(const Position &pos);
+    CellPtr getCell(int x, int y);
     bool setCell(const Position &pos, CellPtr cell);
 
     FloorImagePtr getFloorImage();
     std::vector<HumanPtr> &getHumanList();
 
     const MapPositions &getFinishMapPositions() const;
+    const MapBarriers &getMapBarriers() const;
 
     const Size &getSize() const;
 

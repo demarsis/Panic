@@ -2,8 +2,7 @@
 
 SimulatorWidget::SimulatorWidget(QWidget *parent)
     : QOpenGLWidget(parent),
-      floorTextureID(0),
-      floorSize(0, 0)
+      floorTextureID(0)
 {
 }
 
@@ -13,18 +12,11 @@ SimulatorWidget::~SimulatorWidget()
 
 void SimulatorWidget::setFloor(FloorPtr floor)
 {
-    if (!floor) return;
-
-    setFloorSize(floor->getSize());
-    setFloorImage(floor->getFloorImage()->getImage());
-    setHumanList(floor->getHumanList());
-    setFinishPositionList(floor->getFinishMapPositions());
-}
-
-void SimulatorWidget::setFloorSize(const Size &size)
-{
-    this->floorSize.x = size.x;
-    this->floorSize.y = size.y;
+    this->floor = floor;
+    if (floor)
+    {
+        setFloorImage(floor->getFloorImage()->getImage());
+    }
 }
 
 void SimulatorWidget::DrawCircle(float cx, float cy, float r)
@@ -44,6 +36,8 @@ void SimulatorWidget::DrawCircle(float cx, float cy, float r)
 
 PositionF SimulatorWidget::transferCoordToGl(const PositionF &real_coord) const
 {
+    if (!floor) return PositionF(0, 0);
+    Size floorSize = floor->getSize();
     return PositionF(real_coord.x - floorSize.x / 2,
                      floorSize.y - (floorSize.y / 2 + real_coord.y));
 }
@@ -76,16 +70,6 @@ void SimulatorWidget::setFloorImage(const QImage &image)
     resize(size().width(), size().height());
 }
 
-void SimulatorWidget::setHumanList(const std::vector<HumanPtr> &humanList)
-{
-    this->humanList = humanList;
-}
-
-void SimulatorWidget::setFinishPositionList(const MapPositions &mapFinishPosition)
-{
-    this->finishPositions = mapFinishPosition.getPositionList();
-}
-
 void SimulatorWidget::drawFloor()
 {
     glEnable(GL_TEXTURE_2D);
@@ -93,8 +77,8 @@ void SimulatorWidget::drawFloor()
 
     glColor3f(1, 1, 1);
     glBegin(GL_QUADS);
-        float floorWidth  = floorSize.x;
-        float floorHeight = floorSize.y;
+        float floorWidth  = floor->getSize().x;
+        float floorHeight = floor->getSize().y;
 
         glTexCoord2f(0, 0); glVertex3f(-floorWidth / 2, -floorHeight / 2, 0);
         glTexCoord2f(1, 0); glVertex3f(+floorWidth / 2, -floorHeight / 2, 0);
@@ -160,6 +144,12 @@ void SimulatorWidget::initializeGL()
 
 void SimulatorWidget::resizeGL(int w, int h)
 {
+    Size floorSize(0, 0);
+    if (floor)
+    {
+        floorSize = floor->getSize();
+    }
+
     if (h <= 0) return;
     if (w <= 0) return;
     if (floorSize.x <= 0) return;
@@ -191,14 +181,16 @@ void SimulatorWidget::resizeGL(int w, int h)
 void SimulatorWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
+    if (!floor) return;
+
     drawFloor();
 
-    for (const Position &p : finishPositions)
+    for (const Position &p : floor->getFinishMapPositions().getPositionList())
     {
         drawFinishPosition(p);
     }
 
-    for (HumanPtr h : humanList)
+    for (HumanPtr h : floor->getHumanList())
     {
         drawHuman(h);
     }

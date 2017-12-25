@@ -9,10 +9,7 @@ ImagePositions::ImagePositions(const QImage &img)
             QRgb pixel = img.pixel(i, j);
             if (qAlpha(pixel) != 0)
             {
-                pos.push_back(Position(
-                                  (float)(i),
-                                  (float)(j)
-                                  ));
+                pos.push_back(Position(i, j));
             }
         }
     }

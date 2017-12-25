@@ -4,12 +4,14 @@ Floor::Floor(Size size,
              QString name,
              FloorImagePtr floorImage,
              const std::vector<HumanPtr> &humanList,
-             const MapPositions &finishPositions)
+             const MapPositions &finishPositions,
+             const MapBarriers &mapBarriers)
     : size(size),
       name(name),
       floorImage(floorImage),
       humanList(humanList),
-      finishPositions(finishPositions)
+      finishPositions(finishPositions),
+      mapBarriers(mapBarriers)
 {
     if ((this->size.x > 0) && (this->size.y  > 0))
     {
@@ -58,6 +60,11 @@ CellPtr Floor::getCell(const Position &pos)
     }
 }
 
+CellPtr Floor::getCell(int x, int y)
+{
+    return getCell(Position(x, y));
+}
+
 bool Floor::setCell(const Position &pos, CellPtr cell)
 {
     if(isValidPosition(pos))
@@ -81,6 +88,11 @@ std::vector<HumanPtr> &Floor::getHumanList()
 const MapPositions &Floor::getFinishMapPositions() const
 {
     return finishPositions;
+}
+
+const MapBarriers &Floor::getMapBarriers() const
+{
+    return mapBarriers;
 }
 
 const Size &Floor::getSize() const

@@ -39,7 +39,9 @@ SOURCES += main.cpp\
     mapgen/imagepositions.cpp \
     map/barrier.cpp \
     map/exit.cpp \
-    map/mappositions.cpp
+    map/mappositions.cpp \
+    mapgen/imagebarriers.cpp \
+    map/mapbarriers.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -56,7 +58,9 @@ HEADERS  += mainwindow.h \
     mapgen/imagepositions.h \
     map/barrier.h \
     map/exit.h \
-    map/mappositions.h
+    map/mappositions.h \
+    mapgen/imagebarriers.h \
+    map/mapbarriers.h
 
 FORMS    += mainwindow.ui
 

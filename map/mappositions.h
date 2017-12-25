@@ -2,7 +2,7 @@
 #define FINISHPOSITIONS_H
 
 #include "common/types.h"
-#include "vector"
+#include <vector>
 
 class MapPositions
 {
