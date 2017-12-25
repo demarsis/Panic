@@ -3,8 +3,7 @@
 SimulatorWidget::SimulatorWidget(QWidget *parent)
     : QOpenGLWidget(parent),
       floorTextureID(0),
-      floorSize(0, 0),
-      floorTextureSize(0, 0)
+      floorSize(0, 0)
 {
 }
 
@@ -14,7 +13,8 @@ SimulatorWidget::~SimulatorWidget()
 
 void SimulatorWidget::setFloorSize(const Size &size)
 {
-    this->floorSize = size;
+    this->floorSize.x = size.x * CELL_MM_REAL_SIZE;
+    this->floorSize.y = size.y * CELL_MM_REAL_SIZE;
 }
 
 void SimulatorWidget::DrawCircle(float cx, float cy, float r)
@@ -34,15 +34,12 @@ void SimulatorWidget::DrawCircle(float cx, float cy, float r)
 
 PositionF SimulatorWidget::transferCoordToGl(const PositionF &real_coord) const
 {
-    return PositionF(real_coord.x - floorTextureSize.x / 2,
-                     floorTextureSize.y - (floorTextureSize.y / 2 + real_coord.y));
+    return PositionF(real_coord.x - floorSize.x / 2,
+                     floorSize.y - (floorSize.y / 2 + real_coord.y));
 }
 
 void SimulatorWidget::setFloorImage(const QImage &image)
 {
-    floorTextureSize.x = image.size().width();
-    floorTextureSize.y = image.size().height();
-
     glEnable(GL_TEXTURE_2D);
 
     glGenTextures(1, &floorTextureID);
@@ -76,8 +73,8 @@ void SimulatorWidget::drawFloor()
 
     glColor3f(1, 1, 1);
     glBegin(GL_QUADS);
-        float floorWidth  = floorTextureSize.x;
-        float floorHeight = floorTextureSize.y;
+        float floorWidth  = floorSize.x;
+        float floorHeight = floorSize.y;
 
         glTexCoord2f(0, 0); glVertex3f(-floorWidth / 2, -floorHeight / 2, 0);
         glTexCoord2f(1, 0); glVertex3f(+floorWidth / 2, -floorHeight / 2, 0);
@@ -134,25 +131,25 @@ void SimulatorWidget::resizeGL(int w, int h)
 {
     if (h <= 0) return;
     if (w <= 0) return;
-    if (floorTextureSize.x <= 0) return;
-    if (floorTextureSize.y <= 0) return;
+    if (floorSize.x <= 0) return;
+    if (floorSize.y <= 0) return;
 
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
     float kScreen = (float)w / (float)h;
-    float kImage = (float)floorTextureSize.x / (float)floorTextureSize.y;
+    float kImage = (float)floorSize.x / (float)floorSize.y;
     float sizeX, sizeY;
     if (kScreen > kImage)
     {
-        sizeX = (float)floorTextureSize.y * (float)w / (float)h;
-        sizeY = (float)floorTextureSize.y;
+        sizeX = (float)floorSize.y * (float)w / (float)h;
+        sizeY = (float)floorSize.y;
     }
     else
     {
-        sizeX = (float)floorTextureSize.x;
-        sizeY = (float)floorTextureSize.x * (float)h / (float)w;
+        sizeX = (float)floorSize.x;
+        sizeY = (float)floorSize.x * (float)h / (float)w;
     }
     glOrtho(-sizeX / 2, +sizeX / 2,
             -sizeY / 2, +sizeY / 2,

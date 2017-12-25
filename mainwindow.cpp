@@ -17,6 +17,7 @@ void MainWindow::on_pushButton_clicked()
 {
     MapPtr cafe = MapGeneratorCafe().generate();
     FloorPtr groundFloor= cafe->getFloors()[0];
+    ui->openGLWidget->setFloorSize(groundFloor->getSize());
     ui->openGLWidget->setFloorImage(groundFloor->getFloorImage()->getImage());
     ui->openGLWidget->setHumanList(groundFloor->getHumanList());
     ui->openGLWidget->update();
