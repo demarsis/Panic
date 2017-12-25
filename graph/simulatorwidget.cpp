@@ -11,6 +11,15 @@ SimulatorWidget::~SimulatorWidget()
 {
 }
 
+void SimulatorWidget::setFloor(FloorPtr floor)
+{
+    if (!floor) return;
+
+    setFloorSize(floor->getSize());
+    setFloorImage(floor->getFloorImage()->getImage());
+    setHumanList(floor->getHumanList());
+}
+
 void SimulatorWidget::setFloorSize(const Size &size)
 {
     this->floorSize.x = size.x;

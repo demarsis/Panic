@@ -10,6 +10,7 @@
 #include "common/types.h"
 #include "human/human.h"
 #include <math.h>
+#include "map/floor.h"
 
 class SimulatorWidget : public QOpenGLWidget
 {
@@ -21,6 +22,9 @@ public:
     SimulatorWidget(QWidget *parent = 0);
     ~SimulatorWidget();
 
+    void setFloor(FloorPtr floor);
+
+private:
     void setFloorSize(const Size &size);
     void setFloorImage(const QImage &image);
     void setHumanList(const std::vector<HumanPtr> &humanList);
