@@ -55,6 +55,9 @@ void MainWindow::loadMap(MapGeneratorPtr mapPtr)
 
     // show first floor
     if (!floors.empty()) toggleFloor(floors[0]);
+
+    // unblock controlling panel
+    ui->groupBoxSimulationControl->setEnabled(true);
 }
 
 void MainWindow::toggleFloor(FloorPtr floor)
@@ -62,6 +65,11 @@ void MainWindow::toggleFloor(FloorPtr floor)
     if (!floor) return;
     ui->openGLWidget->setFloor(floor);
     ui->openGLWidget->update();
+}
+
+void MainWindow::resetSimulation()
+{
+    emit calledResetSimulation();
 }
 
 void MainWindow::on_pushButtonLoadMap_clicked()

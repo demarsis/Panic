@@ -105,12 +105,15 @@
        </widget>
       </widget>
       <widget class="QGroupBox" name="groupBoxSimulationControl">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>10</x>
          <y>360</y>
          <width>331</width>
-         <height>151</height>
+         <height>81</height>
         </rect>
        </property>
        <property name="title">
