@@ -38,7 +38,7 @@
          <x>10</x>
          <y>0</y>
          <width>331</width>
-         <height>171</height>
+         <height>191</height>
         </rect>
        </property>
        <property name="title">
@@ -70,14 +70,37 @@
        <widget class="QPushButton" name="pushButtonLoadMap">
         <property name="geometry">
          <rect>
-          <x>100</x>
-          <y>130</y>
-          <width>121</width>
+          <x>180</x>
+          <y>150</y>
+          <width>141</width>
           <height>31</height>
          </rect>
         </property>
         <property name="text">
          <string>Загрузка</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBoxFloor">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>200</y>
+         <width>341</width>
+         <height>151</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Выбор этажа</string>
+       </property>
+       <widget class="QListWidget" name="listWidgetFloor">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>321</width>
+          <height>121</height>
+         </rect>
         </property>
        </widget>
       </widget>

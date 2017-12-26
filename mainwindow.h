@@ -23,11 +23,14 @@ public:
 
 private:
     void loadMapPtrs();
-    void loadFloor(FloorPtr floor);
+    void loadMap(MapGeneratorPtr mapPtr);
+    void toggleFloor(FloorPtr floor);
 
 private slots:
 
     void on_pushButtonLoadMap_clicked();
+
+    void on_listWidgetFloor_currentRowChanged(int currentRow);
 
 private:
     Ui::MainWindow *ui;

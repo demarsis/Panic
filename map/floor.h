@@ -41,6 +41,7 @@ public:
     const MapBarriers &getMapBarriers() const;
 
     const Size &getSize() const;
+    const QString &getName() const;
 
 private:
     bool isValidPosition(const Position &pos) const;

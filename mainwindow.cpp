@@ -29,7 +29,27 @@ void MainWindow::loadMapPtrs()
     }
 }
 
-void MainWindow::loadFloor(FloorPtr floor)
+void MainWindow::loadMap(MapGeneratorPtr mapPtr)
+{
+    if (!mapPtr) return;
+
+    // generate new map
+    currentMap = mapPtr->generate();
+    Floors &floors = currentMap->getFloors();
+
+    // load floor list
+    for (size_t i = 0; i < floors.size(); i++)
+    {
+        QListWidgetItem *item = new QListWidgetItem(floors[i]->getName());
+        item->setData(Qt::UserRole, i);
+        ui->listWidgetFloor->addItem(item);
+    }
+
+    // show first floor
+    if (!floors.empty()) toggleFloor(floors[0]);
+}
+
+void MainWindow::toggleFloor(FloorPtr floor)
 {
     if (!floor) return;
     ui->openGLWidget->setFloor(floor);
@@ -43,11 +63,18 @@ void MainWindow::on_pushButtonLoadMap_clicked()
     if (data.isNull()) return;
 
     MapGeneratorPtr mapPtr = data.value<MapGeneratorPtr>();
-    if (!mapPtr) return;
+    loadMap(mapPtr);
+}
 
-    // generate new map
-    currentMap = mapPtr->generate();
+void MainWindow::on_listWidgetFloor_currentRowChanged(int currentRow)
+{
+    (void)currentRow;
+    QListWidgetItem *item = ui->listWidgetFloor->currentItem();
+    if (!item) return;
 
-    // temp
-    loadFloor(currentMap->getFloors()[0]);
+    size_t floorIndex = item->data(Qt::UserRole).toInt();
+    Floors &floors = currentMap->getFloors();
+    if (floorIndex >= floors.size()) return;
+
+    toggleFloor(floors[floorIndex]);
 }

@@ -100,6 +100,11 @@ const Size &Floor::getSize() const
     return size;
 }
 
+const QString &Floor::getName() const
+{
+    return name;
+}
+
 bool Floor::isValidPosition(const Position &pos) const
 {
     if (pos.x < 0) return false;
