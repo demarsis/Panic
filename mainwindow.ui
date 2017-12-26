@@ -132,9 +132,9 @@
        <widget class="StopwatchLabel" name="labelStopwatch">
         <property name="geometry">
          <rect>
-          <x>170</x>
+          <x>110</x>
           <y>20</y>
-          <width>141</width>
+          <width>211</width>
           <height>41</height>
          </rect>
         </property>
@@ -145,7 +145,7 @@
          <string>00:00:0</string>
         </property>
        </widget>
-       <widget class="ButtonReset" name="pushButton">
+       <widget class="ButtonReset" name="pushButtonReset">
         <property name="geometry">
          <rect>
           <x>60</x>

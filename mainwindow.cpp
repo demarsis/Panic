@@ -11,8 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
     loadMapPtrs();
 
     // connections
-    connect(ui->pushButtonStartPause, SIGNAL(started()), this, SLOT(onStartedSimulation()));
-    connect(ui->pushButtonStartPause, SIGNAL(paused()), this, SLOT(onPausedSimulation()));
+    connect(ui->pushButtonStartPause, SIGNAL(started()), this, SLOT(calledStartedSimulation()));
+    connect(ui->pushButtonStartPause, SIGNAL(paused()), this, SLOT(calledPausedSimulation()));
+    connect(ui->pushButtonReset, SIGNAL(clicked(bool)), this, SLOT(calledResetSimulation()));
 }
 
 MainWindow::~MainWindow()
@@ -86,12 +87,18 @@ void MainWindow::on_listWidgetFloor_currentRowChanged(int currentRow)
     toggleFloor(floors[floorIndex]);
 }
 
-void MainWindow::onStartedSimulation()
+void MainWindow::calledStartedSimulation()
 {
     ui->labelStopwatch->start();
 }
 
-void MainWindow::onPausedSimulation()
+void MainWindow::calledPausedSimulation()
 {
     ui->labelStopwatch->pause();
+}
+
+void MainWindow::calledResetSimulation()
+{
+    ui->pushButtonStartPause->pause();
+    ui->labelStopwatch->reset();
 }
