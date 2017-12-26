@@ -33,6 +33,9 @@ void MainWindow::loadMap(MapGeneratorPtr mapPtr)
 {
     if (!mapPtr) return;
 
+    // clear previos map
+    ui->listWidgetFloor->clear();
+
     // generate new map
     currentMap = mapPtr->generate();
     Floors &floors = currentMap->getFloors();
