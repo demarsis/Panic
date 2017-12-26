@@ -54,10 +54,13 @@ QString Stopwatch::toString() const
     long ms = getElapsedMs();
     int sec = ms / 1000;
     ms = ms % 1000;
+    ms = ms / 100;
     int min = sec / 60;
     sec = sec % 60;
 
-    QTime time(0, min, sec, ms);
-    return time.toString("mm:ss:zzz");
+    return
+        QString("%1").arg(min, 2, 10, QChar('0')) + ":" +
+        QString("%1").arg(sec, 2, 10, QChar('0')) + ":" +
+        QString("%1").arg(ms , 1, 10, QChar('0'));
 }
 

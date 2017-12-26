@@ -30,6 +30,8 @@ private:
 private slots:
     void on_pushButtonLoadMap_clicked();
     void on_listWidgetFloor_currentRowChanged(int currentRow);
+    void onStartedSimulation();
+    void onPausedSimulation();
 
 private:
     Ui::MainWindow *ui;

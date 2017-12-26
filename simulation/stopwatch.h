@@ -4,6 +4,7 @@
 #include <chrono>
 #include <QString>
 #include <QTime>
+#include <memory>
 
 class Stopwatch
 {
@@ -29,5 +30,7 @@ public:
     long getElapsedMs() const;
     QString toString() const;
 };
+
+typedef std::shared_ptr<Stopwatch> StopwatchPtr;
 
 #endif // STOPWATCH_H

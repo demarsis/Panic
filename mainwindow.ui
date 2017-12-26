@@ -121,8 +121,37 @@
          <rect>
           <x>10</x>
           <y>20</y>
-          <width>51</width>
-          <height>51</height>
+          <width>40</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="StopwatchLabel" name="labelStopwatch">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>20</y>
+          <width>141</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="text">
+         <string>00:00:0</string>
+        </property>
+       </widget>
+       <widget class="ButtonReset" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>20</y>
+          <width>40</width>
+          <height>40</height>
          </rect>
         </property>
         <property name="text">
@@ -146,6 +175,16 @@
    <class>ButtonStartStop</class>
    <extends>QPushButton</extends>
    <header>widgets/buttonstartstop.h</header>
+  </customwidget>
+  <customwidget>
+   <class>StopwatchLabel</class>
+   <extends>QLabel</extends>
+   <header>widgets/stopwatchlabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ButtonReset</class>
+   <extends>QPushButton</extends>
+   <header>widgets/buttonreset.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

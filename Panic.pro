@@ -47,7 +47,9 @@ SOURCES += main.cpp\
     mapgen/floorgenerator.cpp \
     mapgen/allmapgenerators.cpp \
     widgets/buttonstartstop.cpp \
-    simulation/stopwatch.cpp
+    simulation/stopwatch.cpp \
+    widgets/stopwatchlabel.cpp \
+    widgets/buttonreset.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -73,7 +75,9 @@ HEADERS  += mainwindow.h \
     mapgen/floorgenerator.h \
     mapgen/allmapgenerators.h \
     widgets/buttonstartstop.h \
-    simulation/stopwatch.h
+    simulation/stopwatch.h \
+    widgets/stopwatchlabel.h \
+    widgets/buttonreset.h
 
 FORMS    += mainwindow.ui
 

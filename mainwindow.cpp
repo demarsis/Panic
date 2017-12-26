@@ -9,6 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // load all maps
     loadMapPtrs();
+
+    // connections
+    connect(ui->pushButtonStartPause, SIGNAL(started()), this, SLOT(onStartedSimulation()));
+    connect(ui->pushButtonStartPause, SIGNAL(paused()), this, SLOT(onPausedSimulation()));
 }
 
 MainWindow::~MainWindow()
@@ -80,4 +84,14 @@ void MainWindow::on_listWidgetFloor_currentRowChanged(int currentRow)
     if (floorIndex >= floors.size()) return;
 
     toggleFloor(floors[floorIndex]);
+}
+
+void MainWindow::onStartedSimulation()
+{
+    ui->labelStopwatch->start();
+}
+
+void MainWindow::onPausedSimulation()
+{
+    ui->labelStopwatch->pause();
 }
