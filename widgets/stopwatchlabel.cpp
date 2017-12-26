@@ -2,7 +2,7 @@
 
 StopwatchLabel::StopwatchLabel(QWidget *parent) : QLabel(parent)
 {
-    QFont font("Courier New");
+    QFont font("Lucida Console");
     font.setBold(true);
     font.setPixelSize(25);
     setFont(font);

@@ -1,8 +1,9 @@
 #include "human.h"
 
-Human::Human(PositionF pos, Diameter diameter)
+Human::Human(PositionF pos, Diameter diameter, Health health)
     : pos(pos),
-      diameter(diameter)
+      diameter(diameter),
+      health(health)
 {
 
 }
@@ -25,4 +26,9 @@ Diameter Human::getDiameter() const
 const Health &Human::getHealth() const
 {
     return health;
+}
+
+std::shared_ptr<Human> Human::clone() const
+{
+    return std::make_shared<Human>(pos, diameter, health);
 }

@@ -12,13 +12,15 @@ class Human
     Health health;
 
 public:
-    Human(PositionF pos, Diameter diameter);
+    Human(PositionF pos, Diameter diameter, Health health);
 
     const PositionF &getPosition() const;
     void setPosition(const PositionF &pos);
 
     Diameter getDiameter() const;
     const Health &getHealth() const;
+
+    std::shared_ptr<Human> clone() const;
 };
 
 typedef std::shared_ptr<Human> HumanPtr;
