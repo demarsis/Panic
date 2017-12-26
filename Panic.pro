@@ -45,7 +45,8 @@ SOURCES += main.cpp\
     common/consolelogger.cpp \
     mapgen/floordescriptor.cpp \
     mapgen/floorgenerator.cpp \
-    mapgen/allmapgenerators.cpp
+    mapgen/allmapgenerators.cpp \
+    widgets/buttonstartstop.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -69,10 +70,14 @@ HEADERS  += mainwindow.h \
     common/consolelogger.h \
     mapgen/floordescriptor.h \
     mapgen/floorgenerator.h \
-    mapgen/allmapgenerators.h
+    mapgen/allmapgenerators.h \
+    widgets/buttonstartstop.h
 
 FORMS    += mainwindow.ui
 
 target.path = $$OUT_PWD
 target.files = $$PWD/install/maps/
 INSTALLS += target
+
+RESOURCES += \
+    icons/icons.qrc

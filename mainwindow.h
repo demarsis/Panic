@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "common/consolelogger.h"
 #include "mapgen/allmapgenerators.h"
 #include "map/floor.h"
 #include "map/map.h"
@@ -27,9 +28,7 @@ private:
     void toggleFloor(FloorPtr floor);
 
 private slots:
-
     void on_pushButtonLoadMap_clicked();
-
     void on_listWidgetFloor_currentRowChanged(int currentRow);
 
 private:
