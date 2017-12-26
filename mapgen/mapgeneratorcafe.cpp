@@ -14,5 +14,10 @@ MapPtr MapGeneratorCafe::generate() const
                 );
 
     floors.push_back(FloorGenerator::generate(groundFloorDescriptor));
-    return std::make_shared<Map>("Cafe", floors);
+    return std::make_shared<Map>(name(), floors);
+}
+
+QString MapGeneratorCafe::name() const
+{
+    return "Cafe";
 }

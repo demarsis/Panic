@@ -44,7 +44,8 @@ SOURCES += main.cpp\
     map/mapbarriers.cpp \
     common/consolelogger.cpp \
     mapgen/floordescriptor.cpp \
-    mapgen/floorgenerator.cpp
+    mapgen/floorgenerator.cpp \
+    mapgen/allmapgenerators.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -67,7 +68,8 @@ HEADERS  += mainwindow.h \
     common/defines.h \
     common/consolelogger.h \
     mapgen/floordescriptor.h \
-    mapgen/floorgenerator.h
+    mapgen/floorgenerator.h \
+    mapgen/allmapgenerators.h
 
 FORMS    += mainwindow.ui
 

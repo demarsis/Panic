@@ -11,6 +11,11 @@ class MapGenerator
 {
 public:
     virtual MapPtr generate() const = 0;
+    virtual QString name() const = 0;
 };
+
+typedef std::shared_ptr<MapGenerator> MapGeneratorPtr;
+
+Q_DECLARE_METATYPE(MapGeneratorPtr)
 
 #endif // MAPGENERATOR_H
