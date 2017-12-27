@@ -33,7 +33,7 @@ private:
     void drawBarrier(const Position &p, BarrierType barrierType);
     void drawHuman(HumanPtr human);
 
-    void DrawCircle(float cx, float cy, float r);
+    void DrawCircle(float cx, float cy, float r, int num_segments = 13);
 
     PositionF transferCoordToGl(const PositionF &real_coord) const;
     PositionF transferCoordToGl(const Position &cell_coord) const;

@@ -1,9 +1,10 @@
 #include "human.h"
 
-Human::Human(PositionF pos, Diameter diameter, Health health)
+Human::Human(PositionF pos, Diameter diameter, Health health, GenderType genderType)
     : pos(pos),
       diameter(diameter),
-      health(health)
+      health(health),
+      gender(GenderFactory::generateGender(genderType))
 {
 
 }
@@ -28,7 +29,13 @@ const Health &Human::getHealth() const
     return health;
 }
 
+GenderType Human::getGenderType() const
+{
+    return gender->type();
+}
+
 std::shared_ptr<Human> Human::clone() const
 {
-    return std::make_shared<Human>(pos, diameter, health);
+    return std::make_shared<Human>(pos, diameter, health,
+                                   getGenderType());
 }

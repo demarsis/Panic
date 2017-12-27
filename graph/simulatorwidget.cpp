@@ -19,10 +19,8 @@ void SimulatorWidget::setFloor(FloorPtr floor)
     }
 }
 
-void SimulatorWidget::DrawCircle(float cx, float cy, float r)
+void SimulatorWidget::DrawCircle(float cx, float cy, float r, int num_segments)
 {
-    int num_segments = 9;
-
     glBegin(GL_LINE_LOOP);
     for (int i = 0; i < num_segments; i++)
     {
@@ -125,10 +123,11 @@ void SimulatorWidget::drawHuman(HumanPtr human)
     if (!human) return;
     float diameter = human->getDiameter() / 10.0f;
 
+    // color: depends on health status
     switch (human->getHealth().getStatus())
     {
     case HealthStatus::Ok:
-        glColor3f(0, 0.8f, 0);
+        glColor3f(0, 0.7f, 0);
         break;
     case HealthStatus::MinorDamage:
         glColor3f(1, 1, 0);
@@ -141,12 +140,27 @@ void SimulatorWidget::drawHuman(HumanPtr human)
         break;
     }
 
+    // circle or rhombus: depends on gender type
+    int circleNumSegments = 4;
+    switch (human->getGenderType())
+    {
+    case GenderTypeMale:
+        circleNumSegments = 4;
+        break;
+    case GenderTypeFemale:
+        circleNumSegments = 13;
+        break;
+    }
+
+    // transfer position into GL coords
     PositionF pos = transferCoordToGl(human->getPosition());
 
+    // draw circle
     glLineWidth(2);
-    DrawCircle(pos.x, pos.y, diameter);
+    DrawCircle(pos.x, pos.y, diameter, circleNumSegments);
     glLineWidth(1);
 
+    // dead cross status
     if (human->getHealth().isDead())
     {
         glBegin(GL_LINES);

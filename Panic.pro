@@ -50,7 +50,9 @@ SOURCES += main.cpp\
     simulation/stopwatch.cpp \
     widgets/stopwatchlabel.cpp \
     widgets/buttonreset.cpp \
-    simulation/simulator.cpp
+    simulation/simulator.cpp \
+    human/humaninfluence.cpp \
+    human/gender.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -79,7 +81,9 @@ HEADERS  += mainwindow.h \
     simulation/stopwatch.h \
     widgets/stopwatchlabel.h \
     widgets/buttonreset.h \
-    simulation/simulator.h
+    simulation/simulator.h \
+    human/humaninfluence.h \
+    human/gender.h
 
 FORMS    += mainwindow.ui
 
