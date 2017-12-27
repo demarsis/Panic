@@ -6,6 +6,7 @@
 #include "mapgen/allmapgenerators.h"
 #include "map/floor.h"
 #include "map/map.h"
+#include "simulation/simulator.h"
 #include <QVariant>
 
 namespace Ui {
@@ -17,17 +18,19 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
     MapPtr currentMap;
+    SimulatorPtr simulator;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
 private:
-    void loadMapPtrs();
-    void loadMap(MapGeneratorPtr mapPtr);
+    void loadAllAvialableMaps();
+    void newSimulation();
+
+    void showFloorList();
     void toggleFloor(FloorPtr floor);
 
-    void resetSimulation();
 
 private slots:
     void on_pushButtonLoadMap_clicked();

@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // load all maps
-    loadMapPtrs();
+    loadAllAvialableMaps();
 
     // connections
     connect(ui->pushButtonStartPause, SIGNAL(started()), this, SLOT(calledStartedSimulation()));
@@ -21,7 +21,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::loadMapPtrs()
+void MainWindow::loadAllAvialableMaps()
 {
     std::vector<MapGeneratorPtr> mapgens = AllMapGenerators::get();
     for (MapGeneratorPtr mapgen : mapgens)
@@ -34,15 +34,14 @@ void MainWindow::loadMapPtrs()
     }
 }
 
-void MainWindow::loadMap(MapGeneratorPtr mapPtr)
+void MainWindow::showFloorList()
 {
-    if (!mapPtr) return;
-
-    // clear previos map
+    // clear previos floor list
     ui->listWidgetFloor->clear();
 
-    // generate new map
-    currentMap = mapPtr->generate();
+    if (!simulator) return;
+    MapPtr map = simulator->getMap();
+    if (!map) return;
     Floors &floors = currentMap->getFloors();
 
     // load floor list
@@ -60,16 +59,16 @@ void MainWindow::loadMap(MapGeneratorPtr mapPtr)
     ui->groupBoxSimulationControl->setEnabled(true);
 }
 
+void MainWindow::newSimulation()
+{
+    simulator = std::make_shared<Simulator>(currentMap);
+}
+
 void MainWindow::toggleFloor(FloorPtr floor)
 {
     if (!floor) return;
     ui->openGLWidget->setFloor(floor);
     ui->openGLWidget->update();
-}
-
-void MainWindow::resetSimulation()
-{
-    emit calledResetSimulation();
 }
 
 void MainWindow::on_pushButtonLoadMap_clicked()
@@ -78,8 +77,17 @@ void MainWindow::on_pushButtonLoadMap_clicked()
     if (!data.isValid()) return;
     if (data.isNull()) return;
 
+    // get generator
     MapGeneratorPtr mapPtr = data.value<MapGeneratorPtr>();
-    loadMap(mapPtr);
+    if (!mapPtr) return;
+
+    // generate new map
+    currentMap = mapPtr->generate();
+    if (!currentMap) return;
+
+    // create simulation
+    newSimulation();
+    showFloorList();
 }
 
 void MainWindow::on_listWidgetFloor_currentRowChanged(int currentRow)
@@ -89,7 +97,9 @@ void MainWindow::on_listWidgetFloor_currentRowChanged(int currentRow)
     if (!item) return;
 
     size_t floorIndex = item->data(Qt::UserRole).toInt();
-    Floors &floors = currentMap->getFloors();
+    MapPtr map = simulator->getMap();
+    if (!map) return;
+    Floors &floors = map->getFloors();
     if (floorIndex >= floors.size()) return;
 
     toggleFloor(floors[floorIndex]);
