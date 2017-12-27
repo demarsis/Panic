@@ -67,7 +67,7 @@
          <string>Название уровня:</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButtonLoadMap">
+       <widget class="QPushButton" name="pushButtonGenerateMap">
         <property name="geometry">
          <rect>
           <x>180</x>
@@ -145,7 +145,7 @@
          <enum>QFrame::Box</enum>
         </property>
         <property name="text">
-         <string>00:00:0</string>
+         <string/>
         </property>
        </widget>
        <widget class="ButtonReset" name="pushButtonReset">

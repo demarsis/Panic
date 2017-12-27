@@ -10,12 +10,15 @@
 class Simulator
 {
     MapPtr map;
-    Stopwatch stopwatch;
+    StopwatchPtr stopwatch;
 
 public:
     Simulator(MapPtr map);
     MapPtr getMap();
-    Stopwatch &getStopwatch();
+    StopwatchPtr getStopwatch();
+
+    void start();
+    void pause();
 };
 
 typedef std::shared_ptr<Simulator> SimulatorPtr;

@@ -6,6 +6,7 @@ Simulator::Simulator(MapPtr map)
     {
         this->map = map->clone();
     }
+    stopwatch = std::make_shared<Stopwatch>();
 }
 
 MapPtr Simulator::getMap()
@@ -13,8 +14,18 @@ MapPtr Simulator::getMap()
     return map;
 }
 
-Stopwatch &Simulator::getStopwatch()
+StopwatchPtr Simulator::getStopwatch()
 {
     return stopwatch;
+}
+
+void Simulator::start()
+{
+    stopwatch->start();
+}
+
+void Simulator::pause()
+{
+    stopwatch->pause();
 }
 

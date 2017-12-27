@@ -34,17 +34,18 @@ void MainWindow::loadAllAvialableMaps()
     }
 }
 
-void MainWindow::showFloorList()
+void MainWindow::loadCurrentSimulatorIntoGUI()
 {
     // clear previos floor list
     ui->listWidgetFloor->clear();
 
+    // get list of floors
     if (!simulator) return;
     MapPtr map = simulator->getMap();
     if (!map) return;
     Floors &floors = currentMap->getFloors();
 
-    // load floor list
+    // load floor list into the floor QList
     for (size_t i = 0; i < floors.size(); i++)
     {
         QListWidgetItem *item = new QListWidgetItem(floors[i]->getName());
@@ -54,6 +55,12 @@ void MainWindow::showFloorList()
 
     // show first floor
     if (!floors.empty()) toggleFloor(floors[0]);
+
+    // set stopwatch
+    ui->labelStopwatch->setStopwatch(simulator->getStopwatch());
+
+    // reset start/pause button
+    ui->pushButtonStartPause->setChecked(false);
 
     // unblock controlling panel
     ui->groupBoxSimulationControl->setEnabled(true);
@@ -71,7 +78,7 @@ void MainWindow::toggleFloor(FloorPtr floor)
     ui->openGLWidget->update();
 }
 
-void MainWindow::on_pushButtonLoadMap_clicked()
+void MainWindow::on_pushButtonGenerateMap_clicked()
 {
     QVariant data = ui->comboBoxMap->currentData();
     if (!data.isValid()) return;
@@ -87,7 +94,7 @@ void MainWindow::on_pushButtonLoadMap_clicked()
 
     // create simulation
     newSimulation();
-    showFloorList();
+    loadCurrentSimulatorIntoGUI();
 }
 
 void MainWindow::on_listWidgetFloor_currentRowChanged(int currentRow)
@@ -107,16 +114,16 @@ void MainWindow::on_listWidgetFloor_currentRowChanged(int currentRow)
 
 void MainWindow::calledStartedSimulation()
 {
-    ui->labelStopwatch->start();
+    simulator->start();
 }
 
 void MainWindow::calledPausedSimulation()
 {
-    ui->labelStopwatch->pause();
+    simulator->pause();
 }
 
 void MainWindow::calledResetSimulation()
 {
-    ui->pushButtonStartPause->pause();
-    ui->labelStopwatch->reset();
+    newSimulation();
+    loadCurrentSimulatorIntoGUI();
 }

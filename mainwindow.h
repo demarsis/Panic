@@ -28,12 +28,12 @@ private:
     void loadAllAvialableMaps();
     void newSimulation();
 
-    void showFloorList();
+    void loadCurrentSimulatorIntoGUI();
     void toggleFloor(FloorPtr floor);
 
 
 private slots:
-    void on_pushButtonLoadMap_clicked();
+    void on_pushButtonGenerateMap_clicked();
     void on_listWidgetFloor_currentRowChanged(int currentRow);
     void calledStartedSimulation();
     void calledPausedSimulation();

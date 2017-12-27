@@ -16,6 +16,7 @@ class StopwatchLabel : public QLabel
 public:
     StopwatchLabel(QWidget *parent = 0);
     StopwatchPtr getStopwatch();
+    void setStopwatch(StopwatchPtr stopwatch);
 
     void start();
     void pause();
