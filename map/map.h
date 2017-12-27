@@ -16,8 +16,8 @@ class Map
 
 public:
     Map(const QString &name, Floors floors);
-
     Floors &getFloors();
+    std::shared_ptr<Map> clone() const;
 };
 
 typedef std::shared_ptr<Map> MapPtr;
