@@ -43,6 +43,8 @@ public:
     const Size &getSize() const;
     const QString &getName() const;
 
+    std::shared_ptr<Floor> clone() const;
+
 private:
     bool isValidPosition(const Position &pos) const;
 };

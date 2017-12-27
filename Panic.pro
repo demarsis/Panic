@@ -49,7 +49,8 @@ SOURCES += main.cpp\
     widgets/buttonstartstop.cpp \
     simulation/stopwatch.cpp \
     widgets/stopwatchlabel.cpp \
-    widgets/buttonreset.cpp
+    widgets/buttonreset.cpp \
+    simulation/simulator.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -77,7 +78,8 @@ HEADERS  += mainwindow.h \
     widgets/buttonstartstop.h \
     simulation/stopwatch.h \
     widgets/stopwatchlabel.h \
-    widgets/buttonreset.h
+    widgets/buttonreset.h \
+    simulation/simulator.h
 
 FORMS    += mainwindow.ui
 

@@ -105,6 +105,21 @@ const QString &Floor::getName() const
     return name;
 }
 
+std::shared_ptr<Floor> Floor::clone() const
+{
+    // clone all humans
+    std::vector<HumanPtr> hl;
+    for (HumanPtr h : humanList)
+    {
+        hl.push_back(h->clone());
+    }
+
+    // clone all floor
+    FloorPtr floor = std::make_shared<Floor>(size, name, floorImage, hl,
+                                             finishPositions, mapBarriers);
+    return floor;
+}
+
 bool Floor::isValidPosition(const Position &pos) const
 {
     if (pos.x < 0) return false;
