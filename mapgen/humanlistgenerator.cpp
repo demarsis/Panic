@@ -9,7 +9,8 @@ HumanListGenerator::HumanListGenerator(const ImagePositions &pos)
                     PositionF(p.x, p.y),
                     30,
                     Health(),
-                    GenderTypeFemale);
+                    GenderTypeMale,
+                    AgeTypeAdult);
         humanList.push_back(human);
     }
 }

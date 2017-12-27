@@ -127,7 +127,7 @@ void SimulatorWidget::drawHuman(HumanPtr human)
     switch (human->getHealth().getStatus())
     {
     case HealthStatus::Ok:
-        glColor3f(0, 0.7f, 0);
+        glColor3f(0, 0.75f, 0);
         break;
     case HealthStatus::MinorDamage:
         glColor3f(1, 1, 0);
@@ -140,12 +140,12 @@ void SimulatorWidget::drawHuman(HumanPtr human)
         break;
     }
 
-    // circle or rhombus: depends on gender type
-    int circleNumSegments = 4;
+    // circle or pentagon: depends on gender type
+    int circleNumSegments = 5;
     switch (human->getGenderType())
     {
     case GenderTypeMale:
-        circleNumSegments = 4;
+        circleNumSegments = 5;
         break;
     case GenderTypeFemale:
         circleNumSegments = 13;

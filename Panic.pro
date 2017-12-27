@@ -52,7 +52,8 @@ SOURCES += main.cpp\
     widgets/buttonreset.cpp \
     simulation/simulator.cpp \
     human/humaninfluence.cpp \
-    human/gender.cpp
+    human/gender.cpp \
+    human/age.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -83,7 +84,8 @@ HEADERS  += mainwindow.h \
     widgets/buttonreset.h \
     simulation/simulator.h \
     human/humaninfluence.h \
-    human/gender.h
+    human/gender.h \
+    human/age.h
 
 FORMS    += mainwindow.ui
 
