@@ -123,6 +123,26 @@ void SimulatorWidget::drawHuman(HumanPtr human)
     if (!human) return;
     float diameter = human->getDiameter() / 10.0f;
 
+    // transfer position into GL coords
+    PositionF pos = transferCoordToGl(human->getPosition());
+
+    // draw human icon
+    if (humanIconTextures)
+    {
+        glEnable(GL_TEXTURE_2D);
+        GLuint humanIconTexutureID = humanIconTextures->getTextureID(human->getAgeType(), human->getGenderType());
+        glBindTexture(GL_TEXTURE_2D, humanIconTexutureID);
+        glColor3f(1, 1, 0);
+        glBegin(GL_QUADS);
+            const float diameterCoeff = 1.3f;
+            glTexCoord2f(0, 0); glVertex3f(pos.x - diameter / diameterCoeff, pos.y - diameter / diameterCoeff, 0);
+            glTexCoord2f(1, 0); glVertex3f(pos.x + diameter / diameterCoeff, pos.y - diameter / diameterCoeff, 0);
+            glTexCoord2f(1, 1); glVertex3f(pos.x + diameter / diameterCoeff, pos.y + diameter / diameterCoeff, 0);
+            glTexCoord2f(0, 1); glVertex3f(pos.x - diameter / diameterCoeff, pos.y + diameter / diameterCoeff, 0);
+        glEnd();
+        glDisable(GL_TEXTURE_2D);
+    }
+
     // color: depends on health status
     switch (human->getHealth().getStatus())
     {
@@ -138,26 +158,6 @@ void SimulatorWidget::drawHuman(HumanPtr human)
     case HealthStatus::Dead:
         glColor3f(1, 0, 0);
         break;
-    }
-
-    // transfer position into GL coords
-    PositionF pos = transferCoordToGl(human->getPosition());
-
-    // draw human icon
-    if (humanIconTextures)
-    {
-        glEnable(GL_TEXTURE_2D);
-        GLuint humanIconTexutureID = humanIconTextures->getTextureID(human->getAgeType(), human->getGenderType());
-        glBindTexture(GL_TEXTURE_2D, humanIconTexutureID);
-        glColor3f(1, 1, 1);
-        glBegin(GL_QUADS);
-            const float diameterCoeff = 1.3f;
-            glTexCoord2f(0, 0); glVertex3f(pos.x - diameter / diameterCoeff, pos.y - diameter / diameterCoeff, 0);
-            glTexCoord2f(1, 0); glVertex3f(pos.x + diameter / diameterCoeff, pos.y - diameter / diameterCoeff, 0);
-            glTexCoord2f(1, 1); glVertex3f(pos.x + diameter / diameterCoeff, pos.y + diameter / diameterCoeff, 0);
-            glTexCoord2f(0, 1); glVertex3f(pos.x - diameter / diameterCoeff, pos.y + diameter / diameterCoeff, 0);
-        glEnd();
-        glDisable(GL_TEXTURE_2D);
     }
 
     // draw circle
