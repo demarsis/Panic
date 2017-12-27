@@ -15,11 +15,14 @@
 #include "map/mappositions.h"
 #include "map/mapbarriers.h"
 #include "common/consolelogger.h"
+#include "humanicontextures.h"
 
 class SimulatorWidget : public QOpenGLWidget
 {
     GLuint floorTextureID;
     FloorPtr floor;
+
+    HumanIconTextures humanIconTextures;
 
 public:
     SimulatorWidget(QWidget *parent = 0);

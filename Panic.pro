@@ -53,7 +53,8 @@ SOURCES += main.cpp\
     simulation/simulator.cpp \
     human/humaninfluence.cpp \
     human/gender.cpp \
-    human/age.cpp
+    human/age.cpp \
+    graph/humanicontextures.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -85,13 +86,18 @@ HEADERS  += mainwindow.h \
     simulation/simulator.h \
     human/humaninfluence.h \
     human/gender.h \
-    human/age.h
+    human/age.h \
+    graph/humanicontextures.h
 
 FORMS    += mainwindow.ui
 
-target.path = $$OUT_PWD
-target.files = $$PWD/install/maps/
-INSTALLS += target
+install_maps.path = $$OUT_PWD
+install_maps.files = $$PWD/install/maps/
+INSTALLS += install_maps
+
+install_textures.path = $$OUT_PWD
+install_textures.files = $$PWD/textures/
+INSTALLS += install_textures
 
 RESOURCES += \
     icons/icons.qrc
