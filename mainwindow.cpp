@@ -39,6 +39,9 @@ void MainWindow::loadCurrentSimulatorIntoGUI()
     // clear previos floor list
     ui->listWidgetFloor->clear();
 
+    // reset start/pause button
+    ui->pushButtonStartPause->resetToUnpausedState();
+
     // get list of floors
     if (!simulator) return;
     MapPtr map = simulator->getMap();
@@ -58,9 +61,6 @@ void MainWindow::loadCurrentSimulatorIntoGUI()
 
     // set stopwatch
     ui->labelStopwatch->setStopwatch(simulator->getStopwatch());
-
-    // reset start/pause button
-    ui->pushButtonStartPause->setChecked(false);
 
     // unblock controlling panel
     ui->groupBoxSimulationControl->setEnabled(true);

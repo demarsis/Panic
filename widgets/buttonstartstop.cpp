@@ -28,6 +28,14 @@ bool ButtonStartStop::isPaused()
     return !isChecked();
 }
 
+void ButtonStartStop::resetToUnpausedState()
+{
+    blockSignals(true);
+    setChecked(false);
+    updateIcon();
+    blockSignals(false);
+}
+
 void ButtonStartStop::updateIcon()
 {
     if (isChecked())

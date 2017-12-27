@@ -18,6 +18,8 @@ public:
     bool isStarted();
     bool isPaused();
 
+    void resetToUnpausedState();
+
 private:
     void updateIcon();
 
