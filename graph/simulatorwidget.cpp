@@ -128,7 +128,7 @@ void SimulatorWidget::drawHuman(HumanPtr human)
     switch (human->getHealth().getStatus())
     {
     case HealthStatus::Ok:
-        glColor3f(0, 1, 0);
+        glColor3f(0, 0.8f, 0);
         break;
     case HealthStatus::MinorDamage:
         glColor3f(1, 1, 0);

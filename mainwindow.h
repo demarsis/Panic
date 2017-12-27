@@ -17,7 +17,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-    MapPtr currentMap;
+    MapPtr currentGeneratedMap;
     SimulatorPtr simulator;
 
 public:
@@ -26,6 +26,8 @@ public:
 
 private:
     void loadAllAvialableMaps();
+
+    // create/reset simulation based on generated map
     void newSimulation();
 
     void loadCurrentSimulatorIntoGUI();

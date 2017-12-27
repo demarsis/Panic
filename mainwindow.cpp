@@ -46,7 +46,7 @@ void MainWindow::loadCurrentSimulatorIntoGUI()
     if (!simulator) return;
     MapPtr map = simulator->getMap();
     if (!map) return;
-    Floors &floors = currentMap->getFloors();
+    Floors &floors = currentGeneratedMap->getFloors();
 
     // load floor list into the floor QList
     for (size_t i = 0; i < floors.size(); i++)
@@ -68,7 +68,7 @@ void MainWindow::loadCurrentSimulatorIntoGUI()
 
 void MainWindow::newSimulation()
 {
-    simulator = std::make_shared<Simulator>(currentMap);
+    simulator = std::make_shared<Simulator>(currentGeneratedMap);
 }
 
 void MainWindow::toggleFloor(FloorPtr floor)
@@ -89,8 +89,8 @@ void MainWindow::on_pushButtonGenerateMap_clicked()
     if (!mapPtr) return;
 
     // generate new map
-    currentMap = mapPtr->generate();
-    if (!currentMap) return;
+    currentGeneratedMap = mapPtr->generate();
+    if (!currentGeneratedMap) return;
 
     // create simulation
     newSimulation();
