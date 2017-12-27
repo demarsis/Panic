@@ -21,9 +21,15 @@ HumanIconTextures::~HumanIconTextures()
     }
 }
 
+GLuint HumanIconTextures::getTextureID(AgeType ageType, GenderType genderType) const
+{
+    return textures.at(std::make_pair(ageType, genderType));
+}
+
 QImage HumanIconTextures::loadImageFromFile(const QString &filename)
 {
-    return QGLWidget::convertToGLFormat(QImage(filename));
+    QImage img(filename);
+    return QGLWidget::convertToGLFormat(img);
 }
 
 GLuint HumanIconTextures::imageToTexture(const QImage &imageGLFormat) const

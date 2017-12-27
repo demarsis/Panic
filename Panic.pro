@@ -92,7 +92,7 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui
 
 install_maps.path = $$OUT_PWD
-install_maps.files = $$PWD/install/maps/
+install_maps.files = $$PWD/maps/
 INSTALLS += install_maps
 
 install_textures.path = $$OUT_PWD

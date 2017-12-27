@@ -140,24 +140,29 @@ void SimulatorWidget::drawHuman(HumanPtr human)
         break;
     }
 
-    // circle or pentagon: depends on gender type
-    int circleNumSegments = 5;
-    switch (human->getGenderType())
-    {
-    case GenderTypeMale:
-        circleNumSegments = 5;
-        break;
-    case GenderTypeFemale:
-        circleNumSegments = 13;
-        break;
-    }
-
     // transfer position into GL coords
     PositionF pos = transferCoordToGl(human->getPosition());
 
+    // draw human icon
+    if (humanIconTextures)
+    {
+        glEnable(GL_TEXTURE_2D);
+        GLuint humanIconTexutureID = humanIconTextures->getTextureID(human->getAgeType(), human->getGenderType());
+        glBindTexture(GL_TEXTURE_2D, humanIconTexutureID);
+        glColor3f(1, 1, 1);
+        glBegin(GL_QUADS);
+            const float diameterCoeff = 1.3f;
+            glTexCoord2f(0, 0); glVertex3f(pos.x - diameter / diameterCoeff, pos.y - diameter / diameterCoeff, 0);
+            glTexCoord2f(1, 0); glVertex3f(pos.x + diameter / diameterCoeff, pos.y - diameter / diameterCoeff, 0);
+            glTexCoord2f(1, 1); glVertex3f(pos.x + diameter / diameterCoeff, pos.y + diameter / diameterCoeff, 0);
+            glTexCoord2f(0, 1); glVertex3f(pos.x - diameter / diameterCoeff, pos.y + diameter / diameterCoeff, 0);
+        glEnd();
+        glDisable(GL_TEXTURE_2D);
+    }
+
     // draw circle
     glLineWidth(2);
-    DrawCircle(pos.x, pos.y, diameter, circleNumSegments);
+    DrawCircle(pos.x, pos.y, diameter);
     glLineWidth(1);
 
     // dead cross status
@@ -176,6 +181,8 @@ void SimulatorWidget::initializeGL()
 {
     glClearColor(0, 0, 0, 1);
     glEnable(GL_LINE_SMOOTH);
+
+    humanIconTextures = std::make_shared<HumanIconTextures>();
 }
 
 void SimulatorWidget::resizeGL(int w, int h)

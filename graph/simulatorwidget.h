@@ -22,7 +22,7 @@ class SimulatorWidget : public QOpenGLWidget
     GLuint floorTextureID;
     FloorPtr floor;
 
-    HumanIconTextures humanIconTextures;
+    HumanIconTexturesPtr humanIconTextures;
 
 public:
     SimulatorWidget(QWidget *parent = 0);

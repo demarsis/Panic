@@ -18,6 +18,8 @@ public:
     HumanIconTextures();
     ~HumanIconTextures();
 
+    GLuint getTextureID(AgeType ageType, GenderType genderType) const;
+
 private:
     QImage loadImageFromFile(const QString &filename);
     GLuint imageToTexture(const QImage &imageGLFormat) const;
@@ -25,5 +27,7 @@ private:
     void addTexture(AgeType ageType, GenderType genderType, const QString &filename);
     void freeTexture(GLuint textureID);
 };
+
+typedef std::shared_ptr<HumanIconTextures> HumanIconTexturesPtr;
 
 #endif // HUMANICONTEXTURES_H
