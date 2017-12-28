@@ -100,8 +100,16 @@ MapCharacteristics MainWindow::createMapCharacteristicsFromGUI()
     genderProbs.addProbs(GenderTypeMale, men);
     genderProbs.addProbs(GenderTypeFemale, women);
 
+    // creation probability
+    int fullness;
+    getFullnessPercentsFromGUI(fullness);
+
+    ProbabilityRelation<bool> creationProbs;
+    creationProbs.addProbs(true, fullness);
+    creationProbs.addProbs(false, 100 - fullness);
+
     // create generator
-    return MapCharacteristics(ageProbs, genderProbs);
+    return MapCharacteristics(ageProbs, genderProbs, creationProbs);
 }
 
 void MainWindow::toggleFloor(FloorPtr floor)
