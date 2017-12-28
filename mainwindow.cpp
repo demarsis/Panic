@@ -71,6 +71,20 @@ void MainWindow::newSimulation()
     simulator = std::make_shared<Simulator>(currentGeneratedMap);
 }
 
+MapCharacteristics MainWindow::createMapCharacteristicsFromGUI()
+{
+    ProbabilityRelation<AgeType> ageProbs;
+    ageProbs.addProbs(AgeTypeChild, 20);
+    ageProbs.addProbs(AgeTypeAdult, 70);
+    ageProbs.addProbs(AgeTypeElderly, 10);
+
+    ProbabilityRelation<GenderType> genderProbs;
+    genderProbs.addProbs(GenderTypeMale, 30);
+    genderProbs.addProbs(GenderTypeFemale, 70);
+
+    return MapCharacteristics(ageProbs, genderProbs);
+}
+
 void MainWindow::toggleFloor(FloorPtr floor)
 {
     if (!floor) return;
@@ -89,7 +103,7 @@ void MainWindow::on_pushButtonGenerateMap_clicked()
     if (!mapPtr) return;
 
     // generate new map
-    currentGeneratedMap = mapPtr->generate();
+    currentGeneratedMap = mapPtr->generate(createMapCharacteristicsFromGUI());
     if (!currentGeneratedMap) return;
 
     // create simulation

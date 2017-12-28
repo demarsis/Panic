@@ -20,7 +20,7 @@ public:
         probs.push_back(std::make_pair(obj, quantity));
         sum += quantity;
     }
-    TYPE generate()
+    TYPE generate() const
     {
         int rnd = Probability::instance().random(sum);
 

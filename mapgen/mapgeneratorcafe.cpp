@@ -1,7 +1,7 @@
 #include "mapgeneratorcafe.h"
 
 
-MapPtr MapGeneratorCafe::generate() const
+MapPtr MapGeneratorCafe::generate(const MapCharacteristics &mapChar) const
 {
     Floors floors;
     FloorDescriptor groundFloorDescriptor(
@@ -13,7 +13,7 @@ MapPtr MapGeneratorCafe::generate() const
                 "maps\\cafe\\floor1\\image.png"
                 );
 
-    floors.push_back(FloorGenerator::generate(groundFloorDescriptor));
+    floors.push_back(FloorGenerator::generate(groundFloorDescriptor, mapChar));
     return std::make_shared<Map>(name(), floors);
 }
 

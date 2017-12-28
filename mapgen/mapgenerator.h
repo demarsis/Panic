@@ -6,11 +6,12 @@
 #include <memory>
 #include "map/floor.h"
 #include "imagepositions.h"
+#include "mapcharacteristics.h"
 
 class MapGenerator
 {
 public:
-    virtual MapPtr generate() const = 0;
+    virtual MapPtr generate(const MapCharacteristics &mapChar) const = 0;
     virtual QString name() const = 0;
 };
 

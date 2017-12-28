@@ -55,7 +55,8 @@ SOURCES += main.cpp\
     human/gender.cpp \
     human/age.cpp \
     graph/humanicontextures.cpp \
-    probability/probability.cpp
+    probability/probability.cpp \
+    mapgen/mapcharacteristics.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -90,7 +91,8 @@ HEADERS  += mainwindow.h \
     human/age.h \
     graph/humanicontextures.h \
     probability/probability.h \
-    probability/probabilityrelation.h
+    probability/probabilityrelation.h \
+    mapgen/mapcharacteristics.h
 
 FORMS    += mainwindow.ui
 

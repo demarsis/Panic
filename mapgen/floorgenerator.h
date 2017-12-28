@@ -8,11 +8,13 @@
 #include "imagebarriers.h"
 #include "map/mappositions.h"
 #include "map/mapbarriers.h"
+#include "mapcharacteristics.h"
 
 class FloorGenerator
 {
 public:
-    static FloorPtr generate(const FloorDescriptor &desc);
+    static FloorPtr generate(const FloorDescriptor &desc,
+                             const MapCharacteristics &mapChar);
 };
 
 #endif // FLOORGENERATOR_H
