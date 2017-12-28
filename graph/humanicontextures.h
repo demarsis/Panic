@@ -23,7 +23,6 @@ private:
     void addTexture(AgeType ageType, GenderType genderType, const QString &filename);
 };
 
-typedef std::shared_ptr<QOpenGLTexture> TexturePtr;
 typedef std::shared_ptr<HumanIconTextures> HumanIconTexturesPtr;
 
 

@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QOpenGLWidget>
 #include <QGLWidget>
+#include <QOpenGLTexture>
 #include <gl/GLU.h>
 #include <gl/GL.h>
 #include <QImage>
@@ -17,16 +18,17 @@
 #include "common/consolelogger.h"
 #include "humanicontextures.h"
 
+typedef std::shared_ptr<QOpenGLTexture> TexturePtr;
+
 class SimulatorWidget : public QOpenGLWidget
 {
-    GLuint floorTextureID;
     FloorPtr floor;
 
     HumanIconTexturesPtr humanIconTextures;
+    TexturePtr floorTexture;
 
 public:
     SimulatorWidget(QWidget *parent = 0);
-    ~SimulatorWidget();
 
     void setFloor(FloorPtr floor);
 
@@ -36,8 +38,10 @@ private:
     void drawBarrier(const Position &p, BarrierType barrierType);
     void drawHuman(HumanPtr human);
 
-    void DrawCircle(GLfloat cx, GLfloat cy, GLfloat r, int num_segments = 13);
-    void drawTexturedRect(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, TexturePtr texturePtr);
+    void drawCircle(GLfloat cx, GLfloat cy, GLfloat r, int num_segments = 13);
+    void drawTexturedRect(GLfloat x, GLfloat y, GLfloat z,
+                          GLfloat width, GLfloat height,
+                          TexturePtr texturePtr);
 
     PositionF transferCoordToGl(const PositionF &real_coord) const;
     PositionF transferCoordToGl(const Position &cell_coord) const;

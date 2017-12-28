@@ -1,12 +1,7 @@
 #include "simulatorwidget.h"
 
 SimulatorWidget::SimulatorWidget(QWidget *parent)
-    : QOpenGLWidget(parent),
-      floorTextureID(0)
-{
-}
-
-SimulatorWidget::~SimulatorWidget()
+    : QOpenGLWidget(parent)
 {
 }
 
@@ -17,9 +12,12 @@ void SimulatorWidget::setFloor(FloorPtr floor)
     {
         setFloorImage(floor->getFloorImage()->getImage());
     }
+
+    resize(size().width(), size().height() + 1);
+    resize(size().width(), size().height());
 }
 
-void SimulatorWidget::DrawCircle(GLfloat cx, GLfloat cy, GLfloat r, int num_segments)
+void SimulatorWidget::drawCircle(GLfloat cx, GLfloat cy, GLfloat r, int num_segments)
 {
     glBegin(GL_LINE_LOOP);
     for (int i = 0; i < num_segments; i++)
@@ -32,17 +30,20 @@ void SimulatorWidget::DrawCircle(GLfloat cx, GLfloat cy, GLfloat r, int num_segm
     glEnd();
 }
 
-void SimulatorWidget::drawTexturedRect(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, TexturePtr texturePtr)
+void SimulatorWidget::drawTexturedRect(GLfloat x, GLfloat y, GLfloat z,
+                                       GLfloat width, GLfloat height,
+                                       TexturePtr texturePtr)
 {
     if (!texturePtr) return;
 
     glEnable(GL_TEXTURE_2D);
     texturePtr->bind();
+    glColor3f(1, 1, 1);
     glBegin(GL_QUADS);
-        glTexCoord2f(0, 0); glVertex3f(x - radius, y - radius, z);
-        glTexCoord2f(1, 0); glVertex3f(x + radius, y - radius, z);
-        glTexCoord2f(1, 1); glVertex3f(x + radius, y + radius, z);
-        glTexCoord2f(0, 1); glVertex3f(x - radius, y + radius, z);
+        glTexCoord2f(0, 0); glVertex3f(x - width / 2, y - height / 2, z);
+        glTexCoord2f(1, 0); glVertex3f(x + width / 2, y - height / 2, z);
+        glTexCoord2f(1, 1); glVertex3f(x + width / 2, y + height / 2, z);
+        glTexCoord2f(0, 1); glVertex3f(x - width / 2, y + height / 2, z);
     glEnd();
     glDisable(GL_TEXTURE_2D);
 }
@@ -62,46 +63,14 @@ PositionF SimulatorWidget::transferCoordToGl(const Position &cell_coord) const
 
 void SimulatorWidget::setFloorImage(const QImage &image)
 {
-    glEnable(GL_TEXTURE_2D);
-
-    glGenTextures(1, &floorTextureID);
-    glBindTexture(GL_TEXTURE_2D, floorTextureID);
-
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
-
-    QImage tex = QGLWidget::convertToGLFormat(image);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex.width(), tex.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, tex.bits());
-
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-
-    glDisable(GL_TEXTURE_2D);
-
-    resize(size().width(), size().height() + 1);
-    resize(size().width(), size().height());
+    floorTexture = std::make_shared<QOpenGLTexture>(image.mirrored());
 }
 
 void SimulatorWidget::drawFloor()
 {
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, floorTextureID);
-
-    glColor3f(1, 1, 1);
-    glBegin(GL_QUADS);
-        float floorWidth  = floor->getSize().x;
-        float floorHeight = floor->getSize().y;
-
-        glTexCoord2f(0, 0); glVertex3f(-floorWidth / 2, -floorHeight / 2, 0);
-        glTexCoord2f(1, 0); glVertex3f(+floorWidth / 2, -floorHeight / 2, 0);
-        glTexCoord2f(1, 1); glVertex3f(+floorWidth / 2, +floorHeight / 2, 0);
-        glTexCoord2f(0, 1); glVertex3f(-floorWidth / 2, +floorHeight / 2, 0);
-    glEnd();
-
-
-
-    glDisable(GL_TEXTURE_2D);
+    float floorWidth  = floor->getSize().x;
+    float floorHeight = floor->getSize().y;
+    drawTexturedRect(0, 0, 0, floorWidth, floorHeight, floorTexture);
 }
 
 void SimulatorWidget::drawFinishPosition(const Position &p)
@@ -109,7 +78,7 @@ void SimulatorWidget::drawFinishPosition(const Position &p)
     PositionF pos = transferCoordToGl(p);
     glColor3f(0, 0, 1);
     glLineWidth(2);
-    DrawCircle(pos.x, pos.y, 4);
+    drawCircle(pos.x, pos.y, 4);
     glLineWidth(1);
 }
 
@@ -131,7 +100,7 @@ void SimulatorWidget::drawBarrier(const Position &p, BarrierType barrierType)
 
     if (barrierType != BarrierTypeNo)
     {
-        DrawCircle(pos.x, pos.y, 1);
+        drawCircle(pos.x, pos.y, 1);
     }
 }
 
@@ -147,7 +116,7 @@ void SimulatorWidget::drawHuman(HumanPtr human)
     if (humanIconTextures)
     {
         TexturePtr tex = humanIconTextures->getTexture(human->getAgeType(), human->getGenderType());
-        drawTexturedRect(pos.x, pos.y, 0, diameter, tex);
+        drawTexturedRect(pos.x, pos.y, 0, diameter, diameter, tex);
     }
 
     // color: depends on health status
@@ -169,7 +138,7 @@ void SimulatorWidget::drawHuman(HumanPtr human)
 
     // draw circle
     glLineWidth(2);
-    DrawCircle(pos.x, pos.y, diameter);
+    drawCircle(pos.x, pos.y, diameter / 2);
     glLineWidth(1);
 
     // dead cross status

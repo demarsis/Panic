@@ -7,7 +7,7 @@ HumanListGenerator::HumanListGenerator(const ImagePositions &pos)
     {
         HumanPtr human = std::make_shared<Human>(
                     PositionF(p.x, p.y),
-                    30,
+                    50,
                     Health(),
                     GenderTypeMale,
                     AgeTypeAdult);
