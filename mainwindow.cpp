@@ -14,6 +14,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButtonStartPause, SIGNAL(started()), this, SLOT(calledStartedSimulation()));
     connect(ui->pushButtonStartPause, SIGNAL(paused()), this, SLOT(calledPausedSimulation()));
     connect(ui->pushButtonReset, SIGNAL(clicked(bool)), this, SLOT(calledResetSimulation()));
+    connect(ui->sliderMenWomen, SIGNAL(valueChanged(int)), this, SLOT(updateManWomenPercents()));
+
+    // some gui issues
+    updateManWomenPercents();
 }
 
 MainWindow::~MainWindow()
@@ -73,15 +77,21 @@ void MainWindow::newSimulation()
 
 MapCharacteristics MainWindow::createMapCharacteristicsFromGUI()
 {
+    // age
     ProbabilityRelation<AgeType> ageProbs;
     ageProbs.addProbs(AgeTypeChild, 20);
     ageProbs.addProbs(AgeTypeAdult, 70);
     ageProbs.addProbs(AgeTypeElderly, 10);
 
-    ProbabilityRelation<GenderType> genderProbs;
-    genderProbs.addProbs(GenderTypeMale, 30);
-    genderProbs.addProbs(GenderTypeFemale, 70);
+    int men = 100 - ui->sliderMenWomen->value();
+    int women = 100 - men;
 
+    // gender
+    ProbabilityRelation<GenderType> genderProbs;
+    genderProbs.addProbs(GenderTypeMale, men);
+    genderProbs.addProbs(GenderTypeFemale, women);
+
+    // create generator
     return MapCharacteristics(ageProbs, genderProbs);
 }
 
@@ -140,4 +150,14 @@ void MainWindow::calledResetSimulation()
 {
     newSimulation();
     loadCurrentSimulatorIntoGUI();
+}
+
+void MainWindow::updateManWomenPercents()
+{
+    int men = 100 - ui->sliderMenWomen->value();
+    int women = 100 - men;
+
+    QString str = "Количество мужчин: " + QString::number(men) + "%, " +
+                  "количество женщин: " + QString::number(women) + "%";
+    ui->labelMenWomenPercents->setText(str);
 }

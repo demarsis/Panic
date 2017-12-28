@@ -45,6 +45,7 @@ private slots:
     void calledStartedSimulation();
     void calledPausedSimulation();
     void calledResetSimulation();
+    void updateManWomenPercents();
 
 private:
     Ui::MainWindow *ui;
