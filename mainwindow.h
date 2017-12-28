@@ -38,6 +38,9 @@ private:
     void loadCurrentSimulatorIntoGUI();
     void toggleFloor(FloorPtr floor);
 
+    void getGenderPercentsFromGUI(int &men, int &women);
+    void getAgePercentsFromGUI(int &children, int &adults, int &elderlies);
+    void getFullnessPercentsFromGUI(int &fullness);
 
 private slots:
     void on_pushButtonGenerateMap_clicked();
@@ -46,6 +49,8 @@ private slots:
     void calledPausedSimulation();
     void calledResetSimulation();
     void updateManWomenPercents();
+    void updateAgePercents();
+    void updateFullnessPercents();
 
 private:
     Ui::MainWindow *ui;

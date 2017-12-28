@@ -15,9 +15,15 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButtonStartPause, SIGNAL(paused()), this, SLOT(calledPausedSimulation()));
     connect(ui->pushButtonReset, SIGNAL(clicked(bool)), this, SLOT(calledResetSimulation()));
     connect(ui->sliderMenWomen, SIGNAL(valueChanged(int)), this, SLOT(updateManWomenPercents()));
+    connect(ui->sliderChildren, SIGNAL(valueChanged(int)), this, SLOT(updateAgePercents()));
+    connect(ui->sliderAdults, SIGNAL(valueChanged(int)), this, SLOT(updateAgePercents()));
+    connect(ui->sliderElderlies, SIGNAL(valueChanged(int)), this, SLOT(updateAgePercents()));
+    connect(ui->sliderFullness, SIGNAL(valueChanged(int)), this, SLOT(updateFullnessPercents()));
 
     // some gui issues
     updateManWomenPercents();
+    updateAgePercents();
+    updateFullnessPercents();
 }
 
 MainWindow::~MainWindow()
@@ -78,15 +84,18 @@ void MainWindow::newSimulation()
 MapCharacteristics MainWindow::createMapCharacteristicsFromGUI()
 {
     // age
-    ProbabilityRelation<AgeType> ageProbs;
-    ageProbs.addProbs(AgeTypeChild, 20);
-    ageProbs.addProbs(AgeTypeAdult, 70);
-    ageProbs.addProbs(AgeTypeElderly, 10);
+    int children, adults, elderlies;
+    getAgePercentsFromGUI(children, adults, elderlies);
 
-    int men = 100 - ui->sliderMenWomen->value();
-    int women = 100 - men;
+    ProbabilityRelation<AgeType> ageProbs;
+    ageProbs.addProbs(AgeTypeChild, children);
+    ageProbs.addProbs(AgeTypeAdult, adults);
+    ageProbs.addProbs(AgeTypeElderly, elderlies);
 
     // gender
+    int men, women;
+    getGenderPercentsFromGUI(men, women);
+
     ProbabilityRelation<GenderType> genderProbs;
     genderProbs.addProbs(GenderTypeMale, men);
     genderProbs.addProbs(GenderTypeFemale, women);
@@ -100,6 +109,37 @@ void MainWindow::toggleFloor(FloorPtr floor)
     if (!floor) return;
     ui->openGLWidget->setFloor(floor);
     ui->openGLWidget->update();
+}
+
+void MainWindow::getGenderPercentsFromGUI(int &men, int &women)
+{
+    men = 100 - ui->sliderMenWomen->value();
+    women = 100 - men;
+}
+
+void MainWindow::getAgePercentsFromGUI(int &children, int &adults, int &elderlies)
+{
+    children = ui->sliderChildren->value();
+    adults = ui->sliderAdults->value();
+    elderlies = ui->sliderElderlies->value();
+
+    if ((children == adults) && (adults == elderlies))
+    {
+        children = 100;
+        adults = 100;
+        elderlies = 100;
+    }
+
+    int sum = children + adults + elderlies;
+
+    children = (children * 100) / sum;
+    adults = (adults * 100) / sum;
+    elderlies = (elderlies * 100) / sum;
+}
+
+void MainWindow::getFullnessPercentsFromGUI(int &fullness)
+{
+    fullness = ui->sliderFullness->value();
 }
 
 void MainWindow::on_pushButtonGenerateMap_clicked()
@@ -154,10 +194,30 @@ void MainWindow::calledResetSimulation()
 
 void MainWindow::updateManWomenPercents()
 {
-    int men = 100 - ui->sliderMenWomen->value();
-    int women = 100 - men;
+    int men, women;
+    getGenderPercentsFromGUI(men, women);
 
-    QString str = "Количество мужчин: " + QString::number(men) + "%, " +
-                  "количество женщин: " + QString::number(women) + "%";
+    QString str = "Мужчины: " + QString::number(men) + "%, " +
+                  "женщины: " + QString::number(women) + "%";
     ui->labelMenWomenPercents->setText(str);
+}
+
+void MainWindow::updateAgePercents()
+{
+    int children, adults, elderlies;
+    getAgePercentsFromGUI(children, adults, elderlies);
+
+    QString str = "Дети: " + QString::number(children) + "%, " +
+                  "взлослые: " + QString::number(adults) + "%, " +
+                  "пожилые: " + QString::number(elderlies) + "%";
+    ui->labelAgePercents->setText(str);
+}
+
+void MainWindow::updateFullnessPercents()
+{
+    int fullness;
+    getFullnessPercentsFromGUI(fullness);
+
+    QString str = "Заполненность помещений: " + QString::number(fullness) + "%";
+    ui->labelFullness->setText(str);
 }
