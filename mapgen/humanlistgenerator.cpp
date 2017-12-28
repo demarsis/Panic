@@ -8,14 +8,18 @@ HumanListGenerator::HumanListGenerator(const ImagePositions &pos,
     {
         AgeType age = mapChar.ageProbabilityRelation().generate();
         GenderType gender = mapChar.genderProbabilityRelation().generate();
+        bool create = mapChar.creationProbabilityRelation().generate();
 
-        HumanPtr human = std::make_shared<Human>(
-                    PositionF(p.x, p.y),
-                    50,
-                    Health(),
-                    gender,
-                    age);
-        humanList.push_back(human);
+        if (create)
+        {
+            HumanPtr human = std::make_shared<Human>(
+                        PositionF(p.x, p.y),
+                        50,
+                        Health(),
+                        gender,
+                        age);
+            humanList.push_back(human);
+        }
     }
 }
 
