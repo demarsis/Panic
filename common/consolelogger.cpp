@@ -3,5 +3,5 @@
 void ConsoleLogger::info(const QString &str)
 {
     QTextStream cout(stdout);
-    cout << str;
+    cout << (str + "\n");
 }
