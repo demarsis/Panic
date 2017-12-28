@@ -130,17 +130,20 @@ void SimulatorWidget::drawHuman(HumanPtr human)
     if (humanIconTextures)
     {
         glEnable(GL_TEXTURE_2D);
-        GLuint humanIconTexutureID = humanIconTextures->getTextureID(human->getAgeType(), human->getGenderType());
-        glBindTexture(GL_TEXTURE_2D, humanIconTexutureID);
-        glColor3f(1, 1, 0);
-        glBegin(GL_QUADS);
-            const float diameterCoeff = 1.3f;
-            glTexCoord2f(0, 0); glVertex3f(pos.x - diameter / diameterCoeff, pos.y - diameter / diameterCoeff, 0);
-            glTexCoord2f(1, 0); glVertex3f(pos.x + diameter / diameterCoeff, pos.y - diameter / diameterCoeff, 0);
-            glTexCoord2f(1, 1); glVertex3f(pos.x + diameter / diameterCoeff, pos.y + diameter / diameterCoeff, 0);
-            glTexCoord2f(0, 1); glVertex3f(pos.x - diameter / diameterCoeff, pos.y + diameter / diameterCoeff, 0);
-        glEnd();
-        glDisable(GL_TEXTURE_2D);
+        TexturePtr tex = humanIconTextures->getTexture(human->getAgeType(), human->getGenderType());
+        if (tex)
+        {
+            tex->bind();
+            glColor3f(1, 1, 0);
+            glBegin(GL_QUADS);
+                const float diameterCoeff = 1.3f;
+                glTexCoord2f(0, 0); glVertex3f(pos.x - diameter / diameterCoeff, pos.y - diameter / diameterCoeff, 0);
+                glTexCoord2f(1, 0); glVertex3f(pos.x + diameter / diameterCoeff, pos.y - diameter / diameterCoeff, 0);
+                glTexCoord2f(1, 1); glVertex3f(pos.x + diameter / diameterCoeff, pos.y + diameter / diameterCoeff, 0);
+                glTexCoord2f(0, 1); glVertex3f(pos.x - diameter / diameterCoeff, pos.y + diameter / diameterCoeff, 0);
+            glEnd();
+            glDisable(GL_TEXTURE_2D);
+        }
     }
 
     // color: depends on health status
@@ -181,6 +184,9 @@ void SimulatorWidget::initializeGL()
 {
     glClearColor(0, 0, 0, 1);
     glEnable(GL_LINE_SMOOTH);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     humanIconTextures = std::make_shared<HumanIconTextures>();
 }
@@ -223,7 +229,7 @@ void SimulatorWidget::resizeGL(int w, int h)
 
 void SimulatorWidget::paintGL()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     if (!floor) return;
 
     drawFloor();

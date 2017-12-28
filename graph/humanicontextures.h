@@ -6,28 +6,25 @@
 #include <human/gender.h>
 #include <QImage>
 #include <QGLWidget>
-#include <gl/GLU.h>
-#include <gl/GL.h>
+#include <QOpenGLTexture>
+#include <memory>
 #include <utility>
+
 
 class HumanIconTextures
 {
-    std::map<std::pair<AgeType, GenderType>, GLuint> textures;
+    std::map<std::pair<AgeType, GenderType>, std::shared_ptr<QOpenGLTexture>> textures;
 
 public:
     HumanIconTextures();
-    ~HumanIconTextures();
-
-    GLuint getTextureID(AgeType ageType, GenderType genderType) const;
+    std::shared_ptr<QOpenGLTexture> getTexture(AgeType ageType, GenderType genderType) const;
 
 private:
-    QImage loadImageFromFile(const QString &filename);
-    GLuint imageToTexture(const QImage &imageGLFormat) const;
-
     void addTexture(AgeType ageType, GenderType genderType, const QString &filename);
-    void freeTexture(GLuint textureID);
 };
 
+typedef std::shared_ptr<QOpenGLTexture> TexturePtr;
 typedef std::shared_ptr<HumanIconTextures> HumanIconTexturesPtr;
+
 
 #endif // HUMANICONTEXTURES_H
