@@ -19,7 +19,7 @@ void SimulatorWidget::setFloor(FloorPtr floor)
     }
 }
 
-void SimulatorWidget::DrawCircle(float cx, float cy, float r, int num_segments)
+void SimulatorWidget::DrawCircle(GLfloat cx, GLfloat cy, GLfloat r, int num_segments)
 {
     glBegin(GL_LINE_LOOP);
     for (int i = 0; i < num_segments; i++)
@@ -30,6 +30,21 @@ void SimulatorWidget::DrawCircle(float cx, float cy, float r, int num_segments)
         glVertex3f(x + cx, y + cy, 0);
     }
     glEnd();
+}
+
+void SimulatorWidget::drawTexturedRect(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, TexturePtr texturePtr)
+{
+    if (!texturePtr) return;
+
+    glEnable(GL_TEXTURE_2D);
+    texturePtr->bind();
+    glBegin(GL_QUADS);
+        glTexCoord2f(0, 0); glVertex3f(x - radius, y - radius, z);
+        glTexCoord2f(1, 0); glVertex3f(x + radius, y - radius, z);
+        glTexCoord2f(1, 1); glVertex3f(x + radius, y + radius, z);
+        glTexCoord2f(0, 1); glVertex3f(x - radius, y + radius, z);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
 }
 
 PositionF SimulatorWidget::transferCoordToGl(const PositionF &real_coord) const
@@ -84,6 +99,8 @@ void SimulatorWidget::drawFloor()
         glTexCoord2f(0, 1); glVertex3f(-floorWidth / 2, +floorHeight / 2, 0);
     glEnd();
 
+
+
     glDisable(GL_TEXTURE_2D);
 }
 
@@ -129,21 +146,8 @@ void SimulatorWidget::drawHuman(HumanPtr human)
     // draw human icon
     if (humanIconTextures)
     {
-        glEnable(GL_TEXTURE_2D);
         TexturePtr tex = humanIconTextures->getTexture(human->getAgeType(), human->getGenderType());
-        if (tex)
-        {
-            tex->bind();
-            glColor3f(1, 1, 0);
-            glBegin(GL_QUADS);
-                const float diameterCoeff = 1.3f;
-                glTexCoord2f(0, 0); glVertex3f(pos.x - diameter / diameterCoeff, pos.y - diameter / diameterCoeff, 0);
-                glTexCoord2f(1, 0); glVertex3f(pos.x + diameter / diameterCoeff, pos.y - diameter / diameterCoeff, 0);
-                glTexCoord2f(1, 1); glVertex3f(pos.x + diameter / diameterCoeff, pos.y + diameter / diameterCoeff, 0);
-                glTexCoord2f(0, 1); glVertex3f(pos.x - diameter / diameterCoeff, pos.y + diameter / diameterCoeff, 0);
-            glEnd();
-            glDisable(GL_TEXTURE_2D);
-        }
+        drawTexturedRect(pos.x, pos.y, 0, diameter, tex);
     }
 
     // color: depends on health status

@@ -36,7 +36,8 @@ private:
     void drawBarrier(const Position &p, BarrierType barrierType);
     void drawHuman(HumanPtr human);
 
-    void DrawCircle(float cx, float cy, float r, int num_segments = 13);
+    void DrawCircle(GLfloat cx, GLfloat cy, GLfloat r, int num_segments = 13);
+    void drawTexturedRect(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, TexturePtr texturePtr);
 
     PositionF transferCoordToGl(const PositionF &real_coord) const;
     PositionF transferCoordToGl(const Position &cell_coord) const;
