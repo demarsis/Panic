@@ -1,8 +1,19 @@
 #include "simulatorwidget.h"
 
 SimulatorWidget::SimulatorWidget(QWidget *parent)
-    : QOpenGLWidget(parent)
+    : QOpenGLWidget(parent),
+      humanIconTextures(nullptr),
+      floorTexture(nullptr)
 {
+
+}
+
+SimulatorWidget::~SimulatorWidget()
+{
+    makeCurrent();
+    if (humanIconTextures) delete humanIconTextures;
+    if (floorTexture) delete floorTexture;
+    doneCurrent();
 }
 
 void SimulatorWidget::setFloor(FloorPtr floor)
@@ -32,7 +43,7 @@ void SimulatorWidget::drawCircle(GLfloat cx, GLfloat cy, GLfloat r, int num_segm
 
 void SimulatorWidget::drawTexturedRect(GLfloat x, GLfloat y, GLfloat z,
                                        GLfloat width, GLfloat height,
-                                       TexturePtr texturePtr)
+                                       QOpenGLTexture *texturePtr)
 {
     if (!texturePtr) return;
 
@@ -63,7 +74,10 @@ PositionF SimulatorWidget::transferCoordToGl(const Position &cell_coord) const
 
 void SimulatorWidget::setFloorImage(const QImage &image)
 {
-    floorTexture = std::make_shared<QOpenGLTexture>(image.mirrored());
+    makeCurrent();
+    if (floorTexture) delete floorTexture;
+    floorTexture = new QOpenGLTexture(image.mirrored());
+    doneCurrent();
 }
 
 void SimulatorWidget::drawFloor()
@@ -115,7 +129,7 @@ void SimulatorWidget::drawHuman(HumanPtr human)
     // draw human icon
     if (humanIconTextures)
     {
-        TexturePtr tex = humanIconTextures->getTexture(human->getAgeType(), human->getGenderType());
+        QOpenGLTexture *tex = humanIconTextures->getTexture(human->getAgeType(), human->getGenderType());
         drawTexturedRect(pos.x, pos.y, 0, diameter, diameter, tex);
     }
 
@@ -161,7 +175,7 @@ void SimulatorWidget::initializeGL()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    humanIconTextures = std::make_shared<HumanIconTextures>();
+    humanIconTextures = new HumanIconTextures();
 }
 
 void SimulatorWidget::resizeGL(int w, int h)

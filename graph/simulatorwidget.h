@@ -18,17 +18,16 @@
 #include "common/consolelogger.h"
 #include "humanicontextures.h"
 
-typedef std::shared_ptr<QOpenGLTexture> TexturePtr;
-
 class SimulatorWidget : public QOpenGLWidget
 {
-    FloorPtr floor;
+    HumanIconTextures *humanIconTextures;
+    QOpenGLTexture *floorTexture;
 
-    HumanIconTexturesPtr humanIconTextures;
-    TexturePtr floorTexture;
+    FloorPtr floor;
 
 public:
     SimulatorWidget(QWidget *parent = 0);
+    ~SimulatorWidget();
 
     void setFloor(FloorPtr floor);
 
@@ -41,7 +40,7 @@ private:
     void drawCircle(GLfloat cx, GLfloat cy, GLfloat r, int num_segments = 13);
     void drawTexturedRect(GLfloat x, GLfloat y, GLfloat z,
                           GLfloat width, GLfloat height,
-                          TexturePtr texturePtr);
+                          QOpenGLTexture *texturePtr);
 
     PositionF transferCoordToGl(const PositionF &real_coord) const;
     PositionF transferCoordToGl(const Position &cell_coord) const;

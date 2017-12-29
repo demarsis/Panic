@@ -12,7 +12,15 @@ HumanIconTextures::HumanIconTextures()
     addTexture(AgeTypeElderly,  GenderTypeFemale,  "textures\\people\\elderly-female.png");
 }
 
-std::shared_ptr<QOpenGLTexture> HumanIconTextures::getTexture(AgeType ageType, GenderType genderType) const
+HumanIconTextures::~HumanIconTextures()
+{
+    for (auto tex : textures)
+    {
+        delete tex.second;
+    }
+}
+
+QOpenGLTexture *HumanIconTextures::getTexture(AgeType ageType, GenderType genderType) const
 {
     return textures.at(std::make_pair(ageType, genderType));
 }
@@ -20,6 +28,6 @@ std::shared_ptr<QOpenGLTexture> HumanIconTextures::getTexture(AgeType ageType, G
 void HumanIconTextures::addTexture(AgeType ageType, GenderType genderType, const QString &filename)
 {
     textures[std::make_pair(ageType, genderType)] =
-            std::make_shared<QOpenGLTexture>(QImage(QString(filename)).mirrored());
+            new QOpenGLTexture(QImage(QString(filename)).mirrored());
 
 }
