@@ -11,7 +11,12 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Panic simulator</string>
+   <string>Симулятор поведения толпы в помещении</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normalon>:/icons/crowd.png</normalon>
+   </iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">

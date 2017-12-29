@@ -3,5 +3,6 @@
         <file>pause.png</file>
         <file>play.png</file>
         <file>reset.png</file>
+        <file>crowd.png</file>
     </qresource>
 </RCC>

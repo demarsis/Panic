@@ -96,13 +96,18 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
+# install maps
 install_maps.path = $$OUT_PWD
 install_maps.files = $$PWD/maps/
 INSTALLS += install_maps
 
+# install textures
 install_textures.path = $$OUT_PWD
 install_textures.files = $$PWD/textures/
 INSTALLS += install_textures
 
 RESOURCES += \
     icons/icons.qrc
+
+#set application icon
+RC_ICONS += icons/crowd.ico
