@@ -58,7 +58,8 @@ SOURCES += main.cpp\
     probability/probability.cpp \
     mapgen/mapcharacteristics.cpp \
     simulation/vector.cpp \
-    simulation/directions.cpp
+    simulation/directions.cpp \
+    map/cellmatrix.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -96,7 +97,8 @@ HEADERS  += mainwindow.h \
     probability/probabilityrelation.h \
     mapgen/mapcharacteristics.h \
     simulation/vector.h \
-    simulation/directions.h
+    simulation/directions.h \
+    map/cellmatrix.h
 
 FORMS    += mainwindow.ui
 

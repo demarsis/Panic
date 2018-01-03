@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include <deque>
 #include "common/types.h"
 #include <QString>
 #include "cell.h"
@@ -10,6 +11,7 @@
 #include "human/human.h"
 #include "mappositions.h"
 #include "mapbarriers.h"
+#include "cellmatrix.h"
 
 class Floor
 {
@@ -20,7 +22,7 @@ class Floor
     MapPositions finishPositions;
     MapBarriers mapBarriers;
 
-    std::vector<std::vector<CellPtr>> cellMatrix;
+    CellMatrix cellMatrix;
 
 public:
     Floor(Size size,
@@ -45,8 +47,12 @@ public:
 
     std::shared_ptr<Floor> clone() const;
 
+    // generate penalty way for each map cell
+    void generateWayPenaltyMap();
+
 private:
     bool isValidPosition(const Position &pos) const;
+
 };
 
 typedef std::shared_ptr<Floor> FloorPtr;

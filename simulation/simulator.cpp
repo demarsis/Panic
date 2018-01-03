@@ -5,6 +5,12 @@ Simulator::Simulator(MapPtr map)
     if (map)
     {
         this->map = map->clone();
+
+        // generate way penalty for cell matrix for each floor
+        for (FloorPtr floor : this->map->getFloors())
+        {
+            floor->generateWayPenaltyMap();
+        }
     }
     stopwatch = std::make_shared<Stopwatch>();
 }

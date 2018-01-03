@@ -124,6 +124,39 @@ std::shared_ptr<Floor> Floor::clone() const
     return floor;
 }
 
+void Floor::generateWayPenaltyMap()
+{
+    // clear update number for all cells
+    for (CellMatrixIterator it(cellMatrix); it.hasNext();)
+    {
+        CellAdditionalData &addData = cell->getAdditionalData();
+        addData.visited = 0;
+    }
+
+
+    // continue while have any changes
+    bool wasChanges = true;
+    int updateNumber = 1;
+    while (wasChanges)
+    {
+        wasChanges = false;
+
+        // generate vector of Cells with finish positions
+        std::deque<CellPtr> cellsToUpdate;
+        CellMatrixIterator it(cellMatrix);
+        while (it.hasNext())
+        {
+            CellPtr cell = it.next();
+            if (cell->getExit().isExit())
+            {
+                cellsToUpdate.push_back(cellsToUpdate);
+            }
+        }
+
+
+    }
+}
+
 bool Floor::isValidPosition(const Position &pos) const
 {
     if (pos.x < 0) return false;
