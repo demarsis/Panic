@@ -3,13 +3,8 @@
 
 #include "cell.h"
 #include <vector>
-//#include "common/"
 
 typedef std::vector<std::vector<CellPtr>> CellMatrix;
-
-/*class CellMatrix : public std::vector<std::vector<CellPtr>>
-{
-};*/
 
 class CellMatrixIterator
 {

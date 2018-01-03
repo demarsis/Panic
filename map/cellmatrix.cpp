@@ -11,6 +11,7 @@ bool CellMatrixIterator::hasNext() const
 {
     // not last x position
     if (x < matrix.size() - 1) return true;
+    if (x >= matrix.size()) return false;
 
     // last x position, not last y position
     if (y < matrix[x].size()) return true;
