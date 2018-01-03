@@ -205,6 +205,54 @@ bool Floor::generateWayPenaltyMap()
     return true;
 }
 
+std::vector<CellPtr> Floor::getHumanCells(HumanPtr human)
+{
+    std::vector<CellPtr> result;
+    if (!human) return result;
+
+    Position center(human->getPosition().x, human->getPosition().y);
+    int radius = human->getDiameter() / 2;
+
+    Position lefttop(center.x - radius, center.y - radius);
+    Position rightbottom(center.x + radius, center.y + radius);
+
+    for (int x = lefttop.x; x <= rightbottom.x; x++)
+    {
+        for (int y = lefttop.y; y <= rightbottom.y; y++)
+        {
+            float currentRadius = sqrt((x - center.x) * (x - center.x) + (y - center.y) * (y - center.y));
+            if (currentRadius > radius) continue;
+
+            result.push_back(getCell(x, y));
+        }
+    }
+
+    return result;
+}
+
+Penalty Floor::getCellsPenalty(const std::vector<CellPtr> &cells, Position offset)
+{
+    Penalty result = 0;
+    for (const CellPtr &cell : cells)
+    {
+        Position pos = cell->getPosition();
+        pos.x += offset.x;
+        pos.y += offset.y;
+
+        CellPtr offsetedCell = getCell(pos);
+
+        if (!offsetedCell)
+        {
+            result += PENALTY_MAX;
+            continue;
+        }
+
+        result += offsetedCell->getAdditionalData().wayPenalty;
+    }
+
+    return result;
+}
+
 bool Floor::isValidPosition(const Position &pos) const
 {
     if (pos.x < 0) return false;

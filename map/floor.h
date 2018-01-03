@@ -53,6 +53,9 @@ public:
     // generate penalty way for each map cell
     bool generateWayPenaltyMap();
 
+    std::vector<CellPtr> getHumanCells(HumanPtr human);
+    Penalty getCellsPenalty(const std::vector<CellPtr> &cells, Position offset);
+
 private:
     bool isValidPosition(const Position &pos) const;
 
