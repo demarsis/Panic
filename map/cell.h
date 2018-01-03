@@ -6,25 +6,34 @@
 #include "barrier.h"
 #include "exit.h"
 
-class Cell
+struct CellAdditionalData
 {
     CellPenalty penalty;
     CellCost cost;
+
+    CellAdditionalData(CellPenalty penalty, CellCost cost)
+        : penalty(penalty),
+          cost(cost)
+    {
+    }
+};
+
+class Cell
+{
+    Position pos;
     Barrier barrier;
     Exit exit;
 
+    CellAdditionalData addData;
+
 public:
-    Cell(const Barrier &barrier, const Exit &exit);
+    Cell(const Position &pos, const Barrier &barrier, const Exit &exit);
 
-    CellPenalty getPenalty() const;
-    void setPenalty(CellPenalty penalty);
-
-    CellCost getCost() const;
-    void setCost(CellCost cost);
-    void resetCost();
-
+    const Position &getPosition() const;
     const Barrier &getBarrier() const;
     const Exit &getExit() const;
+
+    CellAdditionalData &getAdditionalData();
 };
 
 typedef std::shared_ptr<Cell> CellPtr;

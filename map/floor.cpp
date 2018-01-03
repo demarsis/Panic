@@ -35,6 +35,7 @@ Floor::Floor(Size size,
 
                 // create cell
                 cellMatrix[i][j] = std::make_shared<Cell>(
+                            Position(i, j),
                             Barrier(barrierType),
                             Exit(exitType)
                             );

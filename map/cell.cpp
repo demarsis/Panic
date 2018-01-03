@@ -1,36 +1,16 @@
 #include "cell.h"
 
-Cell::Cell(const Barrier &barrier, const Exit &exit)
-    : penalty(0),
-      cost(0),
+Cell::Cell(const Position &pos, const Barrier &barrier, const Exit &exit)
+    : pos(pos),
       barrier(barrier),
-      exit(exit)
+      exit(exit),
+      addData(0, 0)
 {
 }
 
-CellPenalty Cell::getPenalty() const
+const Position &Cell::getPosition() const
 {
-    return penalty;
-}
-
-void Cell::setPenalty(CellPenalty penalty)
-{
-    this->penalty = penalty;
-}
-
-CellCost Cell::getCost() const
-{
-    return cost;
-}
-
-void Cell::setCost(CellCost cost)
-{
-    this->cost = cost;
-}
-
-void Cell::resetCost()
-{
-    setCost(0);
+    return pos;
 }
 
 const Barrier &Cell::getBarrier() const
@@ -41,4 +21,9 @@ const Barrier &Cell::getBarrier() const
 const Exit &Cell::getExit() const
 {
     return exit;
+}
+
+CellAdditionalData &Cell::getAdditionalData()
+{
+    return addData;
 }
