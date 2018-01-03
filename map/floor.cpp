@@ -135,7 +135,7 @@ bool Floor::generateWayPenaltyMap()
     }
 
     // generate vector of Cells with finish positions
-/*    std::deque<CellPtr> finishCells;
+    std::deque<CellPtr> finishCells;
     for (CellMatrixIterator it(cellMatrix); it.hasNext();)
     {
         CellPtr cell = it.next();
@@ -178,8 +178,8 @@ bool Floor::generateWayPenaltyMap()
                     Position relativePosition = a.second;
 
                     // count new penalty for current cell
-                    Penalty newPenalty = neigh->getAdditionalData().wayPenalty +
-                                         neigh->getAdditionalData().cellPenalty *
+                    Penalty newPenalty = currectCell->getAdditionalData().wayPenalty +
+                                         currectCell->getAdditionalData().cellPenalty *
                                          sqrt(relativePosition.x * relativePosition.x + relativePosition.y * relativePosition.y);
 
                     // update only if the penalty is lower then the existing one
@@ -187,6 +187,7 @@ bool Floor::generateWayPenaltyMap()
                     {
                         neigh->getAdditionalData().wayPenalty = newPenalty;
                         wasChanges = true;
+                        cellsToUpdate.push_back(neigh);
                     }
                 }
             }
@@ -195,7 +196,7 @@ bool Floor::generateWayPenaltyMap()
         // next update number
         updateNumber++;
     }
-*/
+
     return true;
 }
 
