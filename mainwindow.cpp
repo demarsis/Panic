@@ -56,7 +56,7 @@ void MainWindow::loadCurrentSimulatorIntoGUI()
     if (!simulator) return;
     MapPtr map = simulator->getMap();
     if (!map) return;
-    Floors &floors = currentGeneratedMap->getFloors();
+    Floors &floors = simulator->getMap()->getFloors();
 
     // load floor list into the floor QList
     for (size_t i = 0; i < floors.size(); i++)

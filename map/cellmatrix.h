@@ -18,6 +18,8 @@ public:
 
     bool hasNext() const;
     CellPtr next();
+
+    void reset();
 };
 
 #endif // CELLMATRIX_H

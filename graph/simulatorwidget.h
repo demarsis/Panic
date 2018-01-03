@@ -36,6 +36,7 @@ private:
     void drawFinishPosition(const Position &p);
     void drawBarrier(const Position &p, BarrierType barrierType);
     void drawHuman(HumanPtr human);
+    void drawPenaltyWay();
 
     void drawCircle(GLfloat cx, GLfloat cy, GLfloat r, int num_segments = 13);
     void drawTexturedRect(GLfloat x, GLfloat y, GLfloat z,

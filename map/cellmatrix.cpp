@@ -33,3 +33,9 @@ CellPtr CellMatrixIterator::next()
 
     return result;
 }
+
+void CellMatrixIterator::reset()
+{
+    x = 0;
+    y = 0;
+}

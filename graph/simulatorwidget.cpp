@@ -167,6 +167,26 @@ void SimulatorWidget::drawHuman(HumanPtr human)
     }
 }
 
+void SimulatorWidget::drawPenaltyWay()
+{
+    CellMatrixIterator it = floor->getCellIterator();
+    glPointSize(3);
+    glBegin(GL_POINTS);
+    while (it.hasNext())
+    {
+        CellPtr cell = it.next();
+        if (!cell) continue;
+
+        Penalty color = cell->getAdditionalData().wayPenalty / 200.0f;
+        glColor3f(color, color, color);
+
+        PositionF pos = transferCoordToGl(cell->getPosition());
+        glVertex3f(pos.x, pos.y, 0);
+    }
+    glEnd();
+    glPointSize(1);
+}
+
 void SimulatorWidget::initializeGL()
 {
     glClearColor(0, 0, 0, 1);
@@ -223,7 +243,7 @@ void SimulatorWidget::paintGL()
 
     if (DRAW_ADDITION_PLAN_OBJECTS)
     {
-        for (const Position &p : floor->getFinishMapPositions().getPositionList())
+        /*for (const Position &p : floor->getFinishMapPositions().getPositionList())
         {
             drawFinishPosition(p);
         }
@@ -231,7 +251,9 @@ void SimulatorWidget::paintGL()
         for (const auto &barrier : floor->getMapBarriers().getBarrierList())
         {
             drawBarrier(barrier.first, barrier.second);
-        }
+        }*/
+
+        drawPenaltyWay();
     }
 
     for (HumanPtr h : floor->getHumanList())

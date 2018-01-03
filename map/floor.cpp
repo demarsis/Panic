@@ -69,6 +69,11 @@ CellPtr Floor::getCell(int x, int y)
     return getCell(Position(x, y));
 }
 
+CellMatrixIterator Floor::getCellIterator()
+{
+    return CellMatrixIterator(cellMatrix);
+}
+
 bool Floor::setCell(const Position &pos, CellPtr cell)
 {
     if(isValidPosition(pos))
