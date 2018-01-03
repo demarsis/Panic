@@ -12,6 +12,8 @@
 #include "mappositions.h"
 #include "mapbarriers.h"
 #include "cellmatrix.h"
+#include "simulation/directions.h"
+#include <math.h>
 
 class Floor
 {
@@ -48,10 +50,13 @@ public:
     std::shared_ptr<Floor> clone() const;
 
     // generate penalty way for each map cell
-    void generateWayPenaltyMap();
+    bool generateWayPenaltyMap();
 
 private:
     bool isValidPosition(const Position &pos) const;
+
+    // Position is relative!
+    std::vector<std::pair<CellPtr, Position>> getNeighborCells(CellPtr cell);
 
 };
 

@@ -34,3 +34,4 @@ Vector Vector::operator *(float mult) const
     return Vector(x * mult, y * mult);
 }
 
+

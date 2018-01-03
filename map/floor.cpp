@@ -124,15 +124,27 @@ std::shared_ptr<Floor> Floor::clone() const
     return floor;
 }
 
-void Floor::generateWayPenaltyMap()
+bool Floor::generateWayPenaltyMap()
 {
     // clear update number for all cells
     for (CellMatrixIterator it(cellMatrix); it.hasNext();)
     {
+        CellPtr cell = it.next();
         CellAdditionalData &addData = cell->getAdditionalData();
         addData.visited = 0;
     }
 
+    // generate vector of Cells with finish positions
+/*    std::deque<CellPtr> finishCells;
+    for (CellMatrixIterator it(cellMatrix); it.hasNext();)
+    {
+        CellPtr cell = it.next();
+        if (cell->getExit().isExit())
+        {
+            finishCells.push_back(cell);
+        }
+    }
+    if (finishCells.empty()) return false;
 
     // continue while have any changes
     bool wasChanges = true;
@@ -141,20 +153,50 @@ void Floor::generateWayPenaltyMap()
     {
         wasChanges = false;
 
-        // generate vector of Cells with finish positions
-        std::deque<CellPtr> cellsToUpdate;
-        CellMatrixIterator it(cellMatrix);
-        while (it.hasNext())
+        // update starts from finish positions
+        std::deque<CellPtr> cellsToUpdate = finishCells;
+
+        // continue until
+        while (!cellsToUpdate.empty())
         {
-            CellPtr cell = it.next();
-            if (cell->getExit().isExit())
+            // get top cell
+            CellPtr currectCell = cellsToUpdate[0];
+            cellsToUpdate.pop_front();
+            if (!currectCell) continue;
+
+            if (currectCell->getAdditionalData().visited < updateNumber)
             {
-                cellsToUpdate.push_back(cellsToUpdate);
+                currectCell->getAdditionalData().visited = updateNumber;
+
+                // get all it's neighbors
+                std::vector<std::pair<CellPtr, Position>> neighs = getNeighborCells(currectCell);
+
+                for (const auto &a : neighs)
+                {
+                    CellPtr neigh = a.first;
+                    if (!neigh) continue;
+                    Position relativePosition = a.second;
+
+                    // count new penalty for current cell
+                    Penalty newPenalty = neigh->getAdditionalData().wayPenalty +
+                                         neigh->getAdditionalData().cellPenalty *
+                                         sqrt(relativePosition.x * relativePosition.x + relativePosition.y * relativePosition.y);
+
+                    // update only if the penalty is lower then the existing one
+                    if (neigh->getAdditionalData().wayPenalty > newPenalty)
+                    {
+                        neigh->getAdditionalData().wayPenalty = newPenalty;
+                        wasChanges = true;
+                    }
+                }
             }
         }
 
-
+        // next update number
+        updateNumber++;
     }
+*/
+    return true;
 }
 
 bool Floor::isValidPosition(const Position &pos) const
@@ -164,4 +206,24 @@ bool Floor::isValidPosition(const Position &pos) const
     if (pos.x >= size.x) return false;
     if (pos.y >= size.y) return false;
     return true;
+}
+
+std::vector<std::pair<CellPtr, Position>> Floor::getNeighborCells(CellPtr cell)
+{
+    std::vector<std::pair<CellPtr, Position>> result;
+    if (!cell) return result;
+
+    Position cellPos = cell->getPosition();
+    Directions dirs(false);
+    for (const auto &a : dirs.getAllDirections())
+    {
+        Position neightborCellPosition(cellPos.x + a.first.x,
+                                       cellPos.y + a.first.y);
+        if (isValidPosition(neightborCellPosition))
+        {
+            result.push_back(std::make_pair(getCell(neightborCellPosition), a.first));
+        }
+    }
+
+    return result;
 }

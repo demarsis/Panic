@@ -12,7 +12,7 @@ class Directions
     std::vector<DirVector> dirs;
 
 public:
-    Directions();
+    Directions(bool centralCell);
     const std::vector<DirVector> &getAllDirections() const;
 };
 
