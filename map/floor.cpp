@@ -34,11 +34,14 @@ Floor::Floor(Size size,
                 if (finishPositions.hasFinishPosition(i, j)) exitType = ExitTypeExit;
 
                 // create cell
-                cellMatrix[i][j] = std::make_shared<Cell>(
-                            Position(i, j),
-                            Barrier(barrierType),
-                            Exit(exitType)
-                            );
+                CellPtr newCell = std::make_shared<Cell>(
+                                      Position(i, j),
+                                      Barrier(barrierType),
+                                      Exit(exitType)
+                                      );
+
+
+                cellMatrix[i][j] = newCell;
             }
         }
     }

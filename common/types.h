@@ -1,13 +1,17 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-typedef float CellPenalty;
-typedef float CellCost;
-typedef float Diameter;
+#include <limits>
 
-#define PENALTY_WALL              (double(10000))
-#define PENALTY_EMERGENCY         (double(100))
-#define PENALTY_HUMAN             (double(1))
+typedef float Penalty;
+
+#define PENALTY_FREE_CELL           ((float)1)
+#define PENALTY_CRITICAL_CELL       ((float)100)
+#define PENALTY_WALL_CELL           ((float)100)
+#define PENALTY_MAX                 ((float)std::numeric_limits<float>::max())
+#define PENALTY_ZERO                ((float)0)
+
+typedef float Diameter;
 
 struct Position
 {

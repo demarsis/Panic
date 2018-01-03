@@ -4,8 +4,13 @@ Cell::Cell(const Position &pos, const Barrier &barrier, const Exit &exit)
     : pos(pos),
       barrier(barrier),
       exit(exit),
-      addData(0, 0)
+      addData(barrier.getCellPenalty(), PENALTY_MAX)
 {
+    // if this cell is an exit - way penalty is zero
+    if (getExit().isExit())
+    {
+        addData.wayPenalty = PENALTY_ZERO;
+    }
 }
 
 const Position &Cell::getPosition() const

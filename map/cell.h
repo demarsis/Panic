@@ -8,12 +8,15 @@
 
 struct CellAdditionalData
 {
-    CellPenalty penalty;
-    CellCost cost;
+    Penalty cellPenalty;
+    Penalty wayPenalty;
 
-    CellAdditionalData(CellPenalty penalty, CellCost cost)
-        : penalty(penalty),
-          cost(cost)
+    int visited;
+
+    CellAdditionalData(Penalty cellPenalty, Penalty wayPenalty)
+        : cellPenalty(cellPenalty),
+          wayPenalty(wayPenalty),
+          visited(0)
     {
     }
 };

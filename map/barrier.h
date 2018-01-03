@@ -1,6 +1,8 @@
 #ifndef BARRIER_H
 #define BARRIER_H
 
+#include "common/types.h"
+
 enum BarrierType
 {
     BarrierTypeNo,
@@ -15,6 +17,7 @@ class Barrier
 public:
     Barrier(BarrierType barrierType);
     BarrierType getType() const;
+    Penalty getCellPenalty() const;
 };
 
 #endif // BARRIER_H
