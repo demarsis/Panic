@@ -24,3 +24,13 @@ const std::vector<Directions::DirVector> &Directions::getAllDirections() const
     return dirs;
 }
 
+const std::vector<Position> Directions::getAllPositions() const
+{
+    std::vector<Position> result;
+    for (const DirVector &dv : dirs)
+    {
+        result.push_back(dv.first);
+    }
+    return result;
+}
+

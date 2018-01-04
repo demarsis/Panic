@@ -5,7 +5,8 @@ bool PenaltyWayBuilder::generate(FloorPtr floor)
     if (!floor) return false;
     int counter = 0;
 
-    //Directions dirs(false);
+    // neigh positions
+    std::vector<Position> relativeNeighPositions = Directions(false).getAllPositions();
 
     // reset cells for not being visited
     CellMatrixIterator it = floor->getCellIterator();
@@ -32,34 +33,35 @@ bool PenaltyWayBuilder::generate(FloorPtr floor)
             CellPtr &currectCell = it.next();
             if (!currectCell) continue;
             CellAdditionalData &currentCellAdditionalData = currectCell->getAdditionalData();
+            const Position &currentCellPosition = currectCell->getPosition();
 
             if (currentCellAdditionalData.visited < currentVisitedValue)
             {
                 currentCellAdditionalData.visited = currentVisitedValue;
 
-                // get all it's neighbors
-
-                /*std::vector<std::pair<CellPtr, Position>> neighs = getNeighborCells(floor, currectCell);
-
-                for (const auto &a : neighs)
+                // for every neighbor
+                for (const Position &relativePos : relativeNeighPositions)
                 {
-                    CellPtr neigh = a.first;
+                    // get a cell
+                    CellPtr neigh = floor->getCell(currentCellPosition.x + relativePos.x,
+                                                    currentCellPosition.y + relativePos.y);
                     if (!neigh) continue;
-                    Position relativePosition = a.second;
+
+                    CellAdditionalData &neighCellAdditionalData = neigh->getAdditionalData();
 
                     // count new penalty for current cell
-                    Penalty newPenalty = currectCell->getAdditionalData().wayPenalty +
-                                         neigh->getAdditionalData().cellPenalty *
-                                         sqrt((double)relativePosition.x * (double)relativePosition.x +
-                                              (double)relativePosition.y * (double)relativePosition.y);
+                    Penalty newPenalty = currentCellAdditionalData.wayPenalty +
+                                         neighCellAdditionalData.cellPenalty *
+                                         sqrt((double)relativePos.x * (double)relativePos.x +
+                                              (double)relativePos.y * (double)relativePos.y);
 
                     // update only if the penalty is lower then the existing one
-                    if (neigh->getAdditionalData().wayPenalty > newPenalty)
+                    if (neighCellAdditionalData.wayPenalty > newPenalty)
                     {
-                        neigh->getAdditionalData().wayPenalty = newPenalty;
+                        neighCellAdditionalData.wayPenalty = newPenalty;
                         wasChanges = true;
                     }
-                }*/
+                }
             }
         }
 
@@ -67,25 +69,4 @@ bool PenaltyWayBuilder::generate(FloorPtr floor)
     }
 
     return true;
-}
-
-std::vector<std::pair<CellPtr, Position> > PenaltyWayBuilder::getNeighborCells(FloorPtr floor, CellPtr cell)
-{
-    std::vector<std::pair<CellPtr, Position>> result;
-    if (!floor) return result;
-    if (!cell)  return result;
-
-    Position cellPos = cell->getPosition();
-    Directions dirs(false);
-    for (const auto &a : dirs.getAllDirections())
-    {
-        Position neightborCellPosition(cellPos.x + a.first.x,
-                                       cellPos.y + a.first.y);
-        if (floor->isValidPosition(neightborCellPosition))
-        {
-            result.push_back(std::make_pair(floor->getCell(neightborCellPosition), a.first));
-        }
-    }
-
-    return result;
 }

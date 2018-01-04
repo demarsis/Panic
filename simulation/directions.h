@@ -14,6 +14,7 @@ class Directions
 public:
     Directions(bool centralCell);
     const std::vector<DirVector> &getAllDirections() const;
+    const std::vector<Position> getAllPositions() const;
 };
 
 #endif // DIRECTIONS_H

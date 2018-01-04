@@ -177,7 +177,7 @@ void SimulatorWidget::drawPenaltyWay()
         CellPtr cell = it.next();
         if (!cell) continue;
 
-        Penalty color = cell->getAdditionalData().wayPenalty / 200.0f;
+        Penalty color = cell->getAdditionalData().wayPenalty / 600.0f;
         glColor3f(color, color, color);
 
         PositionF pos = transferCoordToGl(cell->getPosition());
