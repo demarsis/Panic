@@ -27,7 +27,7 @@ Floor::Floor(Size size,
             for (int j = 0; j < this->size.y; j++)
             {
                 // has barrier
-                BarrierType barrierType = BarrierTypeNo;
+                BarrierType barrierType = mapBarriers.getBarrierType(i, j);
 
                 // has exit
                 ExitType exitType = ExitTypeNo;

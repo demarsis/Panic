@@ -4,47 +4,32 @@ bool PenaltyWayBuilder::generate(FloorPtr floor)
 {
     if (!floor) return false;
 
-    // clear update number for all cells
-    for (CellMatrixIterator it = floor->getCellIterator(); it.hasNext();)
-    {
-        CellPtr cell = it.next();
-        CellAdditionalData &addData = cell->getAdditionalData();
-        addData.visited = 0;
-    }
-
-    // generate vector of Cells with finish positions
-    std::deque<CellPtr> finishCells;
-    for (CellMatrixIterator it = floor->getCellIterator(); it.hasNext();)
-    {
-        CellPtr cell = it.next();
-        if (cell->getExit().isExit())
-        {
-            finishCells.push_back(cell);
-        }
-    }
-    if (finishCells.empty()) return false;
-
     // continue while have any changes
     bool wasChanges = true;
-    int updateNumber = 1;
     while (wasChanges)
     {
         wasChanges = false;
 
-        // update starts from finish positions
-        std::deque<CellPtr> cellsToUpdate = finishCells;
-
-        // continue until
-        while (!cellsToUpdate.empty())
+        // reset visited
+        CellMatrixIterator it = floor->getCellIterator();
+        while (it.hasNext())
         {
-            // get top cell
-            CellPtr currectCell = cellsToUpdate[0];
-            cellsToUpdate.pop_front();
+            CellPtr currectCell = it.next();
+            if (!currectCell) continue;
+            currectCell->getAdditionalData().visited = false;
+        }
+
+
+        // build new way penalties
+        it.reset();
+        while (it.hasNext())
+        {
+            CellPtr currectCell = it.next();
             if (!currectCell) continue;
 
-            if (currectCell->getAdditionalData().visited < updateNumber)
+            if (currectCell->getAdditionalData().visited == false)
             {
-                currectCell->getAdditionalData().visited = updateNumber;
+                currectCell->getAdditionalData().visited = true;
 
                 // get all it's neighbors
                 std::vector<std::pair<CellPtr, Position>> neighs = getNeighborCells(floor, currectCell);
@@ -66,14 +51,10 @@ bool PenaltyWayBuilder::generate(FloorPtr floor)
                     {
                         neigh->getAdditionalData().wayPenalty = newPenalty;
                         wasChanges = true;
-                        cellsToUpdate.push_back(neigh);
                     }
                 }
             }
         }
-
-        // next update number
-        updateNumber++;
     }
 
     return true;
