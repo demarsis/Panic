@@ -43,8 +43,12 @@ bool PenaltyWayBuilder::generate(FloorPtr floor)
                 for (const Position &relativePos : relativeNeighPositions)
                 {
                     // get a cell
-                    CellPtr neigh = floor->getCell(currentCellPosition.x + relativePos.x,
-                                                    currentCellPosition.y + relativePos.y);
+                    Position neighPos(currentCellPosition.x + relativePos.x,
+                                      currentCellPosition.y + relativePos.y);
+
+                    if (!floor->isValidPosition(neighPos)) continue;
+
+                    CellPtr &neigh = floor->getCell(neighPos);
                     if (!neigh) continue;
 
                     CellAdditionalData &neighCellAdditionalData = neigh->getAdditionalData();

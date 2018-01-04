@@ -34,8 +34,8 @@ public:
           const MapPositions &finishPositions,
           const MapBarriers &mapBarriers);
 
-    CellPtr getCell(const Position &pos);
-    CellPtr getCell(int x, int y);
+    CellPtr &getCell(const Position &pos);
+    CellPtr &getCell(int x, int y);
     CellMatrixIterator getCellIterator();
     bool setCell(const Position &pos, CellPtr cell);
 

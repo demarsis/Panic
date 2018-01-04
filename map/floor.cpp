@@ -52,19 +52,12 @@ Floor::Floor(Size size,
     }
 }
 
-CellPtr Floor::getCell(const Position &pos)
+CellPtr &Floor::getCell(const Position &pos)
 {
-    if(isValidPosition(pos))
-    {
-        return cellMatrix[pos.x][pos.y];
-    }
-    else
-    {
-        return CellPtr();
-    }
+    return cellMatrix[pos.x][pos.y];
 }
 
-CellPtr Floor::getCell(int x, int y)
+CellPtr &Floor::getCell(int x, int y)
 {
     return getCell(Position(x, y));
 }
