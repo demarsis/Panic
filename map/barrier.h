@@ -17,6 +17,7 @@ class Barrier
 public:
     Barrier(BarrierType barrierType);
     BarrierType getType() const;
+    void setType(BarrierType barrierType);
     Penalty getCellPenalty() const;
 };
 

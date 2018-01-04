@@ -10,8 +10,6 @@ class MapPositions
 
 public:
     MapPositions(const std::vector<Position> &pos);
-
-    bool hasFinishPosition(int x, int y) const;
     const std::vector<Position> &getPositionList() const;
 };
 

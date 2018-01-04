@@ -10,6 +10,11 @@ BarrierType Barrier::getType() const
     return barrierType;
 }
 
+void Barrier::setType(BarrierType barrierType)
+{
+    this->barrierType = barrierType;
+}
+
 Penalty Barrier::getCellPenalty() const
 {
     switch (getType())

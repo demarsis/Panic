@@ -3,7 +3,6 @@
 bool PenaltyWayBuilder::generate(FloorPtr floor)
 {
     if (!floor) return false;
-    int counter = 0;
 
     // neigh positions
     std::vector<Position> relativeNeighPositions = Directions(false).getAllPositions();
@@ -24,11 +23,6 @@ bool PenaltyWayBuilder::generate(FloorPtr floor)
     bool wasChanges = true;
     while (wasChanges)
     {
-        ////////////////
-        counter++;
-        ConsoleLogger::info(QString("Attempt #") + QString::number(counter));
-        ////////////////
-
         wasChanges = false;
 
         // fill the cells of finishes

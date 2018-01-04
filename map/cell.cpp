@@ -6,11 +6,6 @@ Cell::Cell(const Position &pos, const Barrier &barrier, const Exit &exit)
       exit(exit),
       addData(barrier.getCellPenalty(), PENALTY_MAX)
 {
-    // if this cell is an exit - way penalty is zero
-    if (getExit().isExit())
-    {
-        addData.wayPenalty = PENALTY_ZERO;
-    }
 }
 
 const Position &Cell::getPosition() const
@@ -23,7 +18,13 @@ const Barrier &Cell::getBarrier() const
     return barrier;
 }
 
-const Exit &Cell::getExit() const
+void Cell::setBarrier(BarrierType barrierType)
+{
+    barrier.setType(barrierType);
+    addData.cellPenalty = barrier.getCellPenalty();
+}
+
+Exit &Cell::getExit()
 {
     return exit;
 }

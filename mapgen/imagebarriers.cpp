@@ -20,7 +20,7 @@ ImageBarriers::ImageBarriers(const QImage &img)
 
 MapBarriers ImageBarriers::getMapBarriers() const
 {
-    return MapBarriers(width, height, barriers);
+    return MapBarriers(barriers);
 }
 
 BarrierType ImageBarriers::colorToBarrierType(QRgb pixel) const

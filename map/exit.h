@@ -15,6 +15,7 @@ public:
     Exit(ExitType exitType);
 
     ExitType getExitType() const;
+    void setExitType(ExitType exitType);
     bool isExit() const;
 };
 

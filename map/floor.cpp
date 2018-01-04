@@ -26,24 +26,36 @@ Floor::Floor(Size size,
         {
             for (int j = 0; j < this->size.y; j++)
             {
-                // has barrier
-                BarrierType barrierType = mapBarriers.getBarrierType(i, j);
-
-                // has exit
-                ExitType exitType = ExitTypeNo;
-                if (finishPositions.hasFinishPosition(i, j)) exitType = ExitTypeExit;
-
                 // create cell
-                CellPtr newCell = std::make_shared<Cell>(
+                cellMatrix[i][j] = std::make_shared<Cell>(
                                       Position(i, j),
-                                      Barrier(barrierType),
-                                      Exit(exitType)
+                                      BarrierTypeNo,
+                                      ExitTypeNo
                                       );
-
-
-                cellMatrix[i][j] = newCell;
             }
         }
+
+        // set barriers
+        for (const auto &a : mapBarriers.getBarriersList())
+        {
+            const Position &pos = a.first;
+            if (isValidPosition(pos))
+            {
+                CellPtr &cell = cellMatrix[pos.x][pos.y];
+                cell->setBarrier(a.second);
+            }
+        }
+
+        // set finishes
+        for (const Position &pos : finishPositions.getPositionList())
+        {
+            if (isValidPosition(pos))
+            {
+                CellPtr &cell = cellMatrix[pos.x][pos.y];
+                cell->getExit().setExitType(ExitTypeExit);
+            }
+        }
+
     }
     else
     {
