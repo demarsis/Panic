@@ -4,6 +4,7 @@
 #include "map/floor.h"
 #include "map/cell.h"
 #include "directions.h"
+#include "common/consolelogger.h"
 
 class PenaltyWayBuilder
 {

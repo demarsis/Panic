@@ -52,7 +52,7 @@ Floor::Floor(Size size,
             if (isValidPosition(pos))
             {
                 CellPtr &cell = cellMatrix[pos.x][pos.y];
-                cell->getExit().setExitType(ExitTypeExit);
+                cell->setExit(ExitTypeExit);
             }
         }
 

@@ -40,7 +40,8 @@ public:
     const Position &getPosition() const;
     const Barrier &getBarrier() const;
     void setBarrier(BarrierType barrierType);
-    Exit &getExit();
+    const Exit &getExit() const;
+    void setExit(ExitType exitType);
 
     CellAdditionalData &getAdditionalData();
 };

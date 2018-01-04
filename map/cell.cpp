@@ -24,9 +24,15 @@ void Cell::setBarrier(BarrierType barrierType)
     addData.cellPenalty = barrier.getCellPenalty();
 }
 
-Exit &Cell::getExit()
+const Exit &Cell::getExit() const
 {
     return exit;
+}
+
+void Cell::setExit(ExitType exitType)
+{
+    exit.setExitType(exitType);
+    addData.wayPenalty = exit.getStartWayPenalty();
 }
 
 CellAdditionalData &Cell::getAdditionalData()

@@ -21,3 +21,15 @@ bool Exit::isExit() const
     return getExitType() == ExitTypeExit;
 }
 
+Penalty Exit::getStartWayPenalty() const
+{
+    switch (exitType)
+    {
+    case ExitTypeNo:
+        return PENALTY_MAX;
+    case ExitTypeExit:
+        return PENALTY_ZERO;
+    }
+    return PENALTY_MAX;
+}
+

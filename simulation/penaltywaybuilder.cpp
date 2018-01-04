@@ -26,8 +26,8 @@ bool PenaltyWayBuilder::generate(FloorPtr floor)
         wasChanges = false;
 
         // fill the cells of finishes
+        currentToUpdate.clear();
         currentToUpdate.swap(nextToUpdate);
-        nextToUpdate.clear();
         const MapPositions &finishPoses = floor->getFinishMapPositions();
         for (const Position &pos : finishPoses.getPositionList())
         {
