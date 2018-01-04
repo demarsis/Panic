@@ -50,18 +50,10 @@ public:
 
     std::shared_ptr<Floor> clone() const;
 
-    // generate penalty way for each map cell
-    bool generateWayPenaltyMap();
-
     std::vector<CellPtr> getHumanCells(HumanPtr human);
     Penalty getCellsPenalty(const std::vector<CellPtr> &cells, Position offset);
 
-private:
     bool isValidPosition(const Position &pos) const;
-
-    // Position is relative!
-    std::vector<std::pair<CellPtr, Position>> getNeighborCells(CellPtr cell);
-
 };
 
 typedef std::shared_ptr<Floor> FloorPtr;

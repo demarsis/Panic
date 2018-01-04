@@ -6,8 +6,8 @@
 typedef float Penalty;
 
 #define PENALTY_FREE_CELL           ((float)1)
-#define PENALTY_CRITICAL_CELL       ((float)100)
-#define PENALTY_WALL_CELL           ((float)100)
+#define PENALTY_CRITICAL_CELL       ((float)1000)
+#define PENALTY_WALL_CELL           ((float)1000)
 #define PENALTY_MAX                 ((float)1000000)
 #define PENALTY_ZERO                ((float)0)
 

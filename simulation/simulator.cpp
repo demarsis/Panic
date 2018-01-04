@@ -9,7 +9,7 @@ Simulator::Simulator(MapPtr map)
         // generate way penalty for cell matrix for each floor
         for (FloorPtr floor : this->map->getFloors())
         {
-            floor->generateWayPenaltyMap();
+            PenaltyWayBuilder::generate(floor);
         }
     }
     stopwatch = std::make_shared<Stopwatch>();

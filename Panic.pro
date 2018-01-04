@@ -59,7 +59,9 @@ SOURCES += main.cpp\
     mapgen/mapcharacteristics.cpp \
     simulation/vector.cpp \
     simulation/directions.cpp \
-    map/cellmatrix.cpp
+    map/cellmatrix.cpp \
+    simulation/penaltywaybuilder.cpp \
+    mapgen/mapgeneratortest1.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -98,7 +100,9 @@ HEADERS  += mainwindow.h \
     mapgen/mapcharacteristics.h \
     simulation/vector.h \
     simulation/directions.h \
-    map/cellmatrix.h
+    map/cellmatrix.h \
+    simulation/penaltywaybuilder.h \
+    mapgen/mapgeneratortest1.h
 
 FORMS    += mainwindow.ui
 

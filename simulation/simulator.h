@@ -6,6 +6,7 @@
 #include "map/floor.h"
 #include "human/human.h"
 #include "stopwatch.h"
+#include "penaltywaybuilder.h"
 
 class Simulator
 {
