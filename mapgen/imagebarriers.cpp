@@ -1,10 +1,12 @@
 #include "imagebarriers.h"
 
 ImageBarriers::ImageBarriers(const QImage &img)
+    : width(img.width()),
+      height(img.height())
 {
-    for (int i = 0; i < img.width(); i++)
+    for (int i = 0; i < width; i++)
     {
-        for (int j = 0; j < img.height(); j++)
+        for (int j = 0; j < height; j++)
         {
             BarrierType barrierType = colorToBarrierType(img.pixel(i, j));
 
@@ -18,7 +20,7 @@ ImageBarriers::ImageBarriers(const QImage &img)
 
 MapBarriers ImageBarriers::getMapBarriers() const
 {
-    return MapBarriers(barriers);
+    return MapBarriers(width, height, barriers);
 }
 
 BarrierType ImageBarriers::colorToBarrierType(QRgb pixel) const

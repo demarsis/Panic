@@ -9,6 +9,7 @@
 
 class ImageBarriers
 {
+    int width, height;
     std::vector<std::pair<Position, BarrierType>> barriers;
 
 public:

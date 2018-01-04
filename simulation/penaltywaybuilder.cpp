@@ -29,7 +29,7 @@ bool PenaltyWayBuilder::generate(FloorPtr floor)
         it.reset();
         while (it.hasNext())
         {
-            CellPtr currectCell = it.next();
+            CellPtr &currectCell = it.next();
             if (!currectCell) continue;
             CellAdditionalData &currentCellAdditionalData = currectCell->getAdditionalData();
 
@@ -59,7 +59,7 @@ bool PenaltyWayBuilder::generate(FloorPtr floor)
                         neigh->getAdditionalData().wayPenalty = newPenalty;
                         wasChanges = true;
                     }
-                }*/ wasChanges = true;
+                }*/
             }
         }
 

@@ -7,13 +7,17 @@
 
 class MapBarriers
 {
-    std::vector<std::pair<Position, BarrierType>> barriers;
+    int width, height;
+    std::vector<std::vector<BarrierType>> matrix;
 
 public:
-    MapBarriers(const std::vector<std::pair<Position, BarrierType>> &barriers);
-    const std::vector<std::pair<Position, BarrierType>> &getBarrierList() const;
+    MapBarriers(int width, int height,
+                const std::vector<std::pair<Position, BarrierType>> &barriers);
 
     BarrierType getBarrierType(int x, int y) const;
+
+private:
+    void setBarrier(int x, int y, BarrierType type);
 };
 
 #endif // MAPBARRIERS_H
