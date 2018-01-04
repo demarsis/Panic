@@ -17,7 +17,7 @@ public:
     CellMatrixIterator(CellMatrix &matrix);
 
     bool hasNext() const;
-    CellPtr next();
+    CellPtr &next();
 
     void reset();
 };

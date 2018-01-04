@@ -5,8 +5,20 @@ bool PenaltyWayBuilder::generate(FloorPtr floor)
     if (!floor) return false;
     int counter = 0;
 
+    //Directions dirs(false);
+
+    // reset cells for not being visited
+    CellMatrixIterator it = floor->getCellIterator();
+    while (it.hasNext())
+    {
+        CellPtr currectCell = it.next();
+        if (!currectCell) continue;
+        currectCell->getAdditionalData().resetVisited();
+    }
+
     // continue while have any changes
     bool wasChanges = true;
+    int currentVisitedValue = 1;
     while (wasChanges)
     {
         counter++;
@@ -14,28 +26,20 @@ bool PenaltyWayBuilder::generate(FloorPtr floor)
 
         wasChanges = false;
 
-        // reset visited
-        CellMatrixIterator it = floor->getCellIterator();
-        while (it.hasNext())
-        {
-            CellPtr currectCell = it.next();
-            if (!currectCell) continue;
-            currectCell->getAdditionalData().visited = false;
-        }
-
-        // build new way penalties
         it.reset();
         while (it.hasNext())
         {
             CellPtr currectCell = it.next();
             if (!currectCell) continue;
+            CellAdditionalData &currentCellAdditionalData = currectCell->getAdditionalData();
 
-            if (currectCell->getAdditionalData().visited == false)
+            if (currentCellAdditionalData.visited < currentVisitedValue)
             {
-                currectCell->getAdditionalData().visited = true;
+                currentCellAdditionalData.visited = currentVisitedValue;
 
                 // get all it's neighbors
-                std::vector<std::pair<CellPtr, Position>> neighs = getNeighborCells(floor, currectCell);
+
+                /*std::vector<std::pair<CellPtr, Position>> neighs = getNeighborCells(floor, currectCell);
 
                 for (const auto &a : neighs)
                 {
@@ -55,9 +59,11 @@ bool PenaltyWayBuilder::generate(FloorPtr floor)
                         neigh->getAdditionalData().wayPenalty = newPenalty;
                         wasChanges = true;
                     }
-                }
+                }*/ wasChanges = true;
             }
         }
+
+        currentVisitedValue++;
     }
 
     return true;

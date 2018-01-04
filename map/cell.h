@@ -11,13 +11,18 @@ struct CellAdditionalData
     Penalty cellPenalty;
     Penalty wayPenalty;
 
-    bool visited;
+    int visited;
 
     CellAdditionalData(Penalty cellPenalty, Penalty wayPenalty)
         : cellPenalty(cellPenalty),
           wayPenalty(wayPenalty),
-          visited(false)
+          visited(0)
     {
+    }
+
+    void resetVisited()
+    {
+        visited = 0;
     }
 };
 

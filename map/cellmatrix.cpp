@@ -20,9 +20,9 @@ bool CellMatrixIterator::hasNext() const
     return false;
 }
 
-CellPtr CellMatrixIterator::next()
+CellPtr &CellMatrixIterator::next()
 {
-    CellPtr result = matrix[x][y];
+    CellPtr &result = matrix[x][y];
 
     y++;
     if (y >= matrix[x].size())
