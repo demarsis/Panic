@@ -3,11 +3,15 @@
 bool PenaltyWayBuilder::generate(FloorPtr floor)
 {
     if (!floor) return false;
+    int counter = 0;
 
     // continue while have any changes
     bool wasChanges = true;
     while (wasChanges)
     {
+        counter++;
+        ConsoleLogger::info(QString("Attempt #") + QString::number(counter));
+
         wasChanges = false;
 
         // reset visited
@@ -18,7 +22,6 @@ bool PenaltyWayBuilder::generate(FloorPtr floor)
             if (!currectCell) continue;
             currectCell->getAdditionalData().visited = false;
         }
-
 
         // build new way penalties
         it.reset();
