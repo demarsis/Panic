@@ -121,7 +121,7 @@ void SimulatorWidget::drawBarrier(const Position &p, BarrierType barrierType)
 void SimulatorWidget::drawHuman(HumanPtr human)
 {
     if (!human) return;
-    float diameter = human->getDiameter() / 10.0f;
+    float diameter = human->getDiameter();
 
     // transfer position into GL coords
     PositionF pos = transferCoordToGl(human->getPosition());
