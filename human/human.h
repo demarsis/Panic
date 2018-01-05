@@ -12,6 +12,7 @@ struct HumanAdditionalData
 {
     Vector intentionVector;
     bool movementDecision;
+    std::vector<Vector> pushes;
 };
 
 class Human

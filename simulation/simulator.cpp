@@ -67,6 +67,9 @@ void Simulator::updateHumanVectors()
             HumanAdditionalData &humanAddData = human->getAdditionalData();
             humanAddData.intentionVector = vec;
             humanAddData.movementDecision = false;
+
+            // clear pushes
+            humanAddData.pushes.clear();
         }
     }
 
@@ -109,6 +112,16 @@ void Simulator::updateHumanVectors()
                         otherAddData.intentionVector *= moveProbabylity.generate();
                     }
                 }
+
+                // reciprocal pushes
+                if (intersection)
+                {
+                    Vector humanPush = HumanVector::getPushesVector(human, other);
+                    humanAddData.pushes.push_back(humanPush);
+
+                    Vector otherPush = HumanVector::getPushesVector(other, human);
+                    otherAddData.pushes.push_back(otherPush);
+                }
             }
         }
     }
@@ -120,11 +133,19 @@ void Simulator::updateHumanVectors()
         for (HumanPtr &human : floor->getHumanList())
         {
             if (!human) continue;
+            HumanAdditionalData &humanAddData = human->getAdditionalData();
 
             // get movement vector
-            const Vector &vec = human->getAdditionalData().intentionVector;
+            Vector vec = human->getAdditionalData().intentionVector;
+            for (const Vector &push : humanAddData.pushes)
+            {
+                vec = vec + push;
+            }
+
+            // get current position
             const PositionF &pos = human->getPosition();
 
+            // set new position
             human->setPosition(PositionF(vec.getX() + pos.x, vec.getY() + pos.y));
         }
     }

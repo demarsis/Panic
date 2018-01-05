@@ -112,3 +112,22 @@ bool HumanVector::isNewPositionIntersectedWithOther(const HumanPtr &human, const
     if (squaredLength < squaredDiameter) return true;
     return false;
 }
+
+Vector HumanVector::getPushesVector(const HumanPtr &human, const HumanPtr &other)
+{
+    const PositionF &humanPosition = human->getPosition();
+    const PositionF &otherPosition = other->getPosition();
+
+    float length = sqrt((humanPosition.x - otherPosition.x) * (humanPosition.x - otherPosition.x) +
+                        (humanPosition.y - otherPosition.y) * (humanPosition.y - otherPosition.y));
+    float radiuses = human->getDiameter() / 2 + other->getDiameter() / 2;
+
+    float diff = radiuses - length;
+
+    float k = diff / length;
+
+    float cx = (humanPosition.x - otherPosition.x) * k;
+    float cy = (humanPosition.y - otherPosition.y) * k;
+
+    return Vector(cx, cy);
+}
