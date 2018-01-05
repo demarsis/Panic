@@ -330,7 +330,7 @@
          <x>10</x>
          <y>560</y>
          <width>331</width>
-         <height>111</height>
+         <height>81</height>
         </rect>
        </property>
        <property name="title">
@@ -376,19 +376,6 @@
         </property>
         <property name="text">
          <string/>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButtonNext">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>70</y>
-          <width>75</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Next</string>
         </property>
        </widget>
       </widget>

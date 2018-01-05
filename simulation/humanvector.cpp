@@ -5,7 +5,9 @@ Directions HumanVector::dirs = Directions(false);
 Vector HumanVector::getHumanVector(HumanPtr &human, FloorPtr &floor)
 {
     Vector intention = getIntentionVector(human, floor);
-    return intention;
+
+    Vector result = intention;
+    return result * HUMAN_SPEED_COEFF;
 }
 
 Vector HumanVector::getIntentionVector(HumanPtr &human, FloorPtr &floor)

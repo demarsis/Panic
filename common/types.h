@@ -13,7 +13,7 @@ typedef float Penalty;
 
 typedef float Diameter;
 
-#define HUMAN_SPEED_COEFF           ((float)1)
+#define HUMAN_SPEED_COEFF           ((float)0.10f)
 
 struct Position
 {

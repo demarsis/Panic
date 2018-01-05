@@ -1,6 +1,7 @@
 #include "simulator.h"
 
-Simulator::Simulator(MapPtr map)
+Simulator::Simulator(SimulatorWidget &openGLWidget, MapPtr map)
+    : openGLWidget(openGLWidget)
 {
     if (map)
     {
@@ -13,6 +14,9 @@ Simulator::Simulator(MapPtr map)
         }
     }
     stopwatch = std::make_shared<Stopwatch>();
+
+    timer.setInterval(17);
+    connect(&timer, SIGNAL(timeout()), this, SLOT(onTimer()));
 }
 
 MapPtr Simulator::getMap()
@@ -28,10 +32,36 @@ StopwatchPtr Simulator::getStopwatch()
 void Simulator::start()
 {
     stopwatch->start();
+    timer.start();
 }
 
 void Simulator::pause()
 {
     stopwatch->pause();
+    timer.stop();
+}
+
+void Simulator::onTimer()
+{
+    if (!map) return;
+
+    for (FloorPtr &floor : map->getFloors())
+    {
+        if (!floor) continue;
+        for (HumanPtr &human : floor->getHumanList())
+        {
+            if (!human) continue;
+
+            // get movement vector
+            Vector vec = HumanVector::getHumanVector(human, floor);
+
+            // set new position
+            const PositionF &oldPos = human->getPosition();
+            PositionF newPos(oldPos.x + vec.getX(), oldPos.y + vec.getY());
+            human->setPosition(newPos);
+        }
+    }
+
+    openGLWidget.update();
 }
 

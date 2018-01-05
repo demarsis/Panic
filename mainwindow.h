@@ -52,7 +52,6 @@ private slots:
     void updateManWomenPercents();
     void updateAgePercents();
     void updateFullnessPercents();
-    void on_pushButtonNext_clicked();
 
 private:
     Ui::MainWindow *ui;
