@@ -52,6 +52,9 @@ void Simulator::updateHumanVectors()
 {
     if (!map) return;
 
+    // disapeare
+    disapeareHumans();
+
     // make intentions vectors
     for (FloorPtr &floor : map->getFloors())
     {
@@ -145,6 +148,53 @@ void Simulator::updateHumanVectors()
 
             // set new position
             human->setPosition(PositionF(vec.getX() + pos.x, vec.getY() + pos.y));
+        }
+    }
+}
+
+void Simulator::disapeareHumans()
+{
+    if (!map) return;
+
+    // make intentions vectors
+    for (FloorPtr &floor : map->getFloors())
+    {
+        if (!floor) continue;
+        std::vector<HumanPtr> &humanList = floor->getHumanList();
+        std::vector<HumanPtr>::iterator it = humanList.begin();
+        while (it != humanList.end())
+        {
+            HumanPtr &human = *it;
+            if (!human)
+            {
+                it++;
+                continue;
+            }
+
+            const PositionF &humanPosF = human->getPosition();
+            Position pos(humanPosF.x, humanPosF.y);
+
+            if (!floor->isValidPosition(pos))
+            {
+                it++;
+                continue;
+            }
+
+            const CellPtr &cell = floor->getCell(pos);
+            if (!cell)
+            {
+                it++;
+                continue;
+            }
+
+            if (cell->getExit().isExit())
+            {
+                finishedHumanList.push_back(human);
+                it = humanList.erase(it);
+                continue;
+            }
+
+            it++;
         }
     }
 }

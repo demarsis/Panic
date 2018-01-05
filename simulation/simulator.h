@@ -19,6 +19,7 @@ class Simulator : public QObject
 
     SimulatorWidget &openGLWidget;
     MapPtr map;
+    std::vector<HumanPtr> finishedHumanList;
 
     StopwatchPtr stopwatch;
     QTimer timer;
@@ -36,6 +37,7 @@ private slots:
 
 private:
     void updateHumanVectors();
+    void disapeareHumans();
 };
 
 typedef std::shared_ptr<Simulator> SimulatorPtr;

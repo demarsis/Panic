@@ -125,7 +125,8 @@ Vector HumanVector::getPushesVector(const HumanPtr &human, const HumanPtr &other
     float diff = radiuses - length;
 
     float k = diff / length;
-    k = k/2;
+    k /= 2;
+    k *= HUMAN_PUSH_COEFF;
 
     float cx = (humanPosition.x - otherPosition.x) * k;
     float cy = (humanPosition.y - otherPosition.y) * k;
