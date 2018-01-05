@@ -50,9 +50,6 @@ public:
 
     std::shared_ptr<Floor> clone() const;
 
-    std::vector<CellPtr> getHumanCells(HumanPtr human);
-    Penalty getCellsPenalty(const std::vector<CellPtr> &cells, Position offset);
-
     bool isValidPosition(const Position &pos) const;
 };
 

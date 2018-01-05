@@ -9,6 +9,7 @@
 #include "simulation/simulator.h"
 #include "mapgen/mapcharacteristics.h"
 #include "probability/probabilityrelation.h"
+#include "simulation/humanvector.h"
 #include <QVariant>
 
 namespace Ui {
@@ -51,6 +52,7 @@ private slots:
     void updateManWomenPercents();
     void updateAgePercents();
     void updateFullnessPercents();
+    void on_pushButtonNext_clicked();
 
 private:
     Ui::MainWindow *ui;

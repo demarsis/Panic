@@ -60,7 +60,8 @@ SOURCES += main.cpp\
     simulation/vector.cpp \
     simulation/directions.cpp \
     map/cellmatrix.cpp \
-    simulation/penaltywaybuilder.cpp
+    simulation/penaltywaybuilder.cpp \
+    simulation/humanvector.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -100,7 +101,8 @@ HEADERS  += mainwindow.h \
     simulation/vector.h \
     simulation/directions.h \
     map/cellmatrix.h \
-    simulation/penaltywaybuilder.h
+    simulation/penaltywaybuilder.h \
+    simulation/humanvector.h
 
 FORMS    += mainwindow.ui
 

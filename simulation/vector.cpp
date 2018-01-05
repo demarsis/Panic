@@ -10,6 +10,16 @@ Vector::Vector(float x, float y)
 {
 }
 
+float Vector::getX() const
+{
+    return x;
+}
+
+float Vector::getY() const
+{
+    return y;
+}
+
 Vector Vector::operator =(const Vector &obj)
 {
     x = obj.x;

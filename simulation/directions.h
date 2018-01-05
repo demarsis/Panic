@@ -8,7 +8,10 @@
 
 class Directions
 {
+public:
     typedef std::pair<Position, Vector> DirVector;
+
+private:
     std::vector<DirVector> dirs;
 
 public:

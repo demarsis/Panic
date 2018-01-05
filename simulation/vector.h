@@ -9,6 +9,9 @@ public:
     Vector();
     Vector(float x, float y);
 
+    float getX() const;
+    float getY() const;
+
     Vector operator = (const Vector &obj);
     Vector operator + (const Vector &obj) const;
     Vector operator - (const Vector &obj) const;

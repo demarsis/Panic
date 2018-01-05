@@ -229,3 +229,28 @@ void MainWindow::updateFullnessPercents()
     QString str = "Заполненность помещений: " + QString::number(fullness) + "%";
     ui->labelFullness->setText(str);
 }
+
+void MainWindow::on_pushButtonNext_clicked()
+{
+    MapPtr map = simulator->getMap();
+    if (!map) return;
+
+    for (FloorPtr &floor : map->getFloors())
+    {
+        if (!floor) continue;
+        for (HumanPtr &human : floor->getHumanList())
+        {
+            if (!human) continue;
+
+            // get movement vector
+            Vector vec = HumanVector::getHumanVector(human, floor);
+
+            // set new position
+            const PositionF &oldPos = human->getPosition();
+            PositionF newPos(oldPos.x + vec.getX(), oldPos.y + vec.getY());
+            human->setPosition(newPos);
+        }
+    }
+
+    ui->openGLWidget->update();
+}
