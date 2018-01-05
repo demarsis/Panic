@@ -93,7 +93,7 @@ void Simulator::updateHumanVectors()
             {
                 HumanPtr &other = humanList[j];
                 if (!other) continue;
-                HumanAdditionalData &otherAddData = human->getAdditionalData();
+                HumanAdditionalData &otherAddData = other->getAdditionalData();
 
                 // have intersection?
                 bool intersection = HumanVector::isNewPositionIntersectedWithOther(human, humanAddData.intentionVector, other);
@@ -118,9 +118,7 @@ void Simulator::updateHumanVectors()
                 {
                     Vector humanPush = HumanVector::getPushesVector(human, other);
                     humanAddData.pushes.push_back(humanPush);
-
-                    Vector otherPush = HumanVector::getPushesVector(other, human);
-                    otherAddData.pushes.push_back(otherPush);
+                    otherAddData.pushes.push_back(-humanPush);
                 }
             }
         }

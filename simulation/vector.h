@@ -18,6 +18,8 @@ public:
     Vector operator * (float mult) const;
 
     Vector operator *= (float mult);
+
+    Vector operator -() const;
 };
 
 #endif // VECTOR_H

@@ -51,4 +51,9 @@ Vector Vector::operator *=(float mult)
     return *this;
 }
 
+Vector Vector::operator -() const
+{
+    return Vector(-x, -y);
+}
+
 
