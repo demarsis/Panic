@@ -1,6 +1,6 @@
 #include "humanvector.h"
 
-Directions HumanVector::dirs = Directions(true);
+Directions HumanVector::dirs = Directions(false);
 
 Vector HumanVector::getHumanVector(HumanPtr &human, FloorPtr &floor)
 {
