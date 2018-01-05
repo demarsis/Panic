@@ -11,6 +11,7 @@
 #include "penaltywaybuilder.h"
 #include "graph/simulatorwidget.h"
 #include "humanvector.h"
+#include "probability/probabilityrelation.h"
 
 class Simulator : public QObject
 {
@@ -32,6 +33,9 @@ public:
 
 private slots:
     void onTimer();
+
+private:
+    void updateHumanVectors();
 };
 
 typedef std::shared_ptr<Simulator> SimulatorPtr;

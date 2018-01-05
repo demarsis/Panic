@@ -46,3 +46,8 @@ std::shared_ptr<Human> Human::clone() const
                                    getAgeType()
                                    );
 }
+
+HumanAdditionalData &Human::getAdditionalData()
+{
+    return additionalData;
+}

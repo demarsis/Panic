@@ -6,6 +6,13 @@
 #include "health.h"
 #include "gender.h"
 #include "age.h"
+#include "simulation/vector.h"
+
+struct HumanAdditionalData
+{
+    Vector intentionVector;
+    bool movementDecision;
+};
 
 class Human
 {
@@ -14,6 +21,7 @@ class Human
     Health health;
     GenderPtr gender;
     AgePtr age;
+    HumanAdditionalData additionalData;
 
 public:
     Human(PositionF pos, Diameter diameter, Health health, GenderType genderType, AgeType ageType);
@@ -28,6 +36,8 @@ public:
     AgeType getAgeType() const;
 
     std::shared_ptr<Human> clone() const;
+
+    HumanAdditionalData &getAdditionalData();
 };
 
 typedef std::shared_ptr<Human> HumanPtr;

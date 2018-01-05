@@ -16,6 +16,8 @@ public:
     Vector operator + (const Vector &obj) const;
     Vector operator - (const Vector &obj) const;
     Vector operator * (float mult) const;
+
+    Vector operator *= (float mult);
 };
 
 #endif // VECTOR_H

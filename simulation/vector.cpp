@@ -44,4 +44,11 @@ Vector Vector::operator *(float mult) const
     return Vector(x * mult, y * mult);
 }
 
+Vector Vector::operator *=(float mult)
+{
+    x *= mult;
+    y *= mult;
+    return *this;
+}
+
 

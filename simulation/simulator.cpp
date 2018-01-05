@@ -43,8 +43,16 @@ void Simulator::pause()
 
 void Simulator::onTimer()
 {
+    updateHumanVectors();
+
+    openGLWidget.update();
+}
+
+void Simulator::updateHumanVectors()
+{
     if (!map) return;
 
+    // make intentions vectors
     for (FloorPtr &floor : map->getFloors())
     {
         if (!floor) continue;
@@ -53,15 +61,72 @@ void Simulator::onTimer()
             if (!human) continue;
 
             // get movement vector
-            Vector vec = HumanVector::getHumanVector(human, floor);
+            Vector vec = HumanVector::getIntentionVector(human, floor);
 
-            // set new position
-            const PositionF &oldPos = human->getPosition();
-            PositionF newPos(oldPos.x + vec.getX(), oldPos.y + vec.getY());
-            human->setPosition(newPos);
+            // set current vector
+            HumanAdditionalData &humanAddData = human->getAdditionalData();
+            humanAddData.intentionVector = vec;
+            humanAddData.movementDecision = false;
         }
     }
 
-    openGLWidget.update();
+    ProbabilityRelation<float> moveProbabylity;
+    moveProbabylity.addProbs(1, 20);
+    moveProbabylity.addProbs(0, 80);
+
+    // check intersections
+    for (FloorPtr &floor : map->getFloors())
+    {
+        if (!floor) continue;
+        std::vector<HumanPtr> &humanList = floor->getHumanList();
+
+        for (size_t i = 0; i < humanList.size(); i++)
+        {
+            HumanPtr &human = humanList[i];
+            if (!human) continue;
+            HumanAdditionalData &humanAddData = human->getAdditionalData();
+
+            for (size_t j = i + 1; j < humanList.size(); j++)
+            {
+                HumanPtr &other = humanList[j];
+                if (!other) continue;
+                HumanAdditionalData &otherAddData = human->getAdditionalData();
+
+                // have intersection?
+                bool intersection = HumanVector::isNewPositionIntersectedWithOther(human, humanAddData.intentionVector, other);
+
+                if (intersection)
+                {
+                    // one moves; other stands
+                    if (!humanAddData.movementDecision)
+                    {
+                        humanAddData.movementDecision = true;
+                        otherAddData.intentionVector *= moveProbabylity.generate();
+                    }
+                    if (!otherAddData.movementDecision)
+                    {
+                        otherAddData.movementDecision = true;
+                        otherAddData.intentionVector *= moveProbabylity.generate();
+                    }
+                }
+            }
+        }
+    }
+
+    // update human's positions
+    for (FloorPtr &floor : map->getFloors())
+    {
+        if (!floor) continue;
+        for (HumanPtr &human : floor->getHumanList())
+        {
+            if (!human) continue;
+
+            // get movement vector
+            const Vector &vec = human->getAdditionalData().intentionVector;
+            const PositionF &pos = human->getPosition();
+
+            human->setPosition(PositionF(vec.getX() + pos.x, vec.getY() + pos.y));
+        }
+    }
 }
 

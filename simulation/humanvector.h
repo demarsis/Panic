@@ -12,13 +12,11 @@ class HumanVector
     static Directions dirs;
 
 public:
-    static Vector getHumanVector(HumanPtr &human, FloorPtr &floor);
-
-private:
     static Vector getIntentionVector(HumanPtr &human, FloorPtr &floor);
 
     static std::vector<CellPtr> getHumanCells(HumanPtr &human, FloorPtr &floor);
     static Penalty getCellsPenalty(FloorPtr &floor, const std::vector<CellPtr> &cells, const Position &offset);
+    static bool isNewPositionIntersectedWithOther(const HumanPtr &human, const Vector &vec, const HumanPtr &other);
 };
 
 #endif // HUMANVECTOR_H

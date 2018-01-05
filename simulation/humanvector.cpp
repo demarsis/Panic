@@ -1,14 +1,6 @@
 #include "humanvector.h"
 
-Directions HumanVector::dirs = Directions(false);
-
-Vector HumanVector::getHumanVector(HumanPtr &human, FloorPtr &floor)
-{
-    Vector intention = getIntentionVector(human, floor);
-
-    Vector result = intention;
-    return result * HUMAN_SPEED_COEFF;
-}
+Directions HumanVector::dirs = Directions(true);
 
 Vector HumanVector::getIntentionVector(HumanPtr &human, FloorPtr &floor)
 {
@@ -22,7 +14,7 @@ Vector HumanVector::getIntentionVector(HumanPtr &human, FloorPtr &floor)
     for (const Directions::DirVector &dirvect : dirs.getAllDirections())
     {
         Penalty pen = getCellsPenalty(floor, humanCells, dirvect.first);
-        possibleVectors.push_back(std::make_pair(dirvect.second, pen));
+        possibleVectors.push_back(std::make_pair(dirvect.second * HUMAN_INTENTION_SPEED_COEFF, pen));
     }
     if (possibleVectors.empty()) return Vector();
 
@@ -97,4 +89,26 @@ Penalty HumanVector::getCellsPenalty(FloorPtr &floor, const std::vector<CellPtr>
     }
 
     return result;
+}
+
+bool HumanVector::isNewPositionIntersectedWithOther(const HumanPtr &human, const Vector &vec, const HumanPtr &other)
+{
+    // get new position
+    PositionF pos = human->getPosition();
+    pos.x += vec.getX();
+    pos.y += vec.getY();
+
+    // other's position
+    const PositionF &othersPosition = other->getPosition();
+
+    // check with others
+    float squaredLength = (pos.x - othersPosition.x) * (pos.x - othersPosition.x) +
+                          (pos.y - othersPosition.y) * (pos.y - othersPosition.y);
+
+    float squaredDiameter = human->getDiameter() / 2 + other->getDiameter() / 2;
+    squaredDiameter *= squaredDiameter;
+
+    // check
+    if (squaredLength < squaredDiameter) return true;
+    return false;
 }
