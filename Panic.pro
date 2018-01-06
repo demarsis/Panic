@@ -61,7 +61,8 @@ SOURCES += main.cpp\
     simulation/directions.cpp \
     map/cellmatrix.cpp \
     simulation/penaltywaybuilder.cpp \
-    simulation/humanvector.cpp
+    simulation/humanvector.cpp \
+    mapgen/mapgeneratortestfindexit.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -102,7 +103,8 @@ HEADERS  += mainwindow.h \
     simulation/directions.h \
     map/cellmatrix.h \
     simulation/penaltywaybuilder.h \
-    simulation/humanvector.h
+    simulation/humanvector.h \
+    mapgen/mapgeneratortestfindexit.h
 
 FORMS    += mainwindow.ui
 
