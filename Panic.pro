@@ -63,7 +63,8 @@ SOURCES += main.cpp\
     simulation/penaltywaybuilder.cpp \
     simulation/humanvector.cpp \
     mapgen/mapgeneratortestfindexit.cpp \
-    widgets/combosimulationspeed.cpp
+    widgets/combosimulationspeed.cpp \
+    map/mappushes.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -106,7 +107,8 @@ HEADERS  += mainwindow.h \
     simulation/penaltywaybuilder.h \
     simulation/humanvector.h \
     mapgen/mapgeneratortestfindexit.h \
-    widgets/combosimulationspeed.h
+    widgets/combosimulationspeed.h \
+    map/mappushes.h
 
 FORMS    += mainwindow.ui
 
