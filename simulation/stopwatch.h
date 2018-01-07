@@ -16,8 +16,10 @@ class Stopwatch
     time_t start_time;
     bool started;
 
+    int speedCoeff;
+
 public:
-    Stopwatch();
+    Stopwatch(int speedCoeff);
 
     void start();
     void pause();
@@ -29,6 +31,8 @@ public:
 
     long getElapsedMs() const;
     QString toString() const;
+
+    void setSpeedCoeff(int speedCoeff);
 };
 
 typedef std::shared_ptr<Stopwatch> StopwatchPtr;

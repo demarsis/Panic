@@ -14,7 +14,7 @@ Simulator::Simulator(SimulatorWidget &openGLWidget, int simulationSpeed, MapPtr 
             PenaltyWayBuilder::generate(floor);
         }
     }
-    stopwatch = std::make_shared<Stopwatch>();
+    stopwatch = std::make_shared<Stopwatch>(simulationSpeed);
 
     timer.setInterval(17);
     connect(&timer, SIGNAL(timeout()), this, SLOT(onTimer()));
@@ -45,6 +45,7 @@ void Simulator::pause()
 void Simulator::setSpeed(int simulationSpeed)
 {
     this->simulationSpeed = simulationSpeed;
+    if (stopwatch) stopwatch->setSpeedCoeff(simulationSpeed);
 }
 
 void Simulator::onTimer()

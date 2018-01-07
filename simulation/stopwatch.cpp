@@ -1,6 +1,7 @@
 #include "stopwatch.h"
 
-Stopwatch::Stopwatch()
+Stopwatch::Stopwatch(int speedCoeff)
+    : speedCoeff(speedCoeff)
 {
     reset();
 }
@@ -17,7 +18,7 @@ void Stopwatch::pause()
 
     // count diff
     auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(clock_type::now() - start_time);
-    all_time += diff.count();
+    all_time += diff.count() * speedCoeff;
 }
 
 void Stopwatch::reset()
@@ -41,7 +42,7 @@ long Stopwatch::getElapsedMs() const
     if (isStarted())
     {
         auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(clock_type::now() - start_time);
-        return all_time + diff.count();
+        return all_time + diff.count() * speedCoeff;
     }
     else
     {
@@ -61,6 +62,20 @@ QString Stopwatch::toString() const
     return
         QString("%1").arg(min, 2, 10, QChar('0')) + ":" +
         QString("%1").arg(sec, 2, 10, QChar('0')) + ":" +
-        QString("%1").arg(ms , 1, 10, QChar('0'));
+            QString("%1").arg(ms , 1, 10, QChar('0'));
+}
+
+void Stopwatch::setSpeedCoeff(int speedCoeff)
+{
+    if (isStarted())
+    {
+        pause();
+        this->speedCoeff = speedCoeff;
+        start();
+    }
+    else
+    {
+        this->speedCoeff = speedCoeff;
+    }
 }
 
