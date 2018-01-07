@@ -12,6 +12,7 @@
 #include "graph/simulatorwidget.h"
 #include "humanvector.h"
 #include "probability/probabilityrelation.h"
+#include "map/mappushes.h"
 
 class Simulator : public QObject
 {

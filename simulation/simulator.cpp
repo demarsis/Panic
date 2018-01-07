@@ -95,6 +95,7 @@ void Simulator::updateHumanVectors()
     {
         if (!floor) continue;
         std::vector<HumanPtr> &humanList = floor->getHumanList();
+        MapPushesPtr &pushesMap = floor->getPushesMap();
 
         for (size_t i = 0; i < humanList.size(); i++)
         {
@@ -132,6 +133,12 @@ void Simulator::updateHumanVectors()
                     Vector humanPush = HumanVector::getPushesVector(human, other);
                     humanAddData.pushes.push_back(humanPush);
                     otherAddData.pushes.push_back(-humanPush);
+
+                    if (pushesMap)
+                    {
+                        pushesMap->addPush(human->getPosition(), humanPush);
+                        pushesMap->addPush(other->getPosition(), humanPush);
+                    }
                 }
             }
         }

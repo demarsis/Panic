@@ -56,6 +56,8 @@ Floor::Floor(Size size,
             }
         }
 
+        // create pushes map
+        pushesMap = std::make_shared<MapPushes>(size.x, size.y);
     }
     else
     {
@@ -141,4 +143,9 @@ bool Floor::isValidPosition(const Position &pos) const
     if (pos.x >= size.x) return false;
     if (pos.y >= size.y) return false;
     return true;
+}
+
+MapPushesPtr &Floor::getPushesMap()
+{
+    return pushesMap;
 }

@@ -14,6 +14,7 @@
 #include "cellmatrix.h"
 #include "simulation/directions.h"
 #include <math.h>
+#include "map/mappushes.h"
 
 class Floor
 {
@@ -23,6 +24,7 @@ class Floor
     std::vector<HumanPtr> humanList;
     MapPositions finishPositions;
     MapBarriers mapBarriers;
+    MapPushesPtr pushesMap;
 
     CellMatrix cellMatrix;
 
@@ -51,6 +53,8 @@ public:
     std::shared_ptr<Floor> clone() const;
 
     bool isValidPosition(const Position &pos) const;
+
+    MapPushesPtr &getPushesMap();
 };
 
 typedef std::shared_ptr<Floor> FloorPtr;
