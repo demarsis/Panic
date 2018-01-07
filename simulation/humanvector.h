@@ -6,6 +6,8 @@
 #include "map/floor.h"
 #include "directions.h"
 #include <algorithm>
+#include "common/defines.h"
+#include <vector>
 
 class HumanVector
 {

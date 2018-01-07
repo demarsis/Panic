@@ -7,6 +7,8 @@
 #include "gender.h"
 #include "age.h"
 #include "simulation/vector.h"
+#include "probability/probability.h"
+#include "common/defines.h"
 
 struct HumanAdditionalData
 {

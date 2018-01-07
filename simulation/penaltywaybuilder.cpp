@@ -57,9 +57,9 @@ bool PenaltyWayBuilder::generate(FloorPtr floor)
 
                 // count new penalty for current cell
                 Penalty newPenalty = currentCellAdditionalData.wayPenalty +
-                                     neighCellAdditionalData.cellPenalty *
+                                     neighCellAdditionalData.cellPenalty;/* *
                                      sqrt((double)relativePos.x * (double)relativePos.x +
-                                          (double)relativePos.y * (double)relativePos.y);
+                                          (double)relativePos.y * (double)relativePos.y);*/
 
                 // update only if the penalty is lower then the existing one
                 if (neighCellAdditionalData.wayPenalty > newPenalty)

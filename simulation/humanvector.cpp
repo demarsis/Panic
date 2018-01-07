@@ -19,15 +19,32 @@ Vector HumanVector::getIntentionVector(HumanPtr &human, FloorPtr &floor)
     if (possibleVectors.empty()) return Vector();
 
     // sort by min penalty
-    std::sort(possibleVectors.begin(), possibleVectors.end(),
+/*    std::sort(possibleVectors.begin(), possibleVectors.end(),
                 [](const std::pair<Vector, Penalty> &left,
                    const std::pair<Vector, Penalty> &right) -> bool
                 {
                     return left.second < right.second;
                 }
-    );
+    );*/
 
-    return possibleVectors[0].first;
+    // search min penalty
+    Penalty minPenalty = PENALTY_MAX;
+    for (const std::pair<Vector, Penalty> &pair : possibleVectors)
+    {
+        if (minPenalty > pair.second) minPenalty = pair.second;
+    }
+
+    // leave only mins
+    possibleVectors.erase(std::remove_if(possibleVectors.begin(), possibleVectors.end(),
+                                            [minPenalty](const std::pair<Vector, Penalty> &pair)
+                                            {
+                                                return pair.second > minPenalty;
+                                            }),
+                                            possibleVectors.end()
+                                            );
+
+    int rnd = Probability::instance().random(possibleVectors.size());
+    return possibleVectors[rnd].first;
 }
 
 std::vector<CellPtr> HumanVector::getHumanCells(HumanPtr &human, FloorPtr &floor)
