@@ -17,6 +17,7 @@
 #include "map/mapbarriers.h"
 #include "common/consolelogger.h"
 #include "humanicontextures.h"
+#include "map/mappushes.h"
 
 class SimulatorWidget : public QOpenGLWidget
 {
@@ -37,6 +38,7 @@ private:
     void drawBarrier(const Position &p, BarrierType barrierType);
     void drawHuman(HumanPtr human);
     void drawPenaltyWay();
+    void drawPushes();
 
     void drawCircle(GLfloat cx, GLfloat cy, GLfloat r, int num_segments = 13);
     void drawTexturedRect(GLfloat x, GLfloat y, GLfloat z,

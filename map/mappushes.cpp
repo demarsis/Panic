@@ -14,9 +14,8 @@ MapPushes::MapPushes(int width, int height)
     }
 }
 
-void MapPushes::addPush(const PositionF &posf, const Vector &vec)
+void MapPushes::addPush(const Position &pos, const Vector &vec)
 {
-    const Position pos((int)posf.x, (int)posf.y);
     if (!isValidPosition(pos)) return;
 
     float push = sqrt((vec.getX() * vec.getX()) + (vec.getY() * vec.getY()));

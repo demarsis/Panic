@@ -134,10 +134,22 @@ void Simulator::updateHumanVectors()
                     humanAddData.pushes.push_back(humanPush);
                     otherAddData.pushes.push_back(-humanPush);
 
+                    // notice pushes into pushes map
                     if (pushesMap)
                     {
-                        pushesMap->addPush(human->getPosition(), humanPush);
-                        pushesMap->addPush(other->getPosition(), humanPush);
+                        std::vector<CellPtr> cellsHuman = HumanVector::getHumanCells(human, floor);
+                        std::vector<CellPtr> cellsOther = HumanVector::getHumanCells(other, floor);
+
+                        for (const CellPtr &cell : cellsHuman)
+                        {
+                            if (!cell) continue;
+                            pushesMap->addPush(cell->getPosition(), humanPush);
+                        }
+                        for (const CellPtr &cell : cellsOther)
+                        {
+                            if (!cell) continue;
+                            pushesMap->addPush(cell->getPosition(), humanPush);
+                        }
                     }
                 }
             }

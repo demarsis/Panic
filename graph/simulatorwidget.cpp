@@ -187,6 +187,41 @@ void SimulatorWidget::drawPenaltyWay()
     glPointSize(1);
 }
 
+void SimulatorWidget::drawPushes()
+{
+    if (!floor) return;
+    MapPushesPtr &pushes = floor->getPushesMap();
+    if (!pushes) return;
+
+    int width  = pushes->getSize().x;
+    int height = pushes->getSize().y;
+
+    glPointSize(5);
+    glBegin(GL_POINTS);
+    for (int x = 0; x < width; x++)
+    {
+        for (int y = 0; y < height; y++)
+        {
+            float push = pushes->getPush(Position(x, y));
+            if (push < 10) continue;
+
+            if (push > 50)
+            {
+                glColor3f(1, 0, 0);
+            }
+            else if (push > 10)
+            {
+                glColor3f(1, 1, 0);
+            }
+
+            PositionF posf = transferCoordToGl(PositionF(x, y));
+            glVertex3f(posf.x + 0.5f, posf.y + 0.5f, 0);
+        }
+    }
+    glEnd();
+    glPointSize(1);
+}
+
 void SimulatorWidget::initializeGL()
 {
     glClearColor(0, 0, 0, 1);
@@ -253,7 +288,9 @@ void SimulatorWidget::paintGL()
             drawBarrier(barrier.first, barrier.second);
         }*/
 
-        drawPenaltyWay();
+        //drawPenaltyWay();
+
+        drawPushes();
     }
 
     for (HumanPtr h : floor->getHumanList())

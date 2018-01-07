@@ -16,7 +16,7 @@ class MapPushes
 public:
     MapPushes(int width, int height);
 
-    void addPush(const PositionF &posf, const Vector &vec);
+    void addPush(const Position &pos, const Vector &vec);
     float getPush(const Position &pos) const;
 
     Size getSize() const;
