@@ -1,7 +1,8 @@
 #include "simulator.h"
 
-Simulator::Simulator(SimulatorWidget &openGLWidget, MapPtr map)
-    : openGLWidget(openGLWidget)
+Simulator::Simulator(SimulatorWidget &openGLWidget, int simulationSpeed, MapPtr map)
+    : openGLWidget(openGLWidget),
+      simulationSpeed(simulationSpeed)
 {
     if (map)
     {
@@ -41,9 +42,17 @@ void Simulator::pause()
     timer.stop();
 }
 
+void Simulator::setSpeed(int simulationSpeed)
+{
+    this->simulationSpeed = simulationSpeed;
+}
+
 void Simulator::onTimer()
 {
-    updateHumanVectors();
+    for (int i = 0; i < simulationSpeed; i++)
+    {
+        updateHumanVectors();
+    }
 
     openGLWidget.update();
 }

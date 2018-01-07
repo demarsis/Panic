@@ -18,6 +18,7 @@ class Simulator : public QObject
     Q_OBJECT
 
     SimulatorWidget &openGLWidget;
+    int simulationSpeed;
     MapPtr map;
     std::vector<HumanPtr> finishedHumanList;
 
@@ -25,12 +26,14 @@ class Simulator : public QObject
     QTimer timer;
 
 public:
-    Simulator(SimulatorWidget &openGLWidget, MapPtr map);
+    Simulator(SimulatorWidget &openGLWidget, int simulationSpeed, MapPtr map);
     MapPtr getMap();
     StopwatchPtr getStopwatch();
 
     void start();
     void pause();
+
+    void setSpeed(int simulationSpeed);
 
 private slots:
     void onTimer();

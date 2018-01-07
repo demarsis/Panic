@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->sliderAdults, SIGNAL(valueChanged(int)), this, SLOT(updateAgePercents()));
     connect(ui->sliderElderlies, SIGNAL(valueChanged(int)), this, SLOT(updateAgePercents()));
     connect(ui->sliderFullness, SIGNAL(valueChanged(int)), this, SLOT(updateFullnessPercents()));
+    connect(ui->comboBoxSpeed, SIGNAL(currentIndexChanged(int)), this, SLOT(updateSimulationSpeed()));
 
     // some gui issues
     updateManWomenPercents();
@@ -78,7 +79,9 @@ void MainWindow::loadCurrentSimulatorIntoGUI()
 
 void MainWindow::newSimulation()
 {
-    simulator = std::make_shared<Simulator>(*ui->openGLWidget, currentGeneratedMap);
+    simulator = std::make_shared<Simulator>(*ui->openGLWidget,
+                                            ui->comboBoxSpeed->getSpeed(),
+                                            currentGeneratedMap);
 }
 
 MapCharacteristics MainWindow::createMapCharacteristicsFromGUI()
@@ -228,4 +231,13 @@ void MainWindow::updateFullnessPercents()
 
     QString str = "Заполненность помещений: " + QString::number(fullness) + "%";
     ui->labelFullness->setText(str);
+}
+
+void MainWindow::updateSimulationSpeed()
+{
+    int speed = ui->comboBoxSpeed->getSpeed();
+    if (simulator)
+    {
+        simulator->setSpeed(speed);
+    }
 }

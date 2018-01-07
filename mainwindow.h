@@ -52,6 +52,7 @@ private slots:
     void updateManWomenPercents();
     void updateAgePercents();
     void updateFullnessPercents();
+    void updateSimulationSpeed();
 
 private:
     Ui::MainWindow *ui;
