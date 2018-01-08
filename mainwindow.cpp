@@ -246,4 +246,6 @@ void MainWindow::on_pushButtonGenerateReport_clicked()
 {
     SimulationReport report("report.pdf", simulator);
     report.generate();
+
+    QDesktopServices::openUrl(QUrl("report.pdf"));
 }

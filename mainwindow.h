@@ -14,6 +14,8 @@
 #include "report/simulationreport.h"
 #include "map/mappushes.h"
 #include "map/pushesimage.h"
+#include <QDesktopServices>
+#include <QUrl>
 
 namespace Ui {
 class MainWindow;
