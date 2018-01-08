@@ -241,3 +241,20 @@ void MainWindow::updateSimulationSpeed()
         simulator->setSpeed(speed);
     }
 }
+
+void MainWindow::on_pushButtonGenerateReport_clicked()
+{
+    Report report("report.pdf");
+
+    if (!simulator) return;
+    MapPtr &map = simulator->getMap();
+    if (!map) return;
+
+    for (FloorPtr &floor : map->getFloors())
+    {
+        if (!floor) continue;
+
+        QImage heatmap = PushesImage::pushesMapToImage(floor->getPushesMap());
+        report.addImage(heatmap);
+    }
+}

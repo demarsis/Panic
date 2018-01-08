@@ -304,7 +304,7 @@
          <x>10</x>
          <y>430</y>
          <width>341</width>
-         <height>121</height>
+         <height>71</height>
         </rect>
        </property>
        <property name="title">
@@ -316,7 +316,7 @@
           <x>10</x>
           <y>20</y>
           <width>321</width>
-          <height>81</height>
+          <height>41</height>
          </rect>
         </property>
        </widget>
@@ -328,9 +328,9 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>560</y>
+         <y>510</y>
          <width>331</width>
-         <height>111</height>
+         <height>101</height>
         </rect>
        </property>
        <property name="title">
@@ -401,6 +401,19 @@
          <string>Скорость симуляции:</string>
         </property>
        </widget>
+      </widget>
+      <widget class="QPushButton" name="pushButtonGenerateReport">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>620</y>
+         <width>321</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Сгенерировать отчет</string>
+       </property>
       </widget>
      </widget>
     </item>

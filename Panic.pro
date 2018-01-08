@@ -64,7 +64,10 @@ SOURCES += main.cpp\
     simulation/humanvector.cpp \
     mapgen/mapgeneratortestfindexit.cpp \
     widgets/combosimulationspeed.cpp \
-    map/mappushes.cpp
+    map/mappushes.cpp \
+    map/gradient.cpp \
+    map/pushesimage.cpp \
+    report/report.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -108,7 +111,10 @@ HEADERS  += mainwindow.h \
     simulation/humanvector.h \
     mapgen/mapgeneratortestfindexit.h \
     widgets/combosimulationspeed.h \
-    map/mappushes.h
+    map/mappushes.h \
+    map/gradient.h \
+    map/pushesimage.h \
+    report/report.h
 
 FORMS    += mainwindow.ui
 

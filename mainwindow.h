@@ -11,6 +11,9 @@
 #include "probability/probabilityrelation.h"
 #include "simulation/humanvector.h"
 #include <QVariant>
+#include "report/report.h"
+#include "map/mappushes.h"
+#include "map/pushesimage.h"
 
 namespace Ui {
 class MainWindow;
@@ -53,6 +56,8 @@ private slots:
     void updateAgePercents();
     void updateFullnessPercents();
     void updateSimulationSpeed();
+
+    void on_pushButtonGenerateReport_clicked();
 
 private:
     Ui::MainWindow *ui;

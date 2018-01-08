@@ -20,7 +20,7 @@ Simulator::Simulator(SimulatorWidget &openGLWidget, int simulationSpeed, MapPtr 
     connect(&timer, SIGNAL(timeout()), this, SLOT(onTimer()));
 }
 
-MapPtr Simulator::getMap()
+MapPtr &Simulator::getMap()
 {
     return map;
 }

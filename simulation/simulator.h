@@ -28,7 +28,7 @@ class Simulator : public QObject
 
 public:
     Simulator(SimulatorWidget &openGLWidget, int simulationSpeed, MapPtr map);
-    MapPtr getMap();
+    MapPtr &getMap();
     StopwatchPtr getStopwatch();
 
     void start();
