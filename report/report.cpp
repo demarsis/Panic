@@ -28,6 +28,8 @@ void Report::addImage(const QImage &image)
                image.height() * coeff);
 
     painter->drawImage(rect, image);
+
+    yPos += rect.height();
 }
 
 void Report::addString(const QString &str, const QFont &font, Qt::AlignmentFlag alignment)

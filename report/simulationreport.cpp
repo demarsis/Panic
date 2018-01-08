@@ -13,12 +13,12 @@ void SimulationReport::generate()
     MapPtr &map = simulator->getMap();
     if (!map) return;
 
-
     generateTitle(map->getName());
     for (FloorPtr &floor : map->getFloors())
     {
         generateFloor(floor);
     }
+    generateTitle(map->getName());
 }
 
 void SimulationReport::generateTitle(const QString &mapName)
