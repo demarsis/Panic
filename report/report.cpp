@@ -2,22 +2,24 @@
 
 Report::Report(const QString &filename)
     : filename(filename),
-      writer(filename)
+      pdfwriter(filename)
 {
+    pdfwriter.setPageSize(QPagedPaintDevice::A4);
+    pdfwriter.setPageMargins(QMargins(PDF_MARGINS, PDF_MARGINS, PDF_MARGINS, PDF_MARGINS));
 }
 
 void Report::addImage(const QImage &image)
 {
-    writer.setPageSize(QPagedPaintDevice::A4);
-    writer.setPageMargins(QMargins(30, 30, 30, 30));
+    if (image.width() <= 0) return;
+    if (image.height() <= 0) return;
+    if (pdfwriter.width() <= 0) return;
 
-    QPainter painter(&writer);
-    painter.setPen(Qt::black);
-    painter.setFont(QFont("Times", 10));
+    QPainter painter(&pdfwriter);
+    float coeff = (float)pdfwriter.width() / (float)image.width();
 
-    QRect r = painter.viewport();
+    QRect rect(0, 0,
+               image.width() * coeff,
+               image.height() * coeff);
 
-    QString citydate = "City";
-
-    painter.drawText(r, Qt::AlignRight, citydate);
+    painter.drawImage(rect, image);
 }

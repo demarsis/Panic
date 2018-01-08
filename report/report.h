@@ -6,10 +6,12 @@
 #include <QPdfWriter>
 #include <QPainter>
 
+#define PDF_MARGINS     (100)
+
 class Report
 {
     QString filename;
-    QPdfWriter writer;
+    QPdfWriter pdfwriter;
 
 public:
     Report(const QString &filename);
