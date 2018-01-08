@@ -18,7 +18,6 @@ void SimulationReport::generate()
     {
         generateFloor(floor);
     }
-    generateTitle(map->getName());
 }
 
 void SimulationReport::generateTitle(const QString &mapName)

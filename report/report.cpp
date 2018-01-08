@@ -40,6 +40,6 @@ void Report::addString(const QString &str, const QFont &font, Qt::AlignmentFlag 
     painter->drawText(rect, alignment | Qt::TextWordWrap, str);
 
     QFontMetrics fm(font);
-    QSize fmsize = fm.size(Qt::TextWordWrap, str);
-    yPos += fmsize.height();
+    QRect boundingRect = fm.boundingRect(0, 0, pdfwriter.width(), pdfwriter.height(), Qt::TextWordWrap, str);
+    yPos += boundingRect.height();
 }
