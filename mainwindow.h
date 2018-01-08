@@ -11,7 +11,7 @@
 #include "probability/probabilityrelation.h"
 #include "simulation/humanvector.h"
 #include <QVariant>
-#include "report/report.h"
+#include "report/simulationreport.h"
 #include "map/mappushes.h"
 #include "map/pushesimage.h"
 

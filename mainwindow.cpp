@@ -244,17 +244,6 @@ void MainWindow::updateSimulationSpeed()
 
 void MainWindow::on_pushButtonGenerateReport_clicked()
 {
-    Report report("report.pdf");
-
-    if (!simulator) return;
-    MapPtr &map = simulator->getMap();
-    if (!map) return;
-
-    for (FloorPtr &floor : map->getFloors())
-    {
-        if (!floor) continue;
-
-        QImage heatmap = PushesImage::pushesMapToImage(floor->getPushesMap());
-        report.addImage(heatmap);
-    }
+    SimulationReport report("report.pdf", simulator);
+    report.generate();
 }

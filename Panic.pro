@@ -67,7 +67,8 @@ SOURCES += main.cpp\
     map/mappushes.cpp \
     map/gradient.cpp \
     map/pushesimage.cpp \
-    report/report.cpp
+    report/report.cpp \
+    report/simulationreport.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -114,7 +115,8 @@ HEADERS  += mainwindow.h \
     map/mappushes.h \
     map/gradient.h \
     map/pushesimage.h \
-    report/report.h
+    report/report.h \
+    report/simulationreport.h
 
 FORMS    += mainwindow.ui
 

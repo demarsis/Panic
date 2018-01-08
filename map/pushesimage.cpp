@@ -1,6 +1,6 @@
 #include "pushesimage.h"
 
-QImage PushesImage::pushesMapToImage(MapPushesPtr &map)
+QImage PushesImage::pushesMapToImage(MapPushesPtr &map, const QSize &imageSize)
 {
     if (!map) return QImage();
     int width = map->getSize().x;
@@ -15,9 +15,11 @@ QImage PushesImage::pushesMapToImage(MapPushesPtr &map)
         {
             float push = map->getPush(Position(x, y));
             QColor color = Gradient::getGradientColor(push);
+            color.setAlpha(150);
             result.setPixel(x, y, color.rgba());
         }
     }
+    result = result.scaled(imageSize, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
     return result;
 }

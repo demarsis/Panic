@@ -19,3 +19,8 @@ std::shared_ptr<Map> Map::clone() const
     }
     return std::make_shared<Map>(name, fls);
 }
+
+const QString &Map::getName() const
+{
+    return name;
+}
