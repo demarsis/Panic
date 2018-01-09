@@ -27,6 +27,7 @@ class Floor
     MapPushesPtr pushesMap;
 
     CellMatrix cellMatrix;
+    int startHumanCount;
 
 public:
     Floor(Size size,
@@ -55,6 +56,8 @@ public:
     bool isValidPosition(const Position &pos) const;
 
     MapPushesPtr &getPushesMap();
+
+    int getStartHumanCount() const;
 };
 
 typedef std::shared_ptr<Floor> FloorPtr;

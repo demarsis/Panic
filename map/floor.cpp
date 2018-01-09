@@ -11,7 +11,8 @@ Floor::Floor(Size size,
       floorImage(floorImage),
       humanList(humanList),
       finishPositions(finishPositions),
-      mapBarriers(mapBarriers)
+      mapBarriers(mapBarriers),
+      startHumanCount(humanList.size())
 {
     if ((this->size.x > 0) && (this->size.y  > 0))
     {
@@ -148,4 +149,9 @@ bool Floor::isValidPosition(const Position &pos) const
 MapPushesPtr &Floor::getPushesMap()
 {
     return pushesMap;
+}
+
+int Floor::getStartHumanCount() const
+{
+    return startHumanCount;
 }

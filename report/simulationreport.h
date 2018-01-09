@@ -23,7 +23,7 @@ public:
 
 private:
     void generateTitle(const QString &mapName);
-    void generateFloor(FloorPtr &floor);
+    void generateFloor(FloorPtr &floor, int floorNumber);
 };
 
 #endif // SIMULATIONREPORT_H

@@ -21,11 +21,17 @@ void Report::addImage(const QImage &image)
     if (image.height() <= 0) return;
     if (pdfwriter.width() <= 0) return;
 
-    float coeff = (float)pdfwriter.width() / (float)image.width();
+    const float devider = 1.5f;
 
-    QRect rect(0, yPos,
-               image.width() * coeff,
-               image.height() * coeff);
+    float coeff = (float)pdfwriter.width() / (float)image.width();
+    coeff /= devider;
+
+    int x = pdfwriter.width() / 2  - (image.width()  * coeff) / 2;
+    int y = yPos;
+    int cx = image.width() * coeff;
+    int cy = image.height() * coeff;
+
+    QRect rect(x, y, cx, cy);
 
     painter->drawImage(rect, image);
 
