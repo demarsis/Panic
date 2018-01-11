@@ -1,11 +1,12 @@
 #include "human.h"
 
-Human::Human(PositionF pos, Diameter diameter, Health health, GenderType genderType, AgeType ageType)
+Human::Human(PositionF pos, Diameter diameter, Health health, GenderType genderType, AgeType ageType, PanicType panicType)
     : pos(pos),
       diameter(diameter),
       health(health),
       gender(GenderFactory::generateGender(genderType)),
       age(AgeFactory::generateAge(ageType)),
+      panic(PanicFactory::generatePanic(panicType)),
       speedCoeff(1)
 {
     // diameter influence
@@ -47,12 +48,17 @@ AgeType Human::getAgeType() const
     return age->type();
 }
 
+PanicType Human::getPanicType() const
+{
+    return panic->type();
+}
+
 std::shared_ptr<Human> Human::clone() const
 {
     return std::make_shared<Human>(pos, diameter, health,
                                    getGenderType(),
-                                   getAgeType()
-                                   );
+                                   getAgeType(),
+                                   getPanicType());
 }
 
 HumanAdditionalData &Human::getAdditionalData()

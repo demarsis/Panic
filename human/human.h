@@ -6,6 +6,7 @@
 #include "health.h"
 #include "gender.h"
 #include "age.h"
+#include "panic.h"
 #include "simulation/vector.h"
 #include "probability/probability.h"
 #include "common/defines.h"
@@ -24,11 +25,12 @@ class Human
     Health health;
     GenderPtr gender;
     AgePtr age;
+    PanicPtr panic;
     float speedCoeff;
     HumanAdditionalData additionalData;
 
 public:
-    Human(PositionF pos, Diameter diameter, Health health, GenderType genderType, AgeType ageType);
+    Human(PositionF pos, Diameter diameter, Health health, GenderType genderType, AgeType ageType, PanicType panicType);
 
     const PositionF &getPosition() const;
     void setPosition(const PositionF &pos);
@@ -38,6 +40,7 @@ public:
 
     GenderType getGenderType() const;
     AgeType getAgeType() const;
+    PanicType getPanicType() const;
 
     std::shared_ptr<Human> clone() const;
 

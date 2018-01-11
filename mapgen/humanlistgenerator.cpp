@@ -9,6 +9,7 @@ HumanListGenerator::HumanListGenerator(const ImagePositions &pos,
         AgeType age = mapChar.ageProbabilityRelation().generate();
         GenderType gender = mapChar.genderProbabilityRelation().generate();
         bool create = mapChar.creationProbabilityRelation().generate();
+        PanicType panic = mapChar.panicProbabilityRelation().generate();
 
         if (create)
         {
@@ -17,7 +18,8 @@ HumanListGenerator::HumanListGenerator(const ImagePositions &pos,
                         5,
                         Health(),
                         gender,
-                        age);
+                        age,
+                        panic);
             humanList.push_back(human);
         }
     }
