@@ -6,8 +6,8 @@ QColor Gradient::getGradientColor(float value)
     if (value < 0) value = 0;
     if (value > MAX_GRADIENT_VALUE) value = MAX_GRADIENT_VALUE;
 
-    // inverse
-    value = MAX_GRADIENT_VALUE - value;
+    // convert to [0..100] and inverse
+    value = (-100 * value) / MAX_GRADIENT_VALUE + 100;
 
     // convert to hsv
     return QColor::fromHsv((int)(value), 255, 255);

@@ -30,7 +30,7 @@ PanicType PanicNo::type() const
 //############################
 
 PanicMinor::PanicMinor()
-    : Panic(HumanInfluence(1.0f, 2.0f))
+    : Panic(HumanInfluence(1.0f, 1.5f))
 {
 }
 
@@ -48,7 +48,7 @@ PanicType PanicMinor::type() const
 
 
 PanicMajor::PanicMajor()
-    : Panic(HumanInfluence(1.0f, 3.0f))
+    : Panic(HumanInfluence(1.0f, 2.0f))
 {
 }
 
