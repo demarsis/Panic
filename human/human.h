@@ -24,6 +24,7 @@ class Human
     Health health;
     GenderPtr gender;
     AgePtr age;
+    float speedCoeff;
     HumanAdditionalData additionalData;
 
 public:
@@ -41,6 +42,7 @@ public:
     std::shared_ptr<Human> clone() const;
 
     HumanAdditionalData &getAdditionalData();
+    float getSpeedCoeff() const;
 };
 
 typedef std::shared_ptr<Human> HumanPtr;

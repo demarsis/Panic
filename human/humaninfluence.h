@@ -5,11 +5,13 @@
 class HumanInfluence
 {
     float diameterCoeff;
+    float speedCoeff;
 
 public:
-    HumanInfluence(float diameterCoeff);
+    HumanInfluence(float diameterCoeff, float speedCoeff);
 
     float getDiameterCoeff() const;
+    float getSpeedCoeff() const;
 };
 
 #endif // HUMANINFLUENCE_H

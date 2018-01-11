@@ -13,7 +13,7 @@ const HumanInfluence &Age::getInfluence() const
 //############################
 
 AgeChild::AgeChild()
-    : Age(HumanInfluence(0.90f))
+    : Age(HumanInfluence(0.9f, 0.8f))
 {
 }
 
@@ -30,7 +30,7 @@ AgeType AgeChild::type() const
 //############################
 
 AgeAdult::AgeAdult()
-    : Age(HumanInfluence(1.0f))
+    : Age(HumanInfluence(1.0f, 1.0f))
 {
 }
 
@@ -47,7 +47,7 @@ AgeType AgeAdult::type() const
 //############################
 
 AgeElderly::AgeElderly()
-    : Age(HumanInfluence(0.95f))
+    : Age(HumanInfluence(0.95f, 0.6f))
 {
 }
 

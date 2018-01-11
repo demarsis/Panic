@@ -5,11 +5,16 @@ Human::Human(PositionF pos, Diameter diameter, Health health, GenderType genderT
       diameter(diameter),
       health(health),
       gender(GenderFactory::generateGender(genderType)),
-      age(AgeFactory::generateAge(ageType))
+      age(AgeFactory::generateAge(ageType)),
+      speedCoeff(1)
 {
-    // update coeff
+    // diameter influence
     this->diameter *= gender->getInfluence().getDiameterCoeff();
     this->diameter *= age->getInfluence().getDiameterCoeff();
+
+    // speed influence
+    this->speedCoeff *= gender->getInfluence().getSpeedCoeff();
+    this->speedCoeff *= age->getInfluence().getSpeedCoeff();
 }
 
 const PositionF &Human::getPosition() const
@@ -53,4 +58,9 @@ std::shared_ptr<Human> Human::clone() const
 HumanAdditionalData &Human::getAdditionalData()
 {
     return additionalData;
+}
+
+float Human::getSpeedCoeff() const
+{
+    return speedCoeff;
 }

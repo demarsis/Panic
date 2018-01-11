@@ -44,7 +44,11 @@ Vector HumanVector::getIntentionVector(HumanPtr &human, FloorPtr &floor)
                                             );
 
     int rnd = Probability::instance().random(possibleVectors.size());
-    return possibleVectors[rnd].first;
+    Vector &result = possibleVectors[rnd].first;
+
+    // use speed coeff
+    result *= human->getSpeedCoeff();
+    return result;
 }
 
 std::vector<CellPtr> HumanVector::getHumanCells(HumanPtr &human, FloorPtr &floor)
