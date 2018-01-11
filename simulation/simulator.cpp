@@ -86,9 +86,9 @@ void Simulator::updateHumanVectors()
         }
     }
 
-    ProbabilityRelation<float> moveProbabylity;
-    moveProbabylity.addProbs(1, 20);
-    moveProbabylity.addProbs(0, 80);
+    ProbabilityRelation<float> moveProbability;
+    moveProbability.addProbs(1, 20);
+    moveProbability.addProbs(0, 80);
 
     // check intersections
     for (FloorPtr &floor : map->getFloors())
@@ -102,12 +102,14 @@ void Simulator::updateHumanVectors()
             HumanPtr &human = humanList[i];
             if (!human) continue;
             HumanAdditionalData &humanAddData = human->getAdditionalData();
+            PanicType humanPanicType = human->getPanicType();
 
             for (size_t j = i + 1; j < humanList.size(); j++)
             {
                 HumanPtr &other = humanList[j];
                 if (!other) continue;
                 HumanAdditionalData &otherAddData = other->getAdditionalData();
+                PanicType otherPanicType = other->getPanicType();
 
                 // have intersection?
                 bool intersection = HumanVector::isNewPositionIntersectedWithOther(human, humanAddData.intentionVector, other);
@@ -118,12 +120,18 @@ void Simulator::updateHumanVectors()
                     if (!humanAddData.movementDecision)
                     {
                         humanAddData.movementDecision = true;
-                        otherAddData.intentionVector *= moveProbabylity.generate();
+                        if (humanPanicType != PanicTypeMajor)
+                        {
+                            otherAddData.intentionVector *= moveProbability.generate();
+                        }
                     }
                     if (!otherAddData.movementDecision)
                     {
                         otherAddData.movementDecision = true;
-                        otherAddData.intentionVector *= moveProbabylity.generate();
+                        if (otherPanicType != PanicTypeMajor)
+                        {
+                            otherAddData.intentionVector *= moveProbability.generate();
+                        }
                     }
                 }
 
