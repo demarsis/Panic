@@ -69,7 +69,8 @@ SOURCES += main.cpp\
     map/pushesimage.cpp \
     report/report.cpp \
     report/simulationreport.cpp \
-    human/panic.cpp
+    human/panic.cpp \
+    widgets/combopanic.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -118,7 +119,8 @@ HEADERS  += mainwindow.h \
     map/pushesimage.h \
     report/report.h \
     report/simulationreport.h \
-    human/panic.h
+    human/panic.h \
+    widgets/combopanic.h
 
 FORMS    += mainwindow.ui
 

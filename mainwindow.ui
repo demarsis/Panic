@@ -309,7 +309,7 @@
         <property name="title">
          <string>Паника</string>
         </property>
-        <widget class="QComboBox" name="comboBoxPanicLevel">
+        <widget class="ComboPanic" name="comboBoxPanicLevel">
          <property name="geometry">
           <rect>
            <x>118</x>
@@ -482,6 +482,11 @@
    <class>ComboSimulationSpeed</class>
    <extends>QComboBox</extends>
    <header>widgets/combosimulationspeed.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ComboPanic</class>
+   <extends>QComboBox</extends>
+   <header>widgets/combopanic.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

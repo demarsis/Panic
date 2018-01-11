@@ -111,8 +111,12 @@ MapCharacteristics MainWindow::createMapCharacteristicsFromGUI()
     creationProbs.addProbs(true, fullness);
     creationProbs.addProbs(false, 100 - fullness);
 
+    // panic level
+    ProbabilityRelation<PanicType> panicProbs = ui->comboBoxPanicLevel->getPanicProbability();
+
+
     // create generator
-    return MapCharacteristics(ageProbs, genderProbs, creationProbs);
+    return MapCharacteristics(ageProbs, genderProbs, creationProbs, panicProbs);
 }
 
 void MainWindow::toggleFloor(FloorPtr floor)
