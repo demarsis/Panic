@@ -18,18 +18,17 @@ ProbabilityRelation<PanicType> ComboPanic::getPanicProbability() const
         result.addProbs(PanicTypeNo, 100);
         break;
     case 1:
-        result.addProbs(PanicTypeNo,    80);
-        result.addProbs(PanicTypeMinor, 20);
+        result.addProbs(PanicTypeNo,    60);
+        result.addProbs(PanicTypeMinor, 40);
         break;
     case 2:
-        result.addProbs(PanicTypeNo,    50);
-        result.addProbs(PanicTypeMinor, 40);
-        result.addProbs(PanicTypeMajor, 10);
-        break;
-    case 3:
         result.addProbs(PanicTypeNo,    20);
         result.addProbs(PanicTypeMinor, 40);
         result.addProbs(PanicTypeMajor, 40);
+        break;
+    case 3:
+        result.addProbs(PanicTypeMinor, 20);
+        result.addProbs(PanicTypeMajor, 80);
         break;
     }
 

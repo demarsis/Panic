@@ -3,7 +3,7 @@
 
 #include <QColor>
 
-#define MAX_GRADIENT_VALUE      (float(50))
+#define MAX_GRADIENT_VALUE      (float(10))
 
 class Gradient
 {

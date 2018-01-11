@@ -18,7 +18,8 @@ void MapPushes::addPush(const Position &pos, const Vector &vec)
 {
     if (!isValidPosition(pos)) return;
 
-    float push = sqrt((vec.getX() * vec.getX()) + (vec.getY() * vec.getY()));
+    // squared length of vector
+    float push = (vec.getX() * vec.getX()) + (vec.getY() * vec.getY());
     pushes[pos.x][pos.y] += push;
 }
 
