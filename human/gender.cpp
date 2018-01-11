@@ -13,7 +13,7 @@ const HumanInfluence &Gender::getInfluence() const
 //############################
 
 GenderMale::GenderMale()
-    : Gender(HumanInfluence())
+    : Gender(HumanInfluence(1.0f))
 {
 }
 
@@ -30,7 +30,7 @@ GenderType GenderMale::type() const
 //############################
 
 GenderFemale::GenderFemale()
-    : Gender(HumanInfluence())
+    : Gender(HumanInfluence(0.95f))
 {
 }
 

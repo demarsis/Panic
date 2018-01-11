@@ -7,6 +7,9 @@ Human::Human(PositionF pos, Diameter diameter, Health health, GenderType genderT
       gender(GenderFactory::generateGender(genderType)),
       age(AgeFactory::generateAge(ageType))
 {
+    // update coeff
+    this->diameter *= gender->getInfluence().getDiameterCoeff();
+    this->diameter *= age->getInfluence().getDiameterCoeff();
 }
 
 const PositionF &Human::getPosition() const
