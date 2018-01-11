@@ -12,10 +12,13 @@ Human::Human(PositionF pos, Diameter diameter, Health health, GenderType genderT
     // diameter influence
     this->diameter *= gender->getInfluence().getDiameterCoeff();
     this->diameter *= age->getInfluence().getDiameterCoeff();
+    this->diameter *= panic->getInfluence().getDiameterCoeff();
+
 
     // speed influence
     this->speedCoeff *= gender->getInfluence().getSpeedCoeff();
     this->speedCoeff *= age->getInfluence().getSpeedCoeff();
+    this->speedCoeff *= panic->getInfluence().getSpeedCoeff();
 }
 
 const PositionF &Human::getPosition() const
