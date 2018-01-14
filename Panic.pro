@@ -70,7 +70,8 @@ SOURCES += main.cpp\
     report/report.cpp \
     report/simulationreport.cpp \
     human/panic.cpp \
-    widgets/combopanic.cpp
+    widgets/combopanic.cpp \
+    mapgen/mapgeneratortheater.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -120,7 +121,8 @@ HEADERS  += mainwindow.h \
     report/report.h \
     report/simulationreport.h \
     human/panic.h \
-    widgets/combopanic.h
+    widgets/combopanic.h \
+    mapgen/mapgeneratortheater.h
 
 FORMS    += mainwindow.ui
 

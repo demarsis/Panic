@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "mapgeneratorcafe.h"
+#include "mapgeneratortheater.h"
 #include "mapgeneratortestfindexit.h"
 
 class AllMapGenerators
