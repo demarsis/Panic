@@ -71,7 +71,8 @@ SOURCES += main.cpp\
     report/simulationreport.cpp \
     human/panic.cpp \
     widgets/combopanic.cpp \
-    mapgen/mapgeneratortheater.cpp
+    mapgen/mapgeneratortheater.cpp \
+    mapgen/mapgeneratortheaterblocked.cpp
 
 HEADERS  += mainwindow.h \
     map/cell.h \
@@ -122,7 +123,8 @@ HEADERS  += mainwindow.h \
     report/simulationreport.h \
     human/panic.h \
     widgets/combopanic.h \
-    mapgen/mapgeneratortheater.h
+    mapgen/mapgeneratortheater.h \
+    mapgen/mapgeneratortheaterblocked.h
 
 FORMS    += mainwindow.ui
 

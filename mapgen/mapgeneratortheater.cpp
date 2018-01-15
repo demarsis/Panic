@@ -18,5 +18,5 @@ MapPtr MapGeneratorTheater::generate(const MapCharacteristics &mapChar) const
 
 QString MapGeneratorTheater::name() const
 {
-    return "Theater";
+    return "Theater (unblocked)";
 }
